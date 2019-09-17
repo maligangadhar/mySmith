@@ -1,0 +1,34 @@
+﻿<div class="filtersettings row">
+    <form>
+        <div class="form-group">
+            <sp3-comp-select [size]="6" controlId="userFilterSelect" labelText="{{'FilterBy' | sp3Translate}}" [(values)]="filterList" [(selectedValue)]="selectedFilter" (selectedChange)="onUserStatusFilterChange($event)" [size]="1"></sp3-comp-select>
+        </div>
+    </form>
+
+    <form>
+        <div class="form-group input-group">
+            <span class="input-group-addon"> 
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+            <input type="text" class="form-control" id="userSearch" placeholder="{{'Search' | sp3Translate}}" [formControl]="searchFormControl" />
+        </div>
+    </form>
+</div>
+   <div class="addnewcontrolbtn">
+        <form>
+            <button type="button" class="btn btn-block btn-primary btn-lg" id="createUserNew" (click)="onCreateUser()"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp;{{'AddNewUser' | sp3Translate}}</button>
+        </form>
+   </div> 
+       <sp3-comp-modal-confirm #modalRoleAlert>
+           <div class="app-modal-header">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{'Users' | sp3Translate}}
+           </div>
+           <div class="app-modal-body">
+                       <p>{{'NotAssignedRoles' | sp3Translate}}</p>
+                       <p>{{'SaveMessageQuestion' | sp3Translate}}</p>
+           </div>
+           <div class="app-modal-footer">
+                       <button type="button" class="btn btn-secondary" (click)="yesClick()">{{'Yes' | sp3Translate}}</button>
+                       <button type="button" class="btn btn-secondary " (click)="noClick()">{{'No' | sp3Translate}}</button>
+           </div>
+       </sp3-comp-modal-confirm>

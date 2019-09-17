@@ -1,0 +1,54 @@
+/**Start -  Sidebar tool Expanded */
+.expanded-panel-body {
+    padding: 0 16px;
+
+    .row {
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+
+    [class^="col-"], [class*=" col-"] {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    canvas.viewer{
+    left: auto;
+    bottom: auto;
+    top: auto;
+    width: 100%;
+    position: relative !important;
+    min-width: unset;
+    min-height: unset;
+    background: #fff;
+    
+    }
+    .marker-square{
+        position: relative;
+        display: block;
+        overflow: hidden;
+        canvas{
+            max-width: 100% !important;
+        }
+    }
+    .border-blue {
+        border: 2px solid #299edb;
+        max-width: 100% !important;
+      }
+}
+/**End -  Sidebar tool Expanded */
+
+/**Start -  Sidebar tool Collapsed*/
+.collapsed-panel-body {
+    padding: 0 16px;
+
+    .row {
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+
+    [class^="col-"], [class*=" col-"] {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+/**End -  Sidebar tool Collapsed*/

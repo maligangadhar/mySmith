@@ -1,0 +1,80 @@
+﻿<sp3-comp-modal-prompt #modalPrompt (confirmButtonStat)="modalPromptClick($event)" questionText="{{'DeleteFinding'|sp3Translate}}"
+    headerText="{{'DeleteFindingHeader'|sp3Translate}}"></sp3-comp-modal-prompt>
+<div #myOverlayDiv *ngIf="toAnnotate" style="position: absolute; cursor: crosshair;z-index:100;left:0" [style.width.px]="readerWidth"
+    [style.height.px]="readerHeight" [style.cursor]="cursorType">
+</div>
+<div>
+    <div *ngFor="let mark of imageMarks; let i = index"  [attr.id]="mark.id" style="position: absolute; cursor: move;" [style.width.px]="mark.displayWidth"
+         [style.display]="mark.isVisible"
+        [style.height.px]="mark.displayHeight" [style.left.px]="mark.displayBox.leftTopCoordinate.x" [style.zIndex]="mark.zIndex" 
+         (touchstart)="onTouchStart($event,mark)"
+         (mouseup)="selectMarkAreaMouseUp(event)"
+        (mousedown)="selectMarkAreamousedown(mark)" (touchend)="onTouchEnd($event)" [style.top.px]="mark.displayBox.leftTopCoordinate.y" [class]="mark.markClass">
+        <div class="outermark-areacover">
+            <div class="mark-areacover" *ngIf="mark.displayButtons">
+                <div class="finding-icons-header" *ngIf="!viewMode">
+                    <button type="button" class="btn btn-link pull-right" (click)="deleteMarkArea(mark)"><i class="icn-delete"></i></button>
+                </div>
+                <div class="finding-icons-footer text-center">
+                    <button type="button" class="btn btn-link pull-left" (click)="openDetailsBox(mark)"><span class="icn-comment"></span></button>
+                    <button type="button" class="btn btn-link pull-right" (click)="hideFinding(mark)">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="modal fade" *ngIf="isDetailsModalVisible" tabindex="-1" [ngClass]="{'in': isDetailsModalVisible}" [ngStyle]="{'display': isDetailsModalVisible ? 'block' : 'none', 'opacity': isDetailsModalVisible ? 1 : 0}">
+    <div class="findings-modals modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button *ngIf="isCloseDisabled" (click)="closeDetails()" class="close" id="closeFinding"><i class="icn-close"></i></button>
+                <h4 class="modal-title">{{heading}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div  class="form-group">
+                        <label  class="col-sm-12 control-label">{{'Category'|sp3Translate}}</label>
+                        <div  class="col-sm-12">
+                            <sp3-comp-select #findingCategory [(isDisabled)]="viewMode"controlId="findingsCategory" [size]="6" [(values)]="categoryList" [(selectedValue)]="selectedCategory"
+                                (selectedValueChange)="onCategoryChange($event)" required="true"></sp3-comp-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="subCategoryDisplay">
+                    <div  class="form-group">
+                        <label  class="col-sm-12 control-label">{{'HSCodeGoodsType'|sp3Translate}}</label>
+                        <div  class="col-sm-12">
+                            <sp3-comp-select #findingSubCategory controlId="findingsSubCategory" [size]="6" [(values)]="subCategoryList" [(selectedValue)]="selectedSubCategory" [isDisabled]="viewMode"></sp3-comp-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="!subCategoryDisplay">
+                    <div  class="form-group">
+                        <label  class="col-sm-12 control-label">{{'HSCodeGoodsType'|sp3Translate}}</label>
+                        <div  class="col-sm-12">
+                            <input type="text" [disabled]="viewMode" id="marksHsCodeGoodsType" maxlength="50" placeholder="" [(ngModel)]="markHsCode" class="form-control">
+                            <span class="help-block error-msg case-overall-weight-msg" *ngIf="isMessageShown">{{'Required' | sp3Translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label" for="annotationstext">{{'Notes'|sp3Translate}}</label>
+                        <div class="col-sm-12">
+                            <sp3-comp-multitext #notesFindings [(isDisabled)]="viewMode" controlId="annotationstext" placeholderText="{{'Notes' | sp3Translate}}" rows="2" maxLengthValue="1000"
+                                [(textValue)]="comments"></sp3-comp-multitext>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-reverse btn-medium" id="addAnnotation" (click)="addUpdateDetails()" [disabled]="viewMode ">{{'SaveComment' | sp3Translate}}</button>
+                <button type="button" class="btn btn-reverse btn-medium" (click)="deleteMarkArea(mark);closeDetails();" [disabled]="viewMode">{{'Delete'| sp3Translate}} </button>
+            </div>
+        </div>
+    </div>
+</div>

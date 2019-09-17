@@ -1,0 +1,15 @@
+﻿<div class="filtersettings row">
+    <form>
+         <div class="form-group">
+            <sp3-comp-select  controlId="appFilter" labelText="{{'FilterBy' | sp3Translate}}" [(values)]="filterList" [(selectedValue)]="selectedFilter" (selectedChange)="onAppStatusFilterChange($event)" [size]="6"></sp3-comp-select>
+         </div>
+    </form>
+    <form>
+        <div class="form-group input-group">
+            <span class="input-group-addon"> 
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="{{'Search' | sp3Translate}}" id="appSearch" [formControl] = "appSearchFormControl"/>
+        </div>
+    </form>
+  

@@ -1,0 +1,28 @@
+﻿<div *ngIf="this.service.userInfo.authenticated">
+    <div class="body-container" *ngIf="assignedLicense">
+        <div class="row">
+            <div class="col-sm-12">
+                <sp3-comp-message-display [id]="'landingMessage'"></sp3-comp-message-display>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 landing-container">
+                <div class="row">
+                <sp3-comp-applications controlId="landing" [mode]="3" [allowNavigate]="true" [allowCollapse]="false" [showNoAppMessage]="true"
+                    [showAllApps]="false" [showSelect]="false" [selectedApps]="userApplications" [totalApplications]="totalApplications"></sp3-comp-applications>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div class="body-container" *ngIf="!assignedLicense">
+        <div class="row">
+            <div class="col-sm-12 text-center unauthorised">
+                <h3>{{'UnauthorisedAccess' | sp3Translate}}</h3>
+                <p>{{'AdminContactMessage' | sp3Translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!this.service.userInfo.authenticated" class="text-center unauthorised col-sm-12">
+    <h3>{{'SecureRedirection' | sp3Translate}}</h3>
+</div>

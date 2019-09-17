@@ -1,0 +1,17 @@
+﻿<!-- Show it for all other functionalities-->
+<sp3-comp-modal-case-alert #modalCaseAlert [caseList]="caseIds" [questionText]="query" pageTitle="Delete" (confirmButtonStat)="modalCaseAlertClick($event)"></sp3-comp-modal-case-alert>
+
+<!-- Show it only while deleting functionality is called-->
+<sp3-comp-modal-cancelreason #modalCancelReason (confirmButtonStat)="modalCancelReasonClick($event)" [(reasonsTypes)]="reasonsTypes"></sp3-comp-modal-cancelreason>
+<!-- <sp3-comp-message-display [id]="'caseesMessage'"></sp3-comp-message-display> -->
+<sp3-comp-modal-prompt #modalPrompt (confirmButtonStat)="modalPromptClick($event)" [(questionText)]="query"></sp3-comp-modal-prompt>
+<sp3-comp-modal-case-action #modalCaseAction (confirmButtonStat)="modalCasePromptClick($event)" [caseList]="caseIds" [(questionText)]="query"></sp3-comp-modal-case-action>
+<sp3-comp-modal-clear-case [case]="caseIds" #modalCaseImagePopup (confirmButtonStat)="modalCaseImagePopupClick($event)" [(questionText)]="query"
+    [(buttonTitle)]="buttontitle"></sp3-comp-modal-clear-case>
+<sp3-comp-modal-case-decisioncentre-action [caseList]="caseIds" #modalCaseDecisionCentrePopup (confirmButtonStat)="modalCaseDecisionCentrePopupClick($event)"
+                                           [(questionText)]="query" [(buttonTitle)]="buttontitle" [selectedButtonType]="caseButtonType" [pageTitle]="pageTitle" [inspectionTypes] ="inspectionTypes"></sp3-comp-modal-case-decisioncentre-action>
+
+<sp3-comp-modal-case-decisioncentre-action [caseList]="failureCaseList" #modalFailureCaseDecisionCentrePopup [(questionText)]="query" [pageTitle]="pageTitle"></sp3-comp-modal-case-decisioncentre-action>
+
+<sp3-comp-duplicate-action #modalDuplicateActionPopUp [duplicateActionMessage]="messageCode" (closeAction)="captureCloseAction($event)"></sp3-comp-duplicate-action>
+<button (click)="onButtonClick()" [ngClass]="buttonClass" [disabled]="disableButton" id={{buttonid}}> {{buttontitle | sp3Translate}}</button>

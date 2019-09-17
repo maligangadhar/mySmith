@@ -1,0 +1,7 @@
+<p-dropdown [options]="itemList" [(ngModel)]="selectedItem" (onChange)="onChangeEvent($event)" [disabled]="disabled">
+  <ng-template let-itemList pTemplate="item">
+      <div class="ui-helper-clearfix" style="position: relative;height: 24px;">
+          <img src="{{itemList.value ? itemList.value.content: ' '}}"> 
+      </div>
+  </ng-template>
+</p-dropdown>

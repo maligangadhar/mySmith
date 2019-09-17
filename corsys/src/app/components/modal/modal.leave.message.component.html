@@ -1,0 +1,13 @@
+﻿<sp3-comp-modal-confirm #modalDataChangeAlert>
+    <div class="app-modal-header">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{pageKey | sp3Translate}}
+    </div>
+    <div class="app-modal-body">
+        <p>{{'NotSavedChanges' | sp3Translate}}</p>
+        <p> {{'LeaveMessage' | sp3Translate}}</p>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-reverse" (click)="yesClick()">{{'Yes' | sp3Translate}}</button>
+        <button type="button" class="btn btn-reverse " (click)="noClick()">{{'No' | sp3Translate}}</button>
+    </div>
+</sp3-comp-modal-confirm>

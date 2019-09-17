@@ -1,0 +1,51 @@
+{
+  "rulesDirectory": [
+    "node_modules/codelyzer"
+  ],
+  "rules":{
+    "no-console": [true,"log","error","debug","info","time","timeEnd","trace"],
+    "trailing-comma": [false, {"multiline": "false", "singleline": "never"}],
+    "interface-name": [false, "always-prefix"],
+    "import-spacing": true,
+    "one-variable-per-declaration": [true, "ignore-for-loop"],
+    "semicolon": [true, "always"],
+    "use-pipe-transform-interface": true,
+    "use-output-property-decorator": true,
+    "use-host-property-decorator": true,
+    "use-input-property-decorator": true,
+    "no-attribute-parameter-decorator": true ,
+    "directive-class-suffix": [true, "Directive"],
+    "variable-name": [
+      true,
+      "allow-leading-underscore",
+      "ban-keywords"
+    ],
+    "ordered-imports":[ false],
+    "no-input-rename": true,
+    "no-output-rename": true,
+    "no-duplicate-variable": true,
+    "no-forward-ref": true,    
+    "object-literal-sort-keys": false,
+    "templates-use-public": true,
+    "invoke-injectable": true,
+    "no-conditional-assignment": true,
+    "no-duplicate-super": true,   
+    "component-selector": [true, "element", "sp3-comp", "kebab-case"],
+    "no-string-literal": false,
+    "curly": true,
+    "no-empty": true,
+    "no-unused-expression": [true, "allow-fast-null-checks"],
+    "triple-equals": [true, "allow-null-check", "allow-undefined-check"],
+    "binary-expression-operand-order": true,
+    "eofline": true,    
+    "pipe-naming": [true, "camelCase", "sp3"],
+    "component-class-suffix": [true, "Component"],
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape"
+    ],
+    "use-life-cycle-interface": true,
+    "cyclomatic-complexity": [true, 35]
+    }
+}

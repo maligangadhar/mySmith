@@ -1,0 +1,70 @@
+﻿
+<div class="viewer-container" [ngClass]="{ 'sclose': togglePanel, 'sopen': !togglePanel  }">
+    <sp3-comp-side-menu header="{{'Settings' | sp3Translate}}" (sideMenuToggleState)="getMenuState($event)">
+        <sp3-menu-item [active]="currentTab==1" heading="{{'General' | sp3Translate}}"  imageSrc="{{'../../assets/images/svg/icn-actions.svg'}}" 
+            imageCss="{{'icn-settings'}}" controlId="generalTab" [currentTab]="1" (select)="onTabChange(actionTab.settingsGeneral)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="currentTab==2" heading="{{'Users' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+            imageCss="{{'icn-settings-users'}}" controlId="usersTab" [currentTab]="2" (select)="onTabChange(actionTab.settingsUsers)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="currentTab==3" heading="{{'Roles' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+            imageCss="{{'icn-settings-roles'}}" controlId="rolesTab" [currentTab]="3" (select)="onTabChange(actionTab.settingsRoles)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="currentTab==4" heading="{{'Apps' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+            imageCss="{{'icn-settings-apps'}}" controlId="appsTab" [currentTab]="4" (select)="onTabChange(actionTab.settingsApps)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="currentTab==5" heading="{{'ProfilerSettings' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+            imageCss="{{'icn_guage'}}" controlId="profileTab" [currentTab]="5" (select)="onTabChange(actionTab.settingsProfile)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="currentTab==6" heading="{{'RAPPathway' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+            imageCss="{{'icn_color'}}" controlId="rappathwayTab" [currentTab]="6" (select)="onTabChange(actionTab.settingsRappath)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="currentTab==7" heading="{{'DCSetting' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+            imageCss="{{'icn-settings'}}" controlId="dcsettingTab" [currentTab]="7" (select)="onTabChange(actionTab.settingsdc)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="currentTab==8" heading="{{'LocationSetting' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+        imageCss="{{'icn_location'}}" controlId="locationsTab" [currentTab]="8" (select)="onTabChange(actionTab.locationsListing)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="currentTab==9" heading="{{'DeviceSetting' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+            imageCss="{{'icn_device'}}" controlId="devicesettingTab" [currentTab]="9" (select)="onTabChange(actionTab.settingsDeviceLicense)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="currentTab==10" heading="{{'operationalDashboard' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+            imageCss="{{'icn-settings'}}" controlId="settingsOpDashboard" [currentTab]="10" (select)="onTabChange(actionTab.settingsOpDashboard)">
+        </sp3-menu-item>
+    </sp3-comp-side-menu>
+
+
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.settingsGeneral">
+            <sp3-comp-card-layout controlId="generalSetting"  mode="2" [cardType]="5"></sp3-comp-card-layout>      
+    </div>
+
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.settingsUsers">   
+           <sp3-comp-app-usersettings></sp3-comp-app-usersettings>
+           
+    </div>
+
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.settingsRoles">        
+        <sp3-comp-app-role-settings></sp3-comp-app-role-settings> 
+     </div>
+     <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.settingsApps"> 
+        <sp3-comp-app-applicationsettings></sp3-comp-app-applicationsettings>
+     </div>
+     <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.settingsProfile">        
+            <sp3-comp-card-layout controlId="profilerSettings" mode="2" [cardType]="6"></sp3-comp-card-layout>
+     </div>
+     <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.settingsRappath">        
+            <sp3-comp-card-layout controlId="rapPathway" mode="2" [cardType]="7"></sp3-comp-card-layout>
+     </div>
+     <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.settingsdc">        
+            <sp3-comp-card-layout controlId="dcSetting" mode="2" [cardType]="8"></sp3-comp-card-layout>
+     </div>
+     <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.settingsDeviceLicense">        
+        <sp3-comp-devicelicense></sp3-comp-devicelicense>
+    </div>
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.locationsListing">        
+        <sp3-comp-app-locationslist></sp3-comp-app-locationslist>
+    </div>
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.settingsOpDashboard">
+        <sp3-comp-opdash-setting></sp3-comp-opdash-setting>
+    </div>
+</div>

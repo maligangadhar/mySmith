@@ -1,0 +1,126 @@
+.arrivals-dashboard {
+    width: 100%;
+    padding: 0 15px;
+
+    .arrivals-actions-btns {
+        margin-right: 10px;
+    }
+
+    .nav-tabs {
+        padding: 10px 0px 0px;
+        border-bottom: 1px solid #1a94b5;
+
+        li {
+            margin-bottom: -1px;
+
+            a {
+                line-height: 2.42857;
+                background: #1a94b5;
+                color: $text-color-white;
+                border: 1px solid #1a94b5;
+                border-bottom: 0px;
+                cursor: pointer;
+                width: auto;
+                padding: 5px 15px;
+            }
+
+            a:hover {
+                background: $text-color-white;
+                color: $gray-base;
+            }
+        }
+
+        li.active {
+            border-bottom: 0px;
+        }
+
+        li.active > a {
+            background: $text-color-white;
+            color: $gray-base;
+        }
+    }
+
+
+    .ui-datatable-scrollable-body {
+        max-height: calc(100vh - 370px) !important;
+    }
+    
+}
+.arrivals .arrivals-case-creation{
+    .btn-absolute{
+        position: absolute;
+        left: 46%;
+        top: 200px;
+    }
+    .modal{
+        position: relative;
+        background: transparent !important;
+        z-index: inherit !important;
+        .modal.fade.in {
+            background: rgba(232, 238, 245, 0.6) !important;
+            overflow: auto !important;
+            position: fixed !important;
+            z-index: 999999 !important;
+            padding: 50px 0px;
+            .modal-content{
+                border: 1px solid #ccc;
+            }
+        }
+        .modal-dialog{
+            box-shadow: 0px 0px 0px;
+            .modal-content{
+                box-shadow: 0px 0px 0px;
+                height: calc(100vh - 48px);
+                border-left: 1px solid #ccc;
+                border-right: 1px solid #ccc;
+                .modal-header{
+                    border-radius: 0px;
+                    .close{
+                        display: none;
+                    }
+                }
+                .modal-body{
+                    max-height: calc(100vh - 165px);
+                    label {
+                        margin: 10px 0px;
+                    }
+                }
+            }
+        }
+    }
+}
+.arrivals .full-height-modals .modal-dialog .modal-content .modal-body{
+    .modal-details-header {
+        background: #ebebeb;
+        padding: 8px 16px 8px;
+    }
+    label {
+        margin: 10px 0px;
+    }
+
+}
+.arrivals{
+    .modal-dialog .modal-content .modal-body .form-control[disabled], fieldset[disabled] .form-control {
+        border: 1px solid #ebebeb;
+        padding: 10px 16px !important;
+    }
+}
+.mydraftsgrid{
+    .topbarbtns{
+        position: absolute;
+        //left: 126px;
+        z-index: 999;
+        top: 16px;
+    }
+    .ui-datatable .ui-datatable-scrollable-body{
+        max-height: calc(100vh - 220px) !important;
+    }
+}
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (-webkit-min-device-pixel-ratio: 2) { 
+    .arrivals .arrivals-case-creation .modal .modal-dialog{
+        width: 95% !important;
+    }
+}

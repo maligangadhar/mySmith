@@ -1,0 +1,17 @@
+﻿<div class="users-list row" [style.height.px]="viewListHeight">
+        <form>
+            <div id="appList">
+                <div class="radio" *ngFor="let keyValue of filteredAppsList | sp3FilterAppContent: searchCriteria">
+                        <input id="app{{keyValue.name}}" name="selectedApps" type="radio" [(ngModel)]="listSelectedApp"
+                                [value]="keyValue" (change)="onAppSelectionChange(keyValue)">
+                        <label for="app{{keyValue.name}}">{{keyValue.name}}</label>
+                </div>
+            </div>
+            <div class="col-sm-12" *ngIf="toggleDataFound">
+                <h4 class="col-sm-12 error-info">{{'NoResultFound' | sp3Translate}}</h4>
+            </div>
+        </form>
+    </div>
+                
+
+

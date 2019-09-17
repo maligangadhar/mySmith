@@ -1,0 +1,28 @@
+<div *ngIf="visible" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none'}">
+    <div role="dialog" class="modal-dialog modal-lg" [ngClass]="customContainerCSS">
+        <!-- Modal content generic-->
+        <div class="modal-content">
+            <div class="modal-header" [ngClass]="customCSS">
+                <a class="close" (click)="closeClick()" data-dismiss="modal">
+                    <i class="icn-close"></i>
+                </a>
+                <h4 class="modal-title">{{questionText | sp3Translate}} - {{case.caseId}} {{case}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <sp3-comp-finding-detail [caseId]="case[0]"></sp3-comp-finding-detail>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>{{'AssessmentSummary' | sp3Translate}}</label>
+                        <sp3-comp-multitext #textAreaSelector controlId="uploadDescription" required="true" placeholderText="{{'Description' | sp3Translate}}"
+                            rows="{{4}}" maxLengthValue="1200" [(textValue)]="description"></sp3-comp-multitext>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-medium btn-primary" [disabled]="description.length === 0" id="clearCase" (click)="yesClick()">{{buttonTitle | sp3Translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

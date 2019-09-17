@@ -1,0 +1,70 @@
+<div class="scanimage-container">
+    <div class="topbar">
+        <div class="col-sm-10"><h3>{{scanDetails.scanId}}</h3></div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-default pull-right" (click)="moveToScannerList()"><i class="icn-close-blue"></i></button>
+        </div> 
+    </div>
+    <div class="row casescan">  
+        <div class="scandetails">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 leftcolumn">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{'CorsysScanId' | sp3Translate}}</label>
+                                         {{scanDetails.scanId}}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>{{ 'ContainerID' | sp3Translate}}</label>
+                                        {{scanDetails.containerId}}
+                                    </div>
+                            </div>
+                            <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{'ScanDate' | sp3Translate}}</label>
+                                         {{scanDetails.scanDateTime | sp3DateTimeFormat}}                                  
+                                    </div>
+                                    
+                            </div>
+                        </div>
+                </div>
+                <div class="col-sm-12 col-md-6 findingscancase">
+                        <label>{{'EnterContainerIDLabel' | sp3Translate}}</label>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i aria-hidden="true" class="fa fa-search"></i></div>
+                                         <input type="text" placeholder="{{'EnterContainerIDNumber'| sp3Translate}}" class="form-control" placeholder="{{'EnterContainerIDNumber' | sp3Translate}}" [(ngModel)]="containerValueToSearch" (ngModelChange)="updateData($event)"> 
+                                        <!-- <sp3-comp-text #containerSearch controlId="searchContainer" placeholderText="{{'Enter Container ID Number'| sp3Translate}}"
+                                         [(value)]="containerValueToSearch" controlClass="form-control"></sp3-comp-text>                          -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                    <button type="button" (click)="showNoModalpopup()" [disabled]="isSearchDisabled" class="btn btn-lg btn-block btn-primary">{{'FindCase' | sp3Translate}}</button>
+                            </div>
+                            <!-- Can be used when batch cannot be edited <div class="col-sm-12 text-center">
+                                    <h3>This batch cannot be edited</h3>
+                                    <p>Please notify your supervisor if an error has been made.</p>
+                            
+                            </div>-->
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    
+</div>
+
+<sp3-comp-case-list-scanner #scannerCaseList [containerId]="containerValueToSearch" (onScanMapResponse)='showMappingResponsemessage($event)'></sp3-comp-case-list-scanner>
+
+
+
+
+
+<!-- This code block should be removed once the loadscan image component is fully funtional -->
+<!-- Commented most of the code block as it is static and was a blocker for AOT.  Once these static code is replaced with dynamic data then it can be further cleaned up-->

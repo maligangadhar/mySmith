@@ -1,0 +1,13 @@
+﻿    <span *ngIf="isLabelVisible()">
+        <label class="control-label col-xs-4 col-sm-4" for="controlId">{{labelText}}<sup *ngIf="required">*</sup></label>
+    </span>
+    <div class="{{isLabelVisible() ? 'col-sm-8 col-xs-8' : ''}}">
+           
+        <textarea title="{{toolTip}}" id="{{controlId}}" [ngModel]="textValue" [maxlength]="GetMaxLengthValue()" placeholder="{{placeholderText}}" (ngModelChange)="updateData($event)"
+                  [rows]="rows" class="form-control {{controlClass}}" (focusout)="focusOut()" (focus)="onfocus()" disabled="{{isDisabled}}"></textarea>
+
+        <span class="help-block error-msg" *ngIf="isEmpty">{{'Required' | sp3Translate}}</span>
+        <span class="help-block error-msg case-overall-weight-msg" *ngIf="isMessageShown">{{message | sp3Translate}}</span>
+    </div>
+
+

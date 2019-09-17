@@ -1,0 +1,33 @@
+﻿<div class="viewer-container" [ngClass]="{ 'sclose': togglePanel, 'sopen': !togglePanel  }">
+    <sp3-comp-side-menu  header="{{'DecisionCentre' | sp3Translate}}" (sideMenuToggleState)="getMenuState($event)">
+        <sp3-menu-item [active]="activeTab===1" heading="{{'Actions' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-actions.svg'}}" imageCss="{{'icn_actions'}}"
+            [currentTab]="1" controlId="myActions" (select)="onTabChange(actionTab.myActions)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="activeTab===2" heading="{{'ManageCases' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+            imageCss="{{'icn_cases'}}" [currentTab]="2" controlId="manageCases" (select)="onTabChange(actionTab.manageCases)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="activeTab===3" heading="{{'Screening' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-inspection.svg'}}"
+            imageCss="{{'icn_inspection'}}" [currentTab]="3" controlId="mySuspect" (select)="onTabChange(actionTab.mySuspect)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="activeTab===4" heading="{{'Override' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-activity-list.svg'}}"
+            imageCss="{{'icn_activity_list'}}" [currentTab]="4" controlId="myActivity" (select)="onTabChange(actionTab.myActivity)">
+        </sp3-menu-item>
+    </sp3-comp-side-menu>
+
+
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.myActions">
+        <sp3-comp-decisioncenter-caseview></sp3-comp-decisioncenter-caseview>
+    </div>
+
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.manageCases">
+        <sp3-comp-decisioncenter-case-manage></sp3-comp-decisioncenter-case-manage>
+    </div>
+
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.mySuspect">
+        <sp3-comp-decisioncentre-screening-caseview></sp3-comp-decisioncentre-screening-caseview>
+    </div>
+
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.myActivity">
+        <sp3-comp-decisioncentre-cleared-caseview></sp3-comp-decisioncentre-cleared-caseview>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿<div class="inspection-popups inspection-detail-page col-sm-12 col-md-12 col-lg-8 col-lg-offset-2" *ngIf="caseDetailsVisible">
+    <sp3-comp-inspect-detail #modal [caseId]="caseIdToOpen" [inspectiontype]="inspectiontype" (backToListClick)="closeCaseDetails($event)"></sp3-comp-inspect-detail>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <sp3-comp-message-display [id]="'inspectCaseMessage'"></sp3-comp-message-display>
+    </div>
+</div>
+<div id="wrapper-body" class="inspections-cases-page col-sm-12" *ngIf="!caseDetailsVisible">
+    <div id="grid-actionView">
+        <sp3-comp-grid #actionCenter [value]="inspectMyCases" [dataKey]="caseId" [scrollable]="true" [scrollHeightGrid]="'600px'" [headerCheckboxToggleAllPages]="false" [lazy]="false" [(selection)]="selectedCases" [customPaginator]="true" [customPaginationLoad]="loadCasesLazy"
+            [lazyLoad]="loadSortedCasesLazy" [customRowsPerPage]="actionPerPage" [(totalRecords)]="totalActions" [isPrintHidden]="true" [valueSelectionChange]="onSelectFromGrid" [emptyMessage]="''">
+
+            <sp3-column [field]="" header="" [type]="3"></sp3-column>
+            <sp3-column field="containerIds" header="{{'Containers' | sp3Translate}}" [controlId]="'caseId'" [type]="2" [hasClick]="true" [itemOnClick]="openCase"></sp3-column>
+            <!-- <sp3-column field="caseId" header="{{'ControlCenterCaseId' | sp3Translate}}" [type]="2" [hasClick]="true"
+            [itemOnClick]="openCase"></sp3-column>                  -->
+            <sp3-column field="lastUpdatedDate" [type]="12" header="{{'LastUpdated' | sp3Translate}}" [isSortable]="true"></sp3-column>
+            <sp3-column field="inspectTypeName" header="{{'InspectionType' | sp3Translate}}"></sp3-column>
+            <sp3-column field="findingsCategoriesList" header="{{'FindingsCategory' | sp3Translate}}"></sp3-column>
+
+
+        </sp3-comp-grid>
+    </div>
+
+    <div *ngIf="noSearchData" class="container-blue">
+        <div class="no-results-found-msg-div">
+            <img src="assets/images/svg/icn-search-illust.svg" />
+            <h4>{{'NoCasesAssigned' | sp3Translate}}</h4>
+
+        </div>
+
+    </div>
+</div>

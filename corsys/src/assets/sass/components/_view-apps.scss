@@ -1,0 +1,35 @@
+#viewAppsTab {
+    .role-list-group li {
+        margin: 0.5em 1em;
+    }
+    .featured-promo {
+        vertical-align: top;
+        width: 100%;
+        display: inline-block;
+        .article-image {
+            width: 30%;
+            float: right;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding-left: 2%;
+        }
+        .article-image img {
+            float: right;
+            width: 100%;
+        }
+        .article-text {
+            width: 70%;
+            float: left;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    }
+    .control-label{
+        padding-left:0;
+    }
+    .filterTop {
+        white-space: nowrap;
+    }
+}

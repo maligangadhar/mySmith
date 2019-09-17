@@ -1,0 +1,20 @@
+﻿<div class="viewer-container" [ngClass]="{ 'sclose': togglePanel, 'sopen': !togglePanel  }">
+
+    <sp3-comp-side-menu header="{{'Inspection' | sp3Translate}}" (sideMenuToggleState)="getMenuState($event)">
+        <sp3-menu-item [active]="selectedTab===1" heading="{{'MyCases' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-actions.svg'}}" imageCss="{{'icn_actions'}}"
+            [currentTab]="1" controlId="myCases" (select)="onTabChange(actionTab.myCases)">
+        </sp3-menu-item>
+        <sp3-menu-item [active]="selectedTab===2" heading="{{'AwaitingInspectionCases' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+            imageCss="{{'icn_cases'}}" [currentTab]="2" controlId="awaitingInspectionCases" (select)="onTabChange(actionTab.awaitingInspectionCases)">
+        </sp3-menu-item>
+
+    </sp3-comp-side-menu>
+
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.myCases">
+        <sp3-comp-inspect-caseview></sp3-comp-inspect-caseview>
+    </div>
+
+    <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.awaitingInspectionCases">
+        <sp3-comp-inspect-case-manage></sp3-comp-inspect-case-manage>
+    </div>
+</div>

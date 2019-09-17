@@ -1,0 +1,15 @@
+﻿<div class="users-list row" [style.height.px]="viewListHeight">
+    <form>
+        <div id="userList">
+            <div class="radio" *ngFor="let keyValue of filteredUsersList | sp3FilterContent : searchCriteria">
+                <input id="user{{keyValue.fullName}}" name="selectedUsers" type="radio" [(ngModel)]="listSelectedUser"
+                    [value]="keyValue" (change)="onUserSelectionChange(keyValue)">
+                <label for="user{{keyValue.fullName}}">{{keyValue.fullName}}</label>
+            </div>
+        </div>
+        <div class="col-sm-12" *ngIf="toggleDataFound">
+            <h4 class="col-sm-12 error-info">{{'NoResultFound' | sp3Translate}}</h4>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,23 @@
+<div *ngIf="visible" class="modal fade alertBox" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div id="alertCase" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                   <a class="close" (click)="closeClick()" data-dismiss="modal"><i class="icn-close"></i></a>
+                </div>
+                <div class="modal-body">
+
+                    <p class="lead">{{questionText | sp3Translate}}</p>
+                    <select id="listofCases" class="form-control" multiple="multiple" [disabled]="true">
+                        <option *ngFor="let caseValue of caseList" value="{{caseValue}}">{{caseValue}}</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-reverse" id="yesCase" (click)="confirmAction()">{{'Yes' | sp3Translate}}</button>
+                    <button type="button" class="btn btn-reverse" data-dismiss="modal" id="noCase" (click)="cancelAction()">{{'No' | sp3Translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  

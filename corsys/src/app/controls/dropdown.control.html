@@ -1,0 +1,8 @@
+﻿<div class="col-sm-8 col-md-7  col-lg-12 tooltips">
+    <select id="{{controlId}}" [ngModel]="selectedValue" (ngModelChange)="onChange($event)" class="form-control {{controlClass}}">
+        <option *ngFor="let keyValue of values" [ngValue]="keyValue">{{ keyValue.name }}</option>
+    </select>
+
+    <span *ngIf="isEmpty">{{'Required' | sp3Translate}}</span>
+
+</div>

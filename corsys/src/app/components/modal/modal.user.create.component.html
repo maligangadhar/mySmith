@@ -1,0 +1,63 @@
+﻿        <sp3-comp-modal-confirm #modalClose>
+            <div class="app-modal-header">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{'Users' | sp3Translate}}
+            </div>
+            <div class="app-modal-body">
+            <p>{{'NotSavedChanges'| sp3Translate}}</p>
+             <p>{{'LeaveMessage'| sp3Translate}}</p>          
+            </div>
+            <div class="app-modal-footer">
+                    <button type="button" class="btn btn-reverse" id="userCreateLeave" (click)="leaveClick()">{{'LeaveWithoutSaveButton'| sp3Translate}}</button>
+                    <button type="button" class="btn btn-reverse" id="userCreateBack" (click)="backClick()">{{'BackToWindowButton'| sp3Translate}}</button>
+            </div>
+        </sp3-comp-modal-confirm>
+
+        <sp3-comp-modal-confirm #modalRoleAlert>
+            <div class="app-modal-header">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{'Users' | sp3Translate}}
+            </div>
+            <div class="app-modal-body">
+            <p>{{'NotAssignedRoles' | sp3Translate}}</p>
+             <p>{{'CreateUserQuestion' | sp3Translate}}</p>
+            </div>
+            <div class="app-modal-footer">
+                    <button type="button" class="btn btn-reverse" (click)="yesClick()">{{'Yes' | sp3Translate}}</button>
+                    <button type="button" class="btn btn-reverse" (click)="noClick()">{{'No' | sp3Translate}}</button>
+            </div>
+        </sp3-comp-modal-confirm>
+            <div class="row">
+                    <div class="col-sm-12">
+                        <div class="settings-title" *ngIf="isCreateMode">
+                                <h2 id="userDetailName">{{'CreateUserProfile' | sp3Translate}}
+                                <span class="pull-right">  
+                                         <button class="btn btn-primary" type="button" id="createUserButton" [disabled]="getCreateButtonEnabled()" (click)="createUserClick()">{{'Create' | sp3Translate}}</button>
+                                        <button class="btn btn-primary" (click)="closeClick()" type="button">{{'Cancel' | sp3Translate}}</button>
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <sp3-comp-message-display></sp3-comp-message-display>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <sp3-comp-user-detail [mode]="1" (modeUpdated) = "onModeUpdated($event)" [(isNoLicenseMessageShown)]="isNoLicenseMessageShown"></sp3-comp-user-detail>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">                    
+                    <sp3-comp-roles controlId="createUserSelectedRoleId"></sp3-comp-roles>
+                    <hr>
+                </div>
+            </div>
+            <div class="application-control col-sm-12">
+                <div class="row">
+                    <sp3-comp-applications controlId="selectedUserRoleAppsId" [mode]="3" [allowNavigate]="false" [showAllApps]="false" [showSelect]="false" [allowSelect]="false" [showNoAppMessage]="false"></sp3-comp-applications>
+                    <hr>
+                </div>
+            </div>

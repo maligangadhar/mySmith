@@ -1,0 +1,159 @@
+@import "util/variables";
+/*@import "corsys_components/_modal_component";*/
+body{
+    font-family: 'ProximaNova-Regular', Helvetica, Arial, sans-serif;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $gray-base;
+    background: url(../images/app-bg.jpg) no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+html { overflow-x: hidden; }
+.container-blue{
+    background-color: $pale-blue-base;
+}
+h1, h2, h3, h4, h5 {
+    font-family: 'ProximaSoft-Semibold', Helvetica, Arial, sans-serif;
+    color: $blue-base;
+}
+label {
+    font-family: 'ProximaNova-Bold', Helvetica, Arial, sans-serif;
+    font-size: $font-size-base;
+    color: $gray-base;
+    display: block;
+}
+a {
+    color: #299ed9;
+    cursor: pointer;
+}
+.chart-title {
+    color: #1e6e96;
+}
+
+.alert-background {
+    width: 20px;
+    height: 20px;
+    background-color: #ca3a3a;
+    border-radius: 1em;
+    padding: 0 0.2em;
+    z-index: 1;
+    top: 19px;
+    position: absolute;
+    float: left;
+    left: 86%;
+    overflow: hidden;
+
+    .tab-alert-number {
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+        color: #ffffff;
+        line-height: 1;
+    }
+}
+
+
+
+.notes {
+    position: fixed;
+    top: 20px;
+    left: 130px;
+    z-index: 5;
+    width: 79.2px;
+    height: 26px;
+    background-color: #414042;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3), 0 0 4px 0 rgba(0, 0, 0, 0.3);
+
+    &::after {
+        content: '';
+        display: block;
+        position: fixed;
+        width: 0px;
+        height: 0px;
+        top: 50px;
+        left: 115px;
+    }
+
+    p {
+        width: 61px;
+        height: 17px;
+        font-family: 'ProximaNova-Regular', Helvetica, Arial, sans-serif;
+        color: $text-color-white;
+    }
+}
+.menu-title {
+    width: 300px;
+    height: 56px;
+    background-color: #299ed9;
+}
+
+.notify-badge {
+    position: relative;
+    background: rgba(0,0,255,1);
+    height: 2rem;
+    top: 1rem;
+    left: 1.5rem;
+    width: 4rem;
+    text-align: center;
+    line-height: 2rem;
+    font-size: 1rem;
+    border-radius: 50%;
+    color: $text-color-white;
+    border: 1px solid blue;
+}
+
+/**Page Not Found Styles**/
+.no-results-found-msg-div {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: 0 auto;
+    color: $blue-base;
+    padding: 40px 0;
+    h4{
+        font-size: $font-size-h4;
+    }
+    p{
+        font-size: 18px;
+    }
+}
+#imageViewerHemd{
+  opacity: 0.6 !important;
+  position:absolute;
+}
+.clearedCaseNote{
+ color:gray;
+ font-weight:700;
+ float:right;
+}
+
+.findings{
+  background-color: #dce2e8 !important;
+  color: #2874A6 !important;
+  span{
+    margin-left:10px;
+    cursor:pointer;
+  }
+}
+
+.timelineView{
+  margin-bottom: 15px;
+  width: 132px;
+  float: right;
+  cursor:pointer;
+}
+
+.resTableBorder{
+  border:1px solid #ccc;
+  border-radius:3px;
+}
+
+.selectorarrowleft{
+  width:310px !important;
+} 
+.mydrp .headermonthtxt, .mydrp .headeryeartxt {
+  max-width:70px !important;
+}

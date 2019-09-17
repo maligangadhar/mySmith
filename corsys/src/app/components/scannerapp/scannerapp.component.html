@@ -1,0 +1,150 @@
+<div *ngIf="scannerviewToggle === 0; then scannersList"></div>
+<ng-template #scannersList>
+  <div class="scanner-container">
+    <div class="row">
+      <div class="col-sm-3 filter-sidebar">
+        <!-- Left Hand Filter Block starts here-->
+        <h2 class="title">{{'SelectScanner'| sp3Translate}}</h2>
+        <h4>{{'FilterTable' | sp3Translate}}</h4>
+        <div class="search-panel">
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon" id="searchfilterbutton">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Scan ID, Location…" aria-describedby="searchfilterbutton">
+            </div>
+            <hr>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-lg btn-block btn-primary" disabled>{{'ApplyFilter' | sp3Translate}}</button>
+      </div>
+      <!-- Left Hand Filter Block ends here-->
+      <div class="col-sm-9 scanner-results">
+        <div class="results-container">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="scannericon">
+                    <i class="xray-icon"></i>
+                  </div>
+                  <div class="scanner-details">
+                    <p>
+                      <strong>Scanner ID 0264</strong>
+                      <br/> Bay No 08, Docklands Site E1625
+                      < br/>
+                    </p>
+                    <small> X-RAY HCVM e35 T</small>
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6 text-center">
+                      <button (click)="showScansList()" class="btn btn-transparent">{{'LoadScanner'| sp3Translate}}</button>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-center scan-star">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="scannericon">
+                    <i class="xray-icon"></i>
+                  </div>
+                  <div class="scanner-details">
+                    <p>
+                      <strong>Scanner ID 0264</strong>
+                      <br/> Bay No 08, Docklands Site E1625
+                      <br/>
+                    </p>
+                    <small> X-RAY HCVM e35 T</small>
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6 text-center">
+                      <button (click)="showScansList()" class="btn btn-transparent">{{'LoadScanner'| sp3Translate}}</button>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-center scan-star">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="scannerviewToggle === 1; then scansList"></div>
+<ng-template #scansList>
+  <div class="scanner-container">
+    <div class="row">
+      <div class="col-sm-3 filter-sidebar">
+        <!-- <h2 class="title">Scanner SCN01</h2> -->
+        <h4>{{'FilterTable' | sp3Translate}}</h4>
+        <div class="search-panel">
+          <!-- <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon" id="searchfilterbutton"><i class="fa fa-search" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" placeholder="Scan ID, Location…" aria-describedby="searchfilterbutton">
+              </div>  
+              <hr>
+            </div> -->
+          <!-- <div class="form-group">
+              <label>{{'AssociationStatus'| sp3Translate}}</label>
+              <sp3-comp-multiselect [multiSelectOptions]="associationstatus" [selectedOption]="selectedassociation"></sp3-comp-multiselect> 
+              <hr>
+            </div> -->
+          <div class="form-group">
+            <label>{{'ScanDate' | sp3Translate}}</label>
+            <!-- <sp3-comp-datepicker [(selectedDate)]="scanDate" (dateChange)="onDateChange($event)" controlId="scanDate"></sp3-comp-datepicker> -->
+            <sp3-comp-daterangepicker #dateRangeScanDate [dateRange]="dateRangeSetArrival"></sp3-comp-daterangepicker>
+            <hr>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-lg btn-block btn-primary" (click)="applyFilter()">{{'ApplyFilter' | sp3Translate}}</button>
+        <!-- <div class="btn-bottom-fixed"><button (click)="showScannerList()" type="submit" class="btn btn-lg btn-transparent">{{'ChangeScanner'| sp3Translate}}</button></div>     -->
+      </div>
+      <div class="col-sm-9 scanner-results">
+        <div class="results-container">
+          <!-- <sp3-comp-grid [tableStyle]="{'text-align':'center'}" [lazy]="true" [value]="data" sortMode="single" reorderableColumns="true"
+            [globalFilter]="gb" scrollable="true" scrollHeight="'600px'" [(selection)]="selectedItems" columnResizeMode="expand"
+            [customPaginationLoad]="loadCasesLazy" [totalRecords]="totalRecords" [customPaginator]="true" [isPrintHidden]="true"
+            [customRowsPerPage]="dataParams.pageSize"> -->
+          <sp3-comp-grid [value]="data" [dataKey]="scanId" [scrollable]="true" [scrollHeightGrid]="'600px'" [lazy]="true" [(selection)]="selectedItems"
+            [customPaginator]="true" [customRowsPerPage]="dataParams.pageSize" [customPaginationLoad]="loadCasesLazy" [totalRecords]="totalRecords" [tableStyle]="{'text-align':'center'}" sortMode="single"
+            reorderableColumns="true" [globalFilter]="gb" columnResizeMode="expand">
+            <sp3-column field="scanId" header="{{'ScanId' | sp3Translate}}" [controlId]="'scanId'" [type]="2" [hasClick]="true" [itemOnClick]="openScannedImage"></sp3-column>
+            <sp3-column field="scanDateTime" header="{{'ScanDateTime' | sp3Translate}}" [controlId]="'scanDateTime'" [type]="12"></sp3-column>
+            <sp3-column field="containerId" header="{{'ContainerId' | sp3Translate}}" [controlId]="'ContainerId'"></sp3-column>
+          </sp3-comp-grid>
+
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="scannerviewToggle === 2; then scannedImage"></div>
+<ng-template #scannedImage>
+  <sp3-comp-loadscanimage (emitMessage)="lisItemChanges($event)"></sp3-comp-loadscanimage>
+</ng-template>
+<!-- <sp3-comp-modal-success #modalSuccess></sp3-comp-modal-success>
+<sp3-comp-modal-confirm #modalFailure>
+  <div class="app-modal-header">
+    {{'MatchCaseFailed' | sp3Translate}}
+  </div>
+  <div class="app-modal-body">
+    <h3>{{'ScanAssociationFailed' | sp3Translate}}</h3>
+  </div>
+</sp3-comp-modal-confirm> -->

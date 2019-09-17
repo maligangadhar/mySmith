@@ -1,0 +1,52 @@
+<div class="filtersettings row">
+    <form>
+        <div class="form-group">
+                <sp3-comp-select  controlId="roleFilter" labelText="{{'FilterBy' | sp3Translate}}" [(values)]="filterList" [(selectedValue)]="selectedFilter" [size]="6" (selectedChange)="onRoleStatusFilterChange($event)"></sp3-comp-select>
+        </div>
+    </form>
+    <form>
+        <div class="form-group input-group">
+            <span class="input-group-addon"> 
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="{{'Search' | sp3Translate}}" id="roleSearch" [formControl] = "searchFormControl"/>
+        </div>
+    </form>
+   <!-- <form>
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-primary btn-block" id="roleEditSave" [disabled]="IsSaveDisabled" (click)="updateRoleClick()">{{'Save' | sp3Translate}}</button> 
+            </div>
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-primary btn-block" id="roleEditCancel" [disabled]="isCancelDisabled" (click)="cancelUpdateRole()">{{'Cancel' | sp3Translate}}</button>
+            </div>
+            <small *ngIf="IsSuccess">{{'ChangesSave' | sp3Translate}} </small>
+        </div>
+    </form> -->
+</div>
+<div class="addnewcontrolbtn">
+    <form>
+        <button type="button" class="btn btn-block btn-primary btn-lg" id="roleAddNew" (click)="onCreateRole()"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp;{{'AddNewRole' | sp3Translate}}</button>
+    </form>
+</div>
+<!--<sp3-comp-modal-confirm #modalRoleInactiveAlert>
+    <div class="app-modal-header">
+        <div class="col-md-4">
+            {{'Alert' | sp3Translate}}
+        </div>
+    </div>
+    <div class="app-modal-body">
+        <div class="col-md-1">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-4">
+                {{'RoleInactiveMessage1' | sp3Translate}}
+                <br /> <br />{{'RoleInactiveMessage2' | sp3Translate}}
+                <br /><br /> {{'RoleInactiveLeaveMessage' | sp3Translate}} 
+        </div>
+    </div>
+    <div class="app-modal-footer">
+                <button type="button" class="btn btn-secondary" id="roleInactiveYes" (click)="yesClick()">{{'Yes' | sp3Translate}}</button>
+                <button type="button" class="btn btn-secondary " id="roleInactiveNo" (click)="noClick()">{{'No' | sp3Translate}}</button>
+    </div>
+</sp3-comp-modal-confirm> -->

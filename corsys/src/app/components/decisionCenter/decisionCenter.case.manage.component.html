@@ -1,0 +1,47 @@
+<sp3-comp-modal-querybuilder #modalQueryBuilder sourceType='decisionCaseManage' [staticStatusList]="fixedStaticList" (addAdvancedSearchCriterias)='onAddingAdvancedSearchCriterias($event)'></sp3-comp-modal-querybuilder>
+<sp3-comp-modal-case-detail #modal></sp3-comp-modal-case-detail>
+<div class="control-center-grid search-grid">
+
+        <sp3-comp-message-display id="caseManage"></sp3-comp-message-display>
+    <div class="search-panel">
+        <sp3-comp-autocomplete #autocomplete [minLength]="3" placeholder="{{'StartSearching' | sp3Translate}}" id="basicSearch" [(suggestions)]="suggestions" (searchQueryChanged)="getSearchData($event)" (selectionChanged)="onSelectionChanged($event)" [multiple]="false"></sp3-comp-autocomplete>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <button class="btn btn-link query-btn" type="button" (click)="openQueryBuilder()">{{'QueryBuilder'| sp3Translate}}</button>
+    </div>
+    <div class="search-builder-queries">
+        <div *ngFor='let query of querytagsToDisplay' class="query-tags">
+            <label>{{query.fieldName | sp3Translate}} </label>
+            <span *ngFor='let queryData of query.fieldValues' class="tag">
+                       <p>{{queryData}}</p>
+                        <button type="button" class="btn btn-link" (click)="removeSearch(query,queryData)"><span class="icn-close" aria-hidden="true"></span></button>
+            </span>
+        </div>
+    </div>
+    <div class="col-sm-12" *ngIf="showGrid">
+         <sp3-comp-grid #actionCenter [value]="controlcenterActions" [dataKey]="caseId" [scrollable]="true" [scrollHeightGrid]="'600px'" [headerCheckboxToggleAllPages]="false" [lazy]="true" [(selection)]="selectedCases" [customPaginator]="true" [customRowsPerPage]="actionPerPage"
+            [customPaginationLoad]="loadCasesLazy" [lazyLoad]="onSorting" [(totalRecords)]="totalActions" [emptyMessage]="emptyMessage">
+            <sp3-column [field]="" header="" [type]="3"></sp3-column>
+            <sp3-column field="containerIds" header="{{'Containers' | sp3Translate}}" [controlId]="'caseId'"  [type]="2" [hasClick]="true" [itemOnClick]="openCase"></sp3-column>
+            <!-- <sp3-column field="caseId" header="{{'ControlCenterCaseId' | sp3Translate}}" [type]="2" [hasClick]="true" [itemOnClick]="openCase"></sp3-column> -->
+            <sp3-column field="statusText" header="{{'Status' | sp3Translate}}"></sp3-column>
+            <!-- <sp3-column field="containerIds" header="{{'ContainerID' | sp3Translate}}"></sp3-column> -->
+            <sp3-column field="shippingCompany" header="{{'ShippingCompany' | sp3Translate}}"></sp3-column>
+            <sp3-column field="from" header="{{'Country' | sp3Translate}}"></sp3-column>
+            <sp3-column field="originPort" header="{{'OriginPort' | sp3Translate}}"></sp3-column>
+            <sp3-column field="destinationPort" header="{{'DestinationPort' | sp3Translate}}"></sp3-column>
+            <sp3-column field="lastUpdatedDate" [type]="12" header="{{'LastModified' | sp3Translate}}" [isSortable]= "true"></sp3-column>
+            <sp3-column field="dateOfArrival" [type]="10" header="{{'DateOfArrival' | sp3Translate}}" [isSortable]= "true"></sp3-column>
+
+        </sp3-comp-grid>
+    </div>
+    <div *ngIf="noSearchData" class="container-blue">
+        <div class="no-results-found-msg-div">
+            <!--<i class="icn-search"></i>-->
+            <img src="assets/images/svg/icn-search-illust.svg" />
+            <h4>{{'NoResults'|sp3Translate}}</h4>
+            <p>{{'NoResultsMessage'|sp3Translate}}</p>
+        </div>
+
+    </div>
+
+</div>

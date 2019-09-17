@@ -1,0 +1,208 @@
+.inspection-header{
+    border-radius: 4px;
+    background-color: #ffffff;
+    margin-bottom: 16px;
+    padding: 16px;
+    min-height: 54px;
+    h4{
+        margin: 0px;
+        font-size: 18px;
+        font-weight: normal;
+        line-height: 18px;
+        text-align: left;
+        font-family: ProximaSoft-Semibold, ProximaNova-Bold, ProximaNova-Regular;
+        color: #1e6e96;
+    }
+    .header-search{
+        border-radius: 4px;
+        background-color: #e8eef5;
+        padding: 16px;
+        margin-top: 16px;
+        label{
+            font-family: ProximaNova-Bold;
+        }
+        .ui-multiselect-panel .ui-multiselect-item label{
+            margin-bottom: 0px;
+        }
+    }
+}
+.inspection-popups{
+    .time-line{
+        margin-top: 16px;
+    }
+    .modal-body{
+        background: #fff;
+    }
+
+    
+.timeline {
+    padding: 0px 53px;
+}
+
+.timeline:before {
+	content: "";
+	position: absolute;
+	top: 40px;
+	left: 53px;
+	width: 3px;
+	height: calc(100% - 80px);
+    background: #299ed9;
+    opacity: 0.51;
+}
+
+.timeline .column {
+    margin: 40px;
+    position: relative;
+    .sub-heading{
+        font-size: 16px;
+        font-family: ProximaNova-Bold;
+        color: #443b3b;
+        margin-bottom: 20px;
+        display: block;
+    }
+    .description{
+        border-bottom: 1px solid #c7c4c4;
+        margin-bottom: 20px;
+    }
+}
+.timeline .column.closed{
+    border-bottom: 0px;
+    .description{
+        display: none;
+    }
+}
+
+.timeline .column .title h4 {
+    font-size: 18px;
+    color: #1e6e96;
+    margin-bottom: 15px;
+    span{
+        color: #443b3b;
+        font-size: 16px;
+        font-weight: normal;
+    }
+}
+
+.timeline .column .title h4:before {
+	content: "\f068";
+	position: absolute;
+	left: -78px;
+	top: -15px;
+	background: #fff;
+    width: 48px;
+    height: 48px;
+    background-color: #ffffff;
+    border: 3px solid rgba(42,158,217,0.51);
+    border-radius: 50%;
+    font-family: FontAwesome;
+    text-align: center;
+    padding: 10px;
+    color: rgba(42, 158, 217, 0.51)
+}
+.timeline .column.closed .title h4:before {
+	content: "\f067";
+}
+
+}
+.inspection-detail-page{
+    .modal-header{
+        font-size: 22px;
+    padding: 4px 32px;
+    color: #fff;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background: #299ed9;
+    text-align: left;
+    h4{
+        color: #fff;
+    line-height: 1.8;
+    }
+    .close{
+        font-size: 24px;
+        color: #fff;
+        display: inline-block;
+        opacity: inherit;
+        margin-top: 12px;
+    }
+    }
+    .modal-body{
+        height: calc(100vh - 96px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 16px;
+        .modal-details-header {
+            background: #ebebeb;
+            padding: 8px 32px;
+            margin-top: -1px;
+            float: left;
+            width: 100%;
+            .form-group label {
+                margin-bottom: 4px;
+                color: #443b3b;
+            }
+            
+            .time-line-col {
+                padding: 0px 8px;
+                .box-border-grey{
+                    padding: 8px;
+                }
+            }
+        }
+        .panel-body{
+            
+            .form-group {
+                margin-bottom: 15px;
+                float: left;
+                width: 100%;
+            }
+            .form-control[disabled], fieldset[disabled] .form-control {
+                cursor: default;
+                box-shadow: 0px 0px 0px;
+                border: 0px solid #ebebeb;
+                color: #443b3b !important;
+                padding: 0px;
+                height: auto;
+            }
+            select.form-control[disabled]{
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                text-indent: 1px;
+                text-overflow: '';
+            }
+        }
+        .panel-group .panel-default .panel-heading {
+            cursor: pointer;
+            padding: 16px;
+            border-radius: 0px;
+            background-color: #fff;
+            .collapse-icon {
+                color: rgba(41, 158, 217, 0.7);
+                float: left;
+                margin-top: 0px;
+                margin-right: 10px;
+                margin-left: 8px;
+                padding-right: 36px;
+            }
+        }
+        .panel-group .panel-default .panel-heading:hover, .panel-group .panel-default .panel-heading.active{
+            background-color: #e8eef5 !important;
+        }
+        .panel-group .panel + .panel{
+            margin-top: 0 !important;
+        }
+    }
+}
+.awaiting-inspection-grid{
+    .uiflaggrid i{
+        cursor: default !important;
+    }
+
+    .ui-datatable .ui-datatable-scrollable-body {
+        max-height: calc(100vh - 370px) !important;
+    }
+}
+.inspections-cases-page{
+    .ui-datatable .ui-datatable-scrollable-body {
+        max-height: calc(100vh - 180px) !important;
+    }
+}

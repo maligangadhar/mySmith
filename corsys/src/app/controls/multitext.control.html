@@ -1,0 +1,8 @@
+﻿<textarea id="{{controlId}}" [(ngModel)]="textValue" [maxlength]="maxLengthValue" placeholder="{{placeholderText}}" (ngModelChange)="updateData($event)"
+        [rows]="rows" class="form-control {{controlClass}}" (focusout)="focusOut()" (focus)="onfocus()" disabled="{{isDisabled}}"></textarea>
+
+
+
+<i class="helper-text" id="upLoadDescriptionCount">{{maxLengthValue - textValue.length}} {{'CharactersLeft'| sp3Translate}}</i>
+
+<span class="help-block error-msg" *ngIf="isEmpty">{{'Required' | sp3Translate}}</span>

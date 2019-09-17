@@ -1,0 +1,18 @@
+<div *ngIf="visible" class="modal fade session-modal" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <div id="alertCase" role="dialog">
+          <div class="modal-dialog modal-generic">
+              <div class="modal-content">
+                  <div class="modal-header modal-warning-header">
+                     <h4 class="modal-title"> {{'ImageAnalyzer'| sp3Translate}}</h4>
+                  </div>
+                  <div class="modal-body text-center">
+                        <p class="lead">{{'imageLoadingError'| sp3Translate}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"  (click)="retry()">{{'Retry'| sp3Translate}}</button>
+                    <button type="button" class="btn btn-primary"  (click)="hide()">{{'Ok'| sp3Translate}}</button>
+                   </div>
+              </div>
+          </div>
+      </div>
+  </div>

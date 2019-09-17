@@ -1,0 +1,14 @@
+﻿
+
+<label for="controlId" class="{{sizeClassLabel}}">{{labelText}}<sup *ngIf="required">*</sup></label>
+
+
+<div class="{{sizeClassValue}}">
+    <input type="text" id="{{controlId}}" [maxlength]="GetMaxLengthValue()" placeholder="{{placeholderText}}" [ngModel]="value" (ngModelChange)="updateData($event)"
+           class="form-control {{controlClass}}" (focusout)="focusOut()" (focus)="onfocus()" disabled="{{isDisabled}}">
+    <!--<span id="wghtLabel" class="col-xs-11 col-sm-6 col-md-5" *ngIf="controlId=='ManualCaseOverallWght'"><pre>Kg</pre></span>-->
+    <span class="help-block error-msg case-overall-weight-msg" *ngIf="isMessageShown">{{message | sp3Translate}}</span>
+
+</div>
+
+

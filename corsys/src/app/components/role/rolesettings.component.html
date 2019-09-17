@@ -1,0 +1,29 @@
+<div class="settings-wrapper">
+  <div class="settings-control col-sm-4">
+    <div class="row">
+      <div class="col-sm-12 settings-innercontrol" [style.height.px]="innerControlHeight">
+        <sp3-comp-role-header (showUpdateRole)="showaddrolepanel($event)"></sp3-comp-role-header>
+        <sp3-comp-role-view (showUpdateRole)="showaddrolepanel($event)"></sp3-comp-role-view>
+      </div>
+    </div>
+  </div>
+  <div class="settings-viewer col-sm-8">
+    <div class="settings-innerviewer">
+      <div class="row" [hidden]="showAddNewRolePanel">
+        <div class="col-sm-12">
+          <sp3-comp-message-display></sp3-comp-message-display>
+        </div>
+        <div class="col-sm-12">
+          <sp3-comp-role-detail></sp3-comp-role-detail>
+        </div>
+        <div class="col-sm-12 application-control radiobtns">
+          <sp3-comp-applications controlId="roleEditApps" [mode]="3" [allowNavigate]="false" [showAllApps]="true" [showSelect]="true"
+            [allowSelect]="true" [selectedApps]="roleApps" [showNoAppMessage]="false"></sp3-comp-applications>
+        </div>
+      </div>
+      <div [hidden]="!showAddNewRolePanel">
+        <sp3-comp-modal-create-role (showUpdateRole)="showaddrolepanel($event)"></sp3-comp-modal-create-role>
+      </div>
+    </div>
+  </div>
+</div>

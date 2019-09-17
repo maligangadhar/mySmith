@@ -1,0 +1,61 @@
+#userCreateModal {
+    #column2 {
+        width: 38%;
+        overflow-x: hidden;
+        select {
+            float: right;
+        }
+        .col-lg-6.tooltips {
+            width: 66%;
+        }
+    }
+    #column2,
+    #column3 {
+        border-right: 1px solid #7f7f7f !important;
+    }
+    #column2,
+    #column3,
+    #column4 {
+        border: 0;
+    }
+    .col-lg-10.view-result {
+        width: 99.4%;
+        left: 2.1em;
+    }
+    .modal-lg {
+        width: 98%;
+    }
+}
+@media (max-width: 1200px) {
+    #userCreateModal {
+        #column3 {
+            left: 25%;
+        }
+        #column2 {
+            width: 51%;
+            overflow-x: hidden;
+        }
+        #column2 .col-lg-6.tooltips {
+            width: 58%;
+        }
+        #column4 {
+            left: 53%;
+        }
+    }
+}
+@media (max-width: 992px) {
+    #userCreateModal {
+        #column2 {
+            width: 42%;
+        }
+        #column3 {
+            left: 28%;
+            width: 50%;
+        }
+        #column4 {
+            left: 63%;
+            width: 31%;
+        }
+
+    }
+}

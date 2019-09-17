@@ -1,0 +1,56 @@
+﻿<div *ngIf="visible" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div id="actionCase" role="dialog">
+      <div class="modal-dialog" [ngClass]="customContainerCSS">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" [ngClass]="customCSS">
+          <a class="close" (click)="closeClick()" data-dismiss="modal"><i class="icn-close"></i></a>
+          <h4 class="modal-title">{{pageTitle | sp3Translate}}</h4>
+        </div>
+
+        <div class="modal-body">
+          <p>{{questionText | sp3Translate}}</p>
+          <div *ngIf="selectedButtonType === caseButtonType.AwaitingInspectionCaseInDC" class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <sp3-comp-select #physicalInspectionType controlId="PhyscialInspectionTypeForm" [size]="6" [(values)]="inspectionTypes" [(selectedValue)]="selectedInspectionType"></sp3-comp-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <ul id="listofCases">
+                  <li *ngFor="let caseValue of caseList" title="{{caseValue}}">{{caseValue}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+               
+          <div *ngIf="isCaseButtonClicked" class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                 <label class="control-label">{{'Comments' | sp3Translate}}<sup *ngIf="isCommentsRequired">*</sup></label>
+              </div>
+            </div>
+          </div>
+
+        
+          <div *ngIf="isCaseButtonClicked" class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <sp3-comp-multitext #caseComments controlId="caseDescription" placeholderText="{{'Comments' | sp3Translate}}" rows="{{4}}"
+                                    maxLengthValue="1000" [(textValue)]="description" [required]="isCommentsRequired"></sp3-comp-multitext>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div  *ngIf="isCaseButtonClicked" class="modal-footer">
+          <button type="button" class="btn btn-reverse" data-dismiss="modal" id="DecisionCentreCaseConfirm" [disabled]="getConfirmDisabled()" (click)="yesClick()">{{'Confirm' | sp3Translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

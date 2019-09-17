@@ -1,0 +1,12 @@
+﻿<div class="col-sm-12" *ngIf="message.showMessage">
+    <div id="{{id}}" *ngIf="message.type == 1" class="alert alert-success">
+        {{message.message | sp3Translate}}
+    </div>
+    <div id="{{id}}" *ngIf="message.type == 2" class="alert alert-info">
+        {{message.message | sp3Translate}}
+    </div>
+    <div id="{{id}}" *ngIf="message.type == 3" class="alert alert-danger">
+        {{message.message | sp3Translate}}
+    </div>
+</div>
+ 

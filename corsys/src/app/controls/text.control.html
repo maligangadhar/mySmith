@@ -1,0 +1,6 @@
+﻿<div class="{{sizeClassValue}}">
+    <input type="{{inputType}}" id="{{controlId}}" [maxlength]="GetMaxLengthValue()" placeholder="{{placeholderText}}" [ngModel]="value" (ngModelChange)="updateData($event)"
+           class="form-control {{controlClass}}" (focusout)="focusOut()" (focus)="onfocus()">
+
+    <span class="help-block error-msg" *ngIf="isMessageShown">{{message | sp3Translate}}</span>
+</div>

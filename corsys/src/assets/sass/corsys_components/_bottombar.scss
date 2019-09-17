@@ -1,0 +1,89 @@
+.bottom-bar {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 180px);
+    left: 180px;
+    background: #dce2e8;
+    z-index: 998;
+    transition: all 0.3s;
+    /**Start -  bottom Action Bar CSS **/
+    .bottom-action-bar {
+        padding: 8px;
+        width: 100%;
+        float: left;
+        background: #e8eef5;
+        height: 40px;
+
+        .btn {
+            margin: 0 2px;
+        }
+
+        select.form-control {
+            height: 24px;
+            font-size: 14px;
+            background: #fff;
+            color: #443b3b;
+            border: 0px;
+            width: auto;
+            text-transform: capitalize;
+            padding: 0px 8px;
+            display: inline-block;
+
+            option {
+                color: #443b3b;
+                background: #fff;
+                font-size: 16px;
+                text-transform: capitalize;
+            }
+        }
+    }
+    /**End -  Bottom Action Bar CSS **/
+    /**Start -  Bottom Image Viewer CSS **/
+    .img-analyze-scroller {
+        width: 100%;
+        float: left;
+        display: none;
+        transition: height 0.5s;
+
+
+        .img-analyzer-container {
+            padding: 15px;
+            width: 100%;
+            white-space: nowrap;
+            overflow-x: auto;
+            transition: height 0.5s;
+
+            .img-analyzer-slide-item {
+                width: 200px;
+                overflow: hidden;
+                display: inline-block;
+                margin: 0 2px;
+                text-align: center;
+
+                .title {
+                    line-height: 1.43;
+                    color: $gray-base;
+                    font-size: 14px;
+                    float: left;
+                    width: 100%;
+                    padding: 5px;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100px;
+                }
+            }
+
+            .img-analyzer-slide-item.active {
+                opacity: 0.7;
+            }
+        }
+    }
+
+    .img-analyze-scroller.views-open {
+        display: block;
+        transition: height 0.5s;
+    }
+    /**End -  Bottom Image Viewer CSS **/
+}

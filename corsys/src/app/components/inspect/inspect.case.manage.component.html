@@ -1,0 +1,64 @@
+<sp3-comp-inspect-case-detail #caseDetail></sp3-comp-inspect-case-detail>
+<sp3-comp-modal-confirm #modalcasefailure>
+    <div class="app-modal-header">
+        {{'CASESFAILED' | sp3Translate}}
+    </div>
+    <div class="app-modal-body">
+        <p class="lead">{{'FailedCaseListText' | sp3Translate}}</p>
+        <select id="listofCases" class="form-control" multiple="multiple" [disabled]="true">
+                <option *ngFor="let caseValue of caseFailList" value="{{caseValue}}">{{caseValue}}</option>
+            </select>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-primary " id="rulerCreationOk" (click)="validationOkClick()">{{'Ok'| sp3Translate}}</button>
+    </div>
+</sp3-comp-modal-confirm>
+
+<div class="inspection-header">
+    <h4>{{'AwaitingInspection' | sp3Translate}}</h4>
+    <div class="header-search">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{{'InspectionType' | sp3Translate}}</label>
+                    <sp3-comp-multiselect id="inspectionTypeFilter" [multiSelectOptions]="dataValues.physicalInspectionTypes" (fetchSelectedOptions)="onInspectionTypeChange($event)"></sp3-comp-multiselect>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{{'FindingsCategory' | sp3Translate}}</label>
+                    <sp3-comp-multiselect id="findingCategoryFilter" [multiSelectOptions]="dataValues.categoryTypes" (fetchSelectedOptions)="onFindingCategoryChange($event)"></sp3-comp-multiselect>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <sp3-comp-message-display [id]="'inspectCaseMessage'"></sp3-comp-message-display>
+    </div>
+</div>
+<div id="wrapper-body" class="awaiting-inspection-grid col-sm-12">
+    <div id="grid-actionView">
+        <sp3-comp-grid #actionCenter [value]="inspectMyCases" dataKey="caseId" [scrollable]="true" [scrollHeightGrid]="'600px'" [headerCheckboxToggleAllPages]="false" [lazy]="false" [(selection)]="selectedCases" [customPaginator]="true" [customPaginationLoad]="loadCasesLazy"
+            [isShow]="isShow" [lazyLoad]="loadSortedCasesLazy" [customRowsPerPage]="actionPerPage" [(totalRecords)]="totalActions" [isPrintHidden]="true" [valueSelectionChange]="onSelectFromGrid" [assignToSelf]="true" [assignToSelfFunction]="assignCasestoMyselfClick"
+            [enableAssignToSelf]="enableAssignToSelfButton" [emptyMessage]="''">
+
+            <sp3-column [field]="" header="" [type]="3"></sp3-column>
+            <sp3-column field="containerIds" header="{{'Containers' | sp3Translate}}" [controlId]="'caseId'" [type]="2" [hasClick]="true" [itemOnClick]="openCase"></sp3-column>
+            <!-- <sp3-column field="caseId" header="{{'ControlCenterCaseId' | sp3Translate}}" [type]="2" [hasClick]="true" [itemOnClick]="openCase"></sp3-column> -->
+            <sp3-column field="inspectTypeName" header="{{'InspectionType' | sp3Translate}}"></sp3-column>
+            <sp3-column field="priorityClass" [type]="9" [iconHeaderClass]="'svg-icn-flag-black'" [hasClick]="false"></sp3-column>
+            <sp3-column field="lastUpdatedDate" [type]="12" header="{{'Approval' | sp3Translate}}" [isSortable]="true"></sp3-column>
+            <sp3-column field="findingsCategoriesList" header="{{'FindingsCategory' | sp3Translate}}"></sp3-column>
+        </sp3-comp-grid>
+    </div>
+    <div *ngIf="noSearchData" class="container-blue">
+        <div class="no-results-found-msg-div">
+            <img src="assets/images/svg/icn-search-illust.svg" />
+            <h4>{{noResultsFound}}</h4>
+        </div>
+
+    </div>
+</div>
+<sp3-comp-duplicate-action #modalDuplicateActionPopUp [duplicateActionMessage]="messageCode" (closeAction)="captureCloseAction($event)"></sp3-comp-duplicate-action>

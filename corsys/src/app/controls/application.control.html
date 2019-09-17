@@ -1,0 +1,29 @@
+﻿<div *ngIf="allowCollapse">
+    <div class="settings-title">
+        <h2>{{'Applications'  | sp3Translate}} <span id="roleMappedApps" *ngIf="selectedAppsCount > 0">({{selectedAppsCount}})</span></h2>      
+    </div>    
+</div>
+<div id="apps-collapse" *ngIf="expanded">
+    <div class="app-container" id="{{controlId}}Apps">
+        <div class="col-sm-4 col-lg-3 app-block" *ngFor="let userApp of applications">
+            <div class="landing-block-container">
+            <div class="landing-block" (click)="onAppNavigate(userApp)">
+                <div class="img-container">
+                        <img src="../../assets/images/landingImages/{{userApp.id}}.png" id="appLogo{{userApp.name}}" alt="appImage" class="img-responsive" />
+                </div>
+                <div class="img-container checked" *ngIf="isSelected(userApp)" (click)="onAppSelect(userApp, true)">
+                    <img src="../../assets/images/landingImages/{{userApp.id}}.png" id="appLogo{{userApp.name}}" (click)="onAppNavigate(userApp)" alt="appImage" class="img-responsive" />
+                </div>
+                <div class="img-container unchecked" *ngIf="isUnSelected(userApp)" (click)="onAppSelect(userApp, false)">
+                   <img src="../../assets/images/landingImages/{{userApp.id}}.png" id="appLogo{{userApp.name}}" (click)="onAppNavigate(userApp)" alt="appImage" class="img-responsive" />
+                </div>
+                <h3>{{userApp.name}}
+                </h3>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    

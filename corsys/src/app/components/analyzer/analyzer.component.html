@@ -1,0 +1,18 @@
+﻿<sp3-comp-modal-confirm #modalImageAnalyzerValidation>
+    <div class="app-modal-header">
+        {{'ImageAnalyzer' | sp3Translate}}
+    </div>
+    <div class="app-modal-body">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{'ImageValidaitonMessage'| sp3Translate}}
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-primary " id="ImageanalyzerValidationOk" (click)="validationOkClick()">{{'Ok'| sp3Translate}}</button>
+    </div>
+</sp3-comp-modal-confirm>
+<sp3-comp-modal-loader #modalSp3Loader></sp3-comp-modal-loader>
+<sp3-comp-modal-error #modalError (OnError)="onImageLoadError()"></sp3-comp-modal-error>
+<sp3-comp-image-analyzer #cropper1 [imagePath]="imagePath" [image]="data1" [imageViews]="imageViewList" [descrimination]="hemdScanList" [selectedView]="selectedView" [isNextButtonVisible]="isNextButtonVisible" (selectedViewChange)="onViewChange($event)"
+    (onloadNextCaseClick)="nextCaseButtonClick($event)" [options]="options" [case]="case" [(viewList)]="viewList" [(selectedImageView)]="selectedImageView" (refreshPage)="fetchDetails()" (originalImageRestore)="showOriginalImageView($event)" (showLoader)="showLoader($event)"
+    [toggleSwitchFlag]="hasHEMD" [viewMode]="readOnlyMode" [editFinding]="editFinding" [scanFlag]="scanFlag" [scan]="scan1" [caseId]="caseId" [inspectiontype]="inspectiontype">
+  </sp3-comp-image-analyzer>
+<!-- Passed $event to nextCaseButtonClick-->

@@ -1,0 +1,15 @@
+<div *ngIf="visible" class="modal fade session-modal" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}"> 
+  <div id="alertCase" role="dialog">
+          <div class="modal-dialog modal-generic">
+              <div class="modal-content">
+                  <div class="modal-header modal-warning-header">                    
+                     <h4 class="modal-title"> {{'SessionTimeout'| sp3Translate}}</h4>
+                  </div>
+                  <div class="modal-body text-center">
+                        <p class="lead">{{'SessionExpireMessage'| sp3Translate}}</p>
+                        <p class="lead"><a (click)="navigateToLogin()">{{'SessionRoute' | sp3Translate}}</a></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

@@ -1,0 +1,933 @@
+a {
+    text-decoration: none !important;
+}
+
+.menu-close {
+    width: 40px;
+    height: 100%;
+    background: #ebebeb;
+    position: absolute;
+    transition: all;
+    top: 0;
+    left: 0;
+    z-index: 999;
+
+    .side-toggle.collapse-sidebar {
+        display: none;
+        cursor: pointer;
+        z-index: 8;
+        position: relative;
+        width: 40px;
+        height: 29px;
+        top: 0.5em;
+        text-align: right;
+    }
+
+    .side-toggle.expand-sidebar {
+        cursor: pointer;
+    }
+
+    .active {
+        background-color: #1b94b5;
+
+        .icn_actions {
+            background: url(../images/svg/icn-actions-white.svg) no-repeat;
+            background-size: 24px 24px;
+        }
+        .icn_addcase {
+            background: url(../images/svg/icn-add-case-white.svg) no-repeat;
+            background-size: 24px 24px;
+        }
+
+        .icn_cases {
+            background: url(../images/svg/icn-cases-white.svg) no-repeat;
+            background-size: 24px 24px;
+        }
+
+        .icn_inspection {
+            background: url(../images/svg/icn-inspection-white.svg) no-repeat;
+            background-size: 24px 24px;
+        }
+        .icn_location{
+            background: url(../images/svg/icn-location-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1;
+        }
+        .icn_device{
+            background: url(../images/svg/icn-devices-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1;
+        }
+        .icn_guage{
+            background: url(../images/svg/icn-guage-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1;
+        } 
+        .icn_color{
+            background: url(../images/svg/icn-color-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1;
+        } 
+        .icn_activity_list {
+            background: url(../images/svg/icn-activity-list-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1;
+        }
+        
+        .icn-settings-apps {
+        background: url(../images/svg/icn-settings-apps-white.svg) no-repeat;
+        background-size: 24px 24px;
+        opacity: 1; }
+
+        .icn-settings-roles {
+        background: url(../images/svg/icn-settings-roles-white.svg) no-repeat;
+        background-size: 24px 24px;
+        opacity: 1; }
+
+        .icn-settings-users {
+        background: url(../images/svg/icn-settings-users-white.svg) no-repeat;
+        background-size: 24px 24px;
+        opacity: 1; }
+
+        .icn-settings {
+        background: url(../images/svg/icn-settings-white.svg) no-repeat;
+        background-size: 24px 24px;
+        opacity: 1; }
+
+        p {
+            color: $text-color-white !important;
+        }
+    }
+
+    .logo {
+        width: 100%;
+        height: 40px;
+        position: relative;
+        cursor: pointer;
+
+        p {
+            display: none;
+            color: $text-color-white;
+            font-size: 23px;
+            font-weight: 300;
+            background-color: #299ed9;
+            line-height: 41px;
+            padding-left: 1em;
+            font-size: 22px;
+        }
+
+        .expand-sidebar {
+            display: block;
+            z-index: 8;
+            width: 40px;
+            height: 30px;
+            position: absolute;
+            top: 6px;
+            padding: 0.6em;
+        }
+
+        &:hover ~ p {
+            color: $text-color-white;
+            transition: all 0.3s;
+        }
+    }
+
+    .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+        li {
+            
+            margin: auto;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+            text-align: left;
+
+            &:last-child {
+                border: none;
+            }
+
+            &:hover {
+                background-color: #1b94b5;
+
+                p {
+                    color: $text-color-white !important;
+                }
+                .icn_location{
+                    background: url(../images/svg/icn-location-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                    opacity: 1;
+                }
+                .icn_device{
+                    background: url(../images/svg/icn-devices-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                    opacity: 1;
+                }
+                .icn_guage{
+                    background: url(../images/svg/icn-guage-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                    opacity: 1;
+                } 
+                .icn_color{
+                    background: url(../images/svg/icn-color-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                    opacity: 1;
+                } 
+
+                .icn_actions {
+                    background: url(../images/svg/icn-actions-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                }
+
+                .icn_cases {
+                    background: url(../images/svg/icn-cases-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                }
+                .icn_addcase {
+                    background: url(../images/svg/icn-add-case-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                }                
+
+                .icn_inspection {
+                    background: url(../images/svg/icn-inspection-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                }
+
+                .icn_activity_list {
+                    background: url(../images/svg/icn-activity-list-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                    opacity: 1;
+                }
+                
+            .icn-settings-apps {
+            background: url(../images/svg/icn-settings-apps-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1; }
+
+            .icn-settings-roles {
+            background: url(../images/svg/icn-settings-roles-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1; }
+
+            .icn-settings-users {
+            background: url(../images/svg/icn-settings-users-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1; }
+
+            .icn-settings {
+            background: url(../images/svg/icn-settings-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1; }
+                        }
+
+            p {
+                margin-bottom: 0px;
+               span{
+                display: none;
+               } 
+            }
+            a{
+                padding: 8px;
+                display: block;
+            }
+        }
+    }
+
+    .sidebar-openclose {
+        width: 100%;
+        height: 40px;
+        background-color: #d9d7d7;
+        position: absolute;
+        bottom: 0;
+
+        .icn_arrow_right-grey {
+            background-image: url(../images/svg/icn-arrow-right-grey.svg);
+            background-size: 7px 12px;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            opacity: 0.7;
+        }
+
+        .icn-arrow-right {
+            background-image: url(../images/svg/icn-arrow-right.svg);
+            background-size: 26px 18px;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+        }
+    }
+}
+
+
+.menu-open {
+    width: 300px;
+    height: 100%;
+    background: #ebebeb;
+    position: absolute;
+    transition: all;
+    overflow-y: auto;
+    top: 0;
+    z-index: 999;
+    overflow: hidden;
+
+    .logo {
+        p {
+            display: block;
+            color: $text-color-white;
+            font-weight: 300;
+            background-color: #299ed9;
+            width: 300px;
+            padding: 13px 17px 17px;
+            font-family: 'ProximaSoft-Semibold', Helvetica, Arial, sans-serif;
+            font-size: 22px;
+        }
+    }
+
+    .side-toggle.collapse-sidebar {
+        display: block;
+        cursor: pointer;
+        z-index: 8;
+        position: relative;
+        width: 40px;
+        height: 29px;
+        top: 0.5em;
+        text-align: right;
+    }
+
+    .icn_arrow_left-grey {
+        background-image: url(../images/svg/icn-arrow-left-grey.svg);
+        background-size: 7px 12px;
+        background-repeat: no-repeat;
+        background-position: center;
+        float: right;
+        opacity: 0.7;
+    }
+
+    .icn-arrow-left {
+        background-image: url(../images/svg/icn-arrow-left.svg);
+        background-size: 7px 12px;
+        background-repeat: no-repeat;
+        background-position: center;
+        float: right;
+    }
+
+    .active {
+        background-color: #1b94b5;
+
+
+
+        .icn_actions {
+            background: url(../images/svg/icn-actions-white.svg) no-repeat;
+            background-size: 24px 24px;
+        }
+
+        .icn_cases {
+            background: url(../images/svg/icn-cases-white.svg) no-repeat;
+            background-size: 24px 24px;
+        }
+
+        .icn_inspection {
+            background: url(../images/svg/icn-inspection-white.svg) no-repeat;
+            background-size: 24px 24px;
+        }
+        .icn_location{
+            background: url(../images/svg/icn-location-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1;
+        }
+        .icn_device{
+            background: url(../images/svg/icn-devices-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1;
+        }
+        .icn_guage{
+            background: url(../images/svg/icn-guage-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1;
+        } 
+        .icn_color{
+            background: url(../images/svg/icn-color-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1;
+        } 
+
+        .icn_activity_list {
+            background: url(../images/svg/icn-activity-list-white.svg) no-repeat;
+            background-size: 24px 24px;
+            opacity: 1;
+        }
+
+.icn-settings-apps {
+  background: url(../images/svg/icn-settings-apps-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings-roles {
+  background: url(../images/svg/icn-settings-roles-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings-users {
+  background: url(../images/svg/icn-settings-users-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings {
+  background: url(../images/svg/icn-settings-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+        p {
+            color: $text-color-white !important;
+        }
+    }
+
+    .logoDemo {
+        width: 100%;
+        position: relative;
+        cursor: pointer;
+        height: 40px;
+
+        p {
+            display: inline-block;
+            color: $text-color-white;
+            font-weight: 300;
+            background-color: #299ed9;
+            width: 300px;
+            font-family: ProximaSoft-Semibold, ProximaNova-Bold, ProximaNova-Regular;
+            font-size: 22px;
+            padding: 8px 15px 7.2px 15px;
+        }
+    }
+
+    .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        margin-top: -11px;
+
+        li {
+            padding: 14px 15px;
+            margin: auto;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s;
+            text-align: left;
+
+            &:last-child {
+                border: none;
+            }
+
+            &:hover {
+                background-color: #1b94b5;
+
+                .icn_actions {
+                    background: url(../images/svg/icn-actions-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                }
+
+                .icn_cases {
+                    background: url(../images/svg/icn-cases-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                }
+
+                .icn_inspection {
+                    background: url(../images/svg/icn-inspection-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                }
+
+                .icn_activity_list {
+                    background: url(../images/svg/icn-activity-list-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                    opacity: 1;
+                }
+
+.icn-settings-apps {
+  background: url(../images/svg/icn-settings-apps-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings-roles {
+  background: url(../images/svg/icn-settings-roles-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings-users {
+  background: url(../images/svg/icn-settings-users-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings {
+  background: url(../images/svg/icn-settings-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+                p {
+                    color: $text-color-white !important;
+                }
+            }
+        }
+
+        p {
+            display: inline-block;
+            color: $gray-base;
+            font-size: $font-size-large;
+            position: relative;
+            padding-left: 24px;
+            opacity: 0.9;
+            margin-bottom: 0px;
+            i{
+                position: absolute;
+                left: -8px;
+                top: 2px;
+            }
+        }
+
+    }
+
+    .sidebar-openclose {
+        width: 100%;
+        height: 40px;
+        background-color: #d9d7d7;
+        position: absolute;
+        bottom: 0;
+
+        img {
+            width: 24px;
+            height: 24px;
+            float: right;
+            vertical-align: middle;
+            padding: 0.6em;
+        }
+    }
+}
+
+.case-analyzer {
+    .menu-open {
+        width: 220px;
+        background: #dce2e8;
+
+        .sidebar-openclose {
+            background-color: #f5f8fb;
+        }
+    }
+}
+
+.case-analyzer {
+    .menu-close {
+        background: #dce2e8;
+
+        .sidebar-openclose {
+            background-color: #f5f8fb;
+        }
+    }
+}
+
+.side-toggle.info {
+    color: #999;
+    position: absolute;
+    margin: 0;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+}
+
+#toggle:target {
+    & > .notes {
+        transition: all 0.2s;
+        z-index: 0;
+        opacity: 0;
+    }
+
+    & > menuDemo-fixed {
+        width: 300px;
+        height: 100%;
+        background: #111;
+        transition: all 0.3s;
+        z-index: 1;
+
+        & > a .side-toggle.collapse-sidebar {
+            display: none;
+        }
+
+        & > .menuDemo li {
+            text-align: left;
+            height: 56px;
+            padding: 14px 12px;
+
+            & > p {
+                display: none;
+            }
+        }
+
+        .sidebar-openclose {
+            width: 40px;
+        }
+    }
+}
+/***********/
+
+#menuDemo-fixed li:hover {
+    background-color: #1b94b5;
+
+    .icn_actions {
+        background: url(../images/svg/icn-actions-white.svg) no-repeat;
+        background-size: 24px 24px;
+    }
+
+    .icn_cases {
+        background: url(../images/svg/icn-cases-white.svg) no-repeat;
+        background-size: 24px 24px;
+    }
+
+    .icn_inspection {
+        background: url(../images/svg/icn-inspection-white.svg) no-repeat;
+        background-size: 24px 24px;
+    }
+
+    .icn_activity_list {
+        background: url(../images/svg/icn-activity-list-white.svg) no-repeat;
+        background-size: 24px 24px;
+        opacity: 1;
+    }
+    
+.icn-settings-apps {
+  background: url(../images/svg/icn-settings-apps-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings-roles {
+  background: url(../images/svg/icn-settings-roles-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings-users {
+  background: url(../images/svg/icn-settings-users-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings {
+  background: url(../images/svg/icn-settings-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+}
+
+.icn_actions {
+    background: url(../images/svg/icn-actions.svg) no-repeat;
+    background-size: 24px 24px;
+}
+
+.icn_cases {
+    background: url(../images/svg/icn-cases.svg) no-repeat;
+    background-size: 24px 24px;
+}
+.icn_addcase {
+    background: url(../images/svg/icn-add-case.svg) no-repeat;
+    background-size: 24px 24px;
+}
+
+.icn_inspection {
+    background: url(../images/svg/icn-inspection.svg) no-repeat;
+    background-size: 24px 24px;
+}
+
+.icn_activity_list {
+    background: url(../images/svg/icn-activity-list.svg) no-repeat;
+    background-size: 24px 24px;
+    opacity: 0.3;
+}
+.icn_location{
+    background: url(../images/svg/icn-location.svg) no-repeat;
+    background-size: 24px 24px;
+    opacity: 0.3;
+}
+.icn_device{
+    background: url(../images/svg/icn-devices.svg) no-repeat;
+    background-size: 24px 24px;
+    opacity: 0.3;
+}
+.icn_guage {
+    background: url(../images/svg/icn-guage.svg) no-repeat;
+    background-size: 24px 24px;
+    opacity: 0.3;
+}
+.icn_color {
+    background: url(../images/svg/icn-color.svg) no-repeat;
+    background-size: 24px 24px;
+    opacity: 0.3;
+}
+
+.icn-settings-apps {
+  background: url(../images/svg/icn-settings-apps.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 0.3; }
+
+.icn-settings-roles {
+  background: url(../images/svg/icn-settings-roles.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 0.3; }
+
+.icn-settings-users {
+  background: url(../images/svg/icn-settings-users.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 0.3; }
+
+.icn-settings {
+  background: url(../images/svg/icn-settings.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 0.3; }
+#menuDemo-fixed {
+    width: 40px;
+    height: 100%;
+    background: #ebebeb;
+    position: fixed;
+    transition: all 0.3s;
+    top: 0;
+
+    .side-toggle.collapse-sidebar {
+        display: none;
+        cursor: pointer;
+        z-index: 8;
+        position: relative;
+        width: 40px;
+        height: 29px;
+        top: 0.5em;
+        text-align: right;
+    }
+
+    .side-toggle.expand-sidebar {
+        cursor: pointer;
+    }
+
+    &:target {
+        width: 300px;
+        background: #ebebeb;
+        transition: all 0.3s ease-out;
+        z-index: 1;
+        overflow: hidden;
+
+        & > .notes {
+            content: '';
+            display: block;
+            position: fixed;
+            width: 0px;
+            height: 0px;
+            top: 50px;
+            left: 115px;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid transparent;
+            border-right: 8px solid #009688;
+        }
+
+        & > a .side-toggle.collapse-sidebar {
+            display: block;
+        }
+
+        & > a {
+            & > .logoDemo {
+                width: 300px;
+                margin: auto;
+
+                & > .expand-sidebar {
+                    display: none;
+                    z-index: 0;
+                }
+
+                & > p {
+                    display: block;
+                    color: $text-color-white;
+                    font-size: 22px;
+                    font-weight: 300;
+                    background-color: #299ed9;
+                    width: 300px;
+                    padding: 8px 15px 7.2px 15px;
+                }
+            }
+        }
+
+        & > .menuDemo {
+            position: absolute;
+            margin: auto;
+            padding: 0;
+        }
+
+        & > .menuDemo li {
+            padding: 8px 15px 7.2px 15px;
+
+            & > .count {
+                z-index: 1;
+                position: relative;
+                top: 5px;
+                right: 18px;
+                margin-right: -25px;
+            }
+
+            &:hover {
+                &::after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    background: rgba(38, 166, 154, 0.1);
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    border-radius: 4px;
+                }
+
+                & > .icn_actions {
+                    background: url(../images/svg/icn-actions-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                }
+
+                & > .icn_cases {
+                    background: url(../images/svg/icn-cases-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                }
+
+                & > .icn_inspection {
+                    background: url(../images/svg/icn-inspection-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                }
+
+                & > .icn_activity_list {
+                    background: url(../images/svg/icn-activity-list-white.svg) no-repeat;
+                    background-size: 24px 24px;
+                    opacity: 1;
+                }
+
+.icn-settings-apps {
+  background: url(../images/svg/icn-settings-apps-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings-roles {
+  background: url(../images/svg/icn-settings-roles-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings-users {
+  background: url(../images/svg/icn-settings-users-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+
+.icn-settings {
+  background: url(../images/svg/icn-settings-white.svg) no-repeat;
+  background-size: 24px 24px;
+  opacity: 1; }
+                & > p {
+                    color: $text-color-white;
+                    font-size: 18px;
+                }
+            }
+
+            & > p {
+                display: inline-block;
+            }
+        }
+    }
+
+    .active {
+        background-color: #1b94b5;
+
+        p {
+            color: #fff !important;
+        }
+    }
+
+    .logoDemo {
+        width: 100%;
+        position: relative;
+        cursor: pointer;
+        height: 40px;
+
+        p {
+            display: none;
+            color: $text-color-white;
+            font-weight: 300;
+            background-color: #299ed9;
+            width: 300px;
+            font-size: 22px;
+            padding: 8px 15px 7.2px 15px;
+        }
+
+        .expand-sidebar {
+            display: block;
+            z-index: 8;
+            width: 40px;
+            height: 30px;
+            position: absolute;
+            top: 6px;
+        }
+
+        &:hover ~ p {
+            color: $text-color-white;
+            transition: all 0.3s;
+        }
+    }
+
+    .pmenu {
+        margin: 0;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 300;
+    }
+
+    hr {
+        width: 75%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .menuDemo {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+        li {
+            padding: 8px;
+            margin: auto;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+            text-align: left;
+
+            &:last-child {
+                border: none;
+            }
+
+            p {
+                display: none;
+                margin: auto;
+                color: #888;
+                font-weight: 300;
+                position: absolute;
+                padding-left: 30px;
+                line-height: 30px;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .sidebar-openclose {
+        width: 100%;
+        height: 40px;
+        background-color: #d9d7d7;
+        position: absolute;
+        bottom: 0;
+
+        .icn_arrow_left-grey {
+            background-image: url(../images/svg/icn-arrow-left-grey.svg);
+            background-size: 7px 12px;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            opacity: 0.7;
+        }
+    }
+}

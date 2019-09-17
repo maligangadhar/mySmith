@@ -1,0 +1,151 @@
+
+/*
+- Corsys Button Styles
+*/
+/*Buttons CSS*/
+button {
+    font-family: 'ProximaNova-Bold', Helvetica, Arial, sans-serif;
+}
+
+.btn {
+    border-radius: $border-radius-base;
+    font-size: 14px;;
+    text-transform: uppercase;
+    border: 0 !important;
+    padding: 4px 8px;
+    height: 32px;
+    line-height: 1.5;
+}
+
+.btn-lg {
+    padding: 11px 16px 12px 16px;
+    height: 40px;
+}
+
+.btn-medium {
+    padding: 7px 8px 8px 8px;
+    height: 32px;
+}
+
+.btn-sm {
+    padding: 2px 8px 4px 8px;
+    height: 24px;
+}
+
+.btn-default {
+    background-color: $btn-default-bg;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active {
+    background-color: $btn-default-hover-bg;
+}
+
+.btn-default, .btn-default:hover, .btn-default:focus, .btn-default:active {
+    color: $btn-default-color;
+}
+
+.btn-reverse {
+    background-color: $btn-default-reverse-bg;
+}
+
+.btn-reverse:hover, .btn-reverse:focus, .btn-reverse:active {
+    background-color: $btn-default-reverse-hover-bg;
+}
+
+.btn-reverse, .btn-reverse:hover, .btn-reverse:focus, .btn-reverse:active {
+    color: $btn-default-reverse-color;
+}
+
+.btn-primary {
+    background-color: $btn-primary-bg;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: $btn-primary-hover-bg;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    color: $btn-primary-color;
+}
+
+.btn-green {
+    background-color: $btn-success-bg;
+}
+
+.btn-green:hover, .btn-green:focus, .btn-green:active {
+    background-color: $btn-success-hover-bg;
+}
+
+.btn-green, .btn-green:hover, .btn-green:focus, .btn-green:active {
+    color: $btn-success-color;
+}
+
+.btn-red {
+    background-color: $btn-warning-bg;
+}
+
+.btn-red:hover, .btn-red:focus, .btn-red:active {
+    background-color: $btn-warning-hover-bg;
+}
+
+.btn-red, .btn-red:hover, .btn-red:focus, .btn-red:active {
+    color: $btn-warning-color;
+}
+
+.btn-orng {
+    background-color: $btn-info-bg;
+}
+
+.btn-orng:hover, .btn-orng:focus, .btn-orng:active {
+    background-color: $btn-info-hover-bg;
+}
+
+.btn-orng, .btn-orng:hover, .btn-orng:focus, .btn-orng:active {
+    color: $btn-info-color;
+}
+
+.btn-link {
+    color: $btn-default-color;
+    opacity: 0.5;
+}
+
+.btn-link:hover, .btn-link:focus, .btn-link:active {
+    text-decoration: none;
+    opacity: 1;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline: none;
+}
+
+label.btn-file.btn.btn-primary {
+    position: relative;
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-family: ProximaNova-Bold !important;
+    font-size: 14px !important;
+    color: #fff !important;
+    font-weight: 300 !important;
+    height: 32px !important;
+    opacity: 1 !important;
+}
+
+label.btn-file.btn.btn-primary input[type="file"] {
+    position: absolute;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    width: 0;
+    height: 0;
+    outline: none;
+    cursor: inherit;
+}
+label.btn-file.btn.btn-primary.disable-selection {
+    opacity: 0.5 !important;
+}
+.btn-transparent {
+    background-color: $text-color-white;
+    border: solid 1px $btn-default-color !important;
+    border-radius: $border-radius-base;
+    color: $btn-default-color;
+}
+.btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus{
+    outline: none;
+}

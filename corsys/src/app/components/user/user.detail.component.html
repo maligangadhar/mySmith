@@ -1,0 +1,100 @@
+﻿<form class="form-horizontal" *ngIf="userDetail">
+    <div class="settings-title" *ngIf="id==='userEdit'">
+        <h2 id="userDetailName">{{userDetail.fullName}}
+            <span class="pull-right">
+                <form novalidate="" class="ng-untouched ng-pristine ng-valid">
+                    <!---->
+                    <button class="btn btn-primary" type="button" [disabled]="getSaveButtonDisabled()" (click)="updateUserClick()">{{'SaveChanges' | sp3Translate}}</button>
+                    <button class="btn btn-primary" type="button" [disabled]="getSaveButtonDisabled()" (click)="cancelUpdateUser()">{{'Cancel' | sp3Translate}}</button>
+                </form>
+            </span>
+        </h2>
+        <div class="col-sm-12 well well-sm bg-success" *ngIf="IsSuccess">
+                {{'ChangesSave' | sp3Translate}}
+        </div>
+    </div>
+    <div class="col-sm-12 settings-panel-profile" *ngIf="id==='userEdit'">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="userOrgId">{{'UserName' | sp3Translate}}</label>
+                <p class="body-text" id="userOrgId">{{userDetailInfo.userName}}</p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="usersIdNo">{{'UserId' | sp3Translate}}</label>
+                <p class="body-text" id="usersIdNo">{{userDetailInfo.id}}</p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group" *ngIf="id==='userEdit'" id="userCreatedDate">
+                <label for="userCreatedDate">{{'AccountCreate' | sp3Translate}}</label>
+                <p class="body-text" id="userCreatedDate">{{userDetailInfo.createDate | sp3DateFormat}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6" *ngIf="id==='userCreate'">
+            <div class="form-group">
+                <sp3-comp-textbox #name controlId="userOrgId" placeholderText="{{'UserName' | sp3Translate}}" [size]="7" labelText="{{'UserName' | sp3Translate}}" required="true" [(value)]="userDetailInfo.userName" maxLengthValue="30" (textAdded)="onTextAdded($event)"></sp3-comp-textbox>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6" *ngIf="id==='userCreate'">
+            <div class="form-group">
+                <sp3-comp-textbox #name controlId="userDetailName" placeholderText="{{'fullName' | sp3Translate}}" [size]="7" labelText="{{'fullName' | sp3Translate}}" required="true" [(value)]="userDetailInfo.fullName" maxLengthValue="100" (textAdded)="onTextAdded($event)"></sp3-comp-textbox>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+                    <sp3-comp-textbox #name controlId="userEmail" inputType="email" placeholderText="{{'Email' | sp3Translate}}" [size]="7" labelText="{{'Email' | sp3Translate}}" required="true" [(value)]="userDetailInfo.email" maxLengthValue="50" (textAdded)="onTextAdded($event)"
+                    (emailValidated)="onEmailValidated($event)"></sp3-comp-textbox>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+                <sp3-comp-textbox #name controlId="userPosition" placeholderText="{{'Position' | sp3Translate}}" [size]="7" labelText="{{'Position' | sp3Translate}}" [(value)]="userDetailInfo.position" maxLengthValue="30" (textAdded)="onTextAdded($event)"></sp3-comp-textbox>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+                <sp3-comp-textbox #name controlId="userInputTelephone" placeholderText="{{'Telephone' | sp3Translate}}" [size]="7" labelText="{{'Telephone' | sp3Translate}}" required="true" [(value)]="userDetailInfo.telephone" maxLengthValue="25" (textAdded)="onTextAdded($event)"></sp3-comp-textbox>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+                <sp3-comp-textbox #name controlId="userMobile" placeholderText="{{'Mobile' | sp3Translate}}" [size]="7" labelText="{{'Mobile' | sp3Translate}}" required="true" [(value)]="userDetailInfo.mobile" maxLengthValue="25" (textAdded)="onTextAdded($event)"></sp3-comp-textbox>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="form-group userSelect">
+                <sp3-comp-select controlId="userEmpStatus" labelText="{{'EmpStatus' | sp3Translate}}" [size]="7" [(values)]="empStatusList" [(selectedValue)]="empStatus" (selectedChange)="onSelectChanged($event)"></sp3-comp-select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="form-group userSelect">
+                <sp3-comp-select controlId="userStatus" labelText="{{'Status' | sp3Translate}}" required="true" [size]="7" [(values)]="statusList" [(selectedValue)]="userStatus" (selectedChange)="onUserStatusSelectChanged($event)"></sp3-comp-select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+                <sp3-comp-inputswitch controlId="licenseStatus" [buttonState]="toggleLicenceFlag"
+                (getButtonState)="getLicenseSwitchState($event)" labelText="{{'AssignLicense' | sp3Translate}}" title="" [disableSwitch]="toggleDisableSwitchFlag"></sp3-comp-inputswitch>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+                <span class="help-block error-msg" *ngIf="isNoLicenseMessageShown">{{'NoUserLicense' | sp3Translate}}</span>
+            </div>
+        </div>
+    </div>
+</form>

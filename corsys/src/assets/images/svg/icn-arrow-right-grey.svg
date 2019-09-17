@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 44 (41411) - http://www.bohemiancoding.com/sketch -->
+    <title>741CF459-999A-49F2-9BE2-80167B5679E9</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <polygon id="path-1" points="8.5 16.585 13.085 12 8.5 7.415 9.915 6 15.915 12 9.915 18"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Styles---Icons-01" transform="translate(-704.000000, -665.000000)">
+            <g id="icon/icn_arrow_right" transform="translate(696.000000, 659.000000)">
+                <rect id="bg" x="0" y="0" width="24" height="24"></rect>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Shape" fill="#443B3B" fill-rule="nonzero" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

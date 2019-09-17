@@ -1,0 +1,416 @@
+/**Image Analyzer */
+
+/**Start -  Sidebar tool Expanded CSS */
+.expanded-panel-body {
+  /**Start -  Marker / Rulers icon - CSS */
+  .markers {
+      padding: 8px 0px;
+      height: 48px;
+      overflow: hidden;
+
+      table {
+          width: 100%;
+          text-align: center;
+
+          td {
+              padding: 0px;
+              height: 35px;
+          }
+
+          .markers-left {
+              border-right: 1px solid #c7c4c4;
+          }
+
+          .markers-right {
+              border-left: 1px solid #c7c4c4;
+          }
+
+          .btn-tool {
+              padding: 0px 8px;
+              display: inline-block;
+
+              img {
+                  cursor: pointer;
+                  margin: 8px 0px;
+              }
+          }
+          .btn-tool.readmode {
+            cursor: not-allowed;
+            // pointer-events: none;
+            img {
+                pointer-events: none;
+            }
+          }
+
+          .btn-tool.active {
+              background-color: rgba(68,59,59,0.2);
+              border-radius: 4px;
+              box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.5);
+          }
+      }
+  }
+  /**End -  Marker / Rulers icon - CSS */
+  /**Start - Zoom icons CSS */
+  .zoomers {
+      border-bottom: solid 1px rgba(68,59,59,0.2);
+      margin: 8px 0px;
+      padding-bottom: 8px;
+      display: inline-block;
+
+      .btn-tool {
+          width: auto;
+          float: left;
+          padding: 2px 8px;
+          text-align: center;
+
+          img {
+              cursor: pointer;
+              margin: 0px;
+          }
+      }
+
+      .btn-tool.viewselection {
+          width: 116px;
+          padding: 0px 8px 0px 0px;
+      }
+  }
+  /**End - Zoom icons CSS */
+  
+  /** Start - Selectmenu tool CSS*/
+  select.form-control {
+      background-color: transparent;
+      border: 1px solid #fff;
+      border-radius: 4px;
+      display: inline-block;
+      font-size: 14px;
+      color: #443b3b;
+      text-align: left;
+      padding: 3px 40px 4px 8px;
+      margin: 0;
+      height: 24px;
+      -webkit-appearance: none;
+      background-image: linear-gradient(49deg, transparent 50%, #1e6e96 56%), linear-gradient(135deg, #1e6e96 50%, transparent 50%), linear-gradient(to right, #fff, #fff);
+      background-position: calc(100% - 17px) calc(1em + -5px), calc(100% - 13px) calc(1em + -5px), 100% 0;
+      background-size: 5px 8px, 5px 8px, 2.5em 2.5em;
+      background-repeat: no-repeat;
+      border-right: 0;
+      box-shadow: none;
+  }
+  /**End - Selectmenu tool CSS*/
+  
+  /**Start - Analyzer Tools Slider CSS */
+  .ui-widget-content {
+      background: transparent;
+      padding: 8px !important;
+  }
+
+  .slider-bar, .ui-slider {
+      background: #fff;
+      box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.5);
+      border-radius: 4px;
+      height: 20px !important;
+      width: 110px !important;
+      float: left;
+      margin-right: 4px;
+  }
+
+  .slider-perse {
+      padding: 3.4px 0;
+      font-family: 'ProximaNova-Bold', Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      display: table;
+      text-align: center;
+      color: $gray-base;
+      opacity: 0.9;
+      width: 34px;
+      height: 20px;
+      margin-left:5px;
+      border-radius: 4px;
+      background-color: #ffffff;
+      box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.5);
+      float: left;
+  }
+
+  .layer {
+      width: 10px;
+      height: 20px;
+      opacity: 0.8;
+      font-family: 'ProximaNova-Bold', Helvetica, Arial, sans-serif;
+      line-height: 1.67;
+      text-align: left;
+      color: $gray-base;
+      margin-left: 3px;
+  }
+
+  .ui-panel.ui-widget {
+      border: 0;
+
+      .ui-panel-titlebar.ui-corner-all {
+          background: transparent;
+          border: 0;
+      }
+  }
+
+  .ui-slider {
+      background: #fff;
+      box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.5);
+      border-radius: 4px;
+      height: 20px !important;
+
+      .ui-slider-handle {
+          background: url(../images/svg/icn-slider-arrrow-default.svg) no-repeat !important;
+          width: 16px !important;
+          height: 29px !important;
+          object-fit: contain;
+          border-radius: 2px;
+          box-shadow: -4px -2px 0px -4px rgba(0, 0, 0, 0.3);
+          background-position: center !important;
+          margin-left: -8px;
+      }
+
+      .ui-slider-handle:hover {
+          background: url(../images/svg/icn-slider-arrrow-selected.svg) no-repeat !important;
+          width: 16px !important;
+          height: 29px !important;
+          cursor: hand;
+          object-fit: contain;
+          border-radius: 2px;
+          box-shadow: -4px -2px 0px -4px rgba(0, 0, 0, 0.3);
+          background-position: center !important;
+
+      }
+  }
+
+  a.ui-panel-titlebar-icon.ui-panel-titlebar-toggler.ui-corner-all.ui-state-default {
+      background: transparent !important;
+      border: 0 !important;
+  }
+
+  .ui-panel .ui-panel-content p {
+      line-height: 1.67;
+      color: $gray-base;
+      margin: 8px 0px;
+  }
+  /**End - Analyzer Tools - Slider CSS */
+  .customTitleBar > .ui-panel-titlebar {
+      color: #1e6e96;
+      font-size: 16px;
+      line-height: 1.25;
+      padding: 0px 8px;
+      font-family: ProximaNova-Bold;
+      .fa{
+          top: 8px;
+          font-size: 12px;
+      }
+  }
+  .preset-tools{
+      .active{
+          opacity: 0.5;
+      }
+      .preset{
+          height: 32px;
+          float: left;
+          font-size: 12px;
+          font-family: ProximaNova-Regular;
+          opacity: 0.9;
+          margin-right: 10px;
+          background: #fff;
+          text-align: center;
+          border-radius: 4px;
+          text-transform: uppercase;
+          line-height: 12px;
+          cursor: pointer;
+      }
+      .preset::last-child{
+          margin-right: 0px;
+      }
+      .preset-lg{
+          width: 51px;
+          padding: 9px;
+      }
+      .preset-sm{
+          width: 32px;
+          position: relative;
+          span:first-child{
+              position: absolute;
+              left: 4px;
+              top: 4px;
+          }
+          span:last-child{
+              position: absolute;
+              right: 4px;
+              bottom: 4px;
+          }
+          
+      }
+  }
+  .btn-dots, .btn-dots-grey {
+      background: none;
+      padding: 0px;
+      margin: 0px 4px 8px 0px;
+  }
+  .btn-dots.active, .btn-dots-grey.active{
+      opacity: 0.5;
+  }
+  .btn-dots.inActive, .btn-dots-grey.inActive{
+      opacity: 1.0;
+  }
+  .btn-dots:hover, .btn-dots-grey:hover{
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+      background: none;
+  }
+  .btn-dots:active, .btn-dots-grey:active,.btn-dots:focus, .btn-dots-grey:focus{
+      outline: none;
+  }
+  label{
+      opacity: 0.9;
+      font-size: 12px;
+      line-height: 20px;
+      font-weight: normal;
+  }
+  .sp3dropdown{
+      .ui-widget-content .ui-state-default, .ui-state-default{
+          background: transparent;
+          border: 0px;
+          
+      }
+      .ui-dropdown {
+          width: 100% !important;
+          .ui-dropdown-panel{
+              padding: 0px !important;
+              .ui-dropdown-list{
+                  padding: 2px 0px !important;
+                  background: #fff;
+                  .ui-dropdown-item{
+                      height: 24px;
+                      margin: 5px;
+                      padding: 0px;
+                      border: 0px !important;
+                      img{
+                          height: 24px;
+                          width:100%;
+                      }
+                  }
+              }
+          }
+          label.ui-dropdown-label{
+              background: transparent;
+              border: 1px solid #fff;
+              padding: 0px 13px;
+              height: 24px;
+              font-size: 14px;
+              font-weight: bold;
+              color: #443b3b;
+          }
+          .ui-dropdown-trigger{
+              background: #fff;
+              width: 32px;
+              text-align: center;
+              .fa{
+                  color: #1e6e96;
+                  font-size: 20px;
+                  margin-top: 1px;
+                  margin-left: 0px;
+              }
+          }
+      }
+  }
+  .material-selectors{
+    /* to hide the checkbox itself */
+    margin-top:10px;
+    padding:0px;
+    input[type=checkbox]{
+        display: none;
+    }
+    .checkbox{
+        width: 100%;
+        border-radius: 4px;
+        height: 24px;
+        margin: 0px 0px 6px;
+        padding: 2px 7px;
+        label{
+            padding-left: 25px;
+            color: #fff;
+            font-size: 12px;
+            font-family: ProximaNova-Bold;
+            font-weight: normal;
+        }
+    }
+    .checkbox.organic{
+        background: #e68f28;
+    }
+    .checkbox.nonorganic{
+        background: #3dae5e; 
+    }
+    .checkbox.metal{
+        background: #299ed9;
+    }
+    input[type="checkbox"] + span:before {
+        position: absolute;
+        color: #fff;
+        display: inline-block;
+        content: "\f0c8";
+        font-family: FontAwesome;
+        left: 7px;
+        font-size: 18px;
+    }
+    /* space between checkbox and label */
+    input[type="checkbox"]:checked + span:before { 
+        content: "\f14a";
+        }
+    }
+}
+/**End -  Sidebar Expanded tools CSS */
+
+/**Start -  Sidebar Collapsed tools CSS */
+.collapsed-panel-body {
+  /**Start -  Markers,Rulers, Zoom icon - CSS */
+  .markers, .zoomers {
+      padding: 0px;
+      text-align: center;
+
+      .markers-left {
+          border-bottom: 1px solid #c7c4c4;
+      }
+
+      .markers-right {
+          border-top: 1px solid #c7c4c4;
+      }
+
+      .btn-tool {
+          float: none;
+          text-align: center;
+          padding: 4px 4px;
+          margin: 8px auto;
+          display: inline-block;
+
+          img {
+              cursor: pointer;
+              width: 20px;
+              height: 17px;
+          }
+      }
+      .btn-tool.readmode {
+        cursor: not-allowed;
+        // pointer-events: none;
+        img {
+            // cursor: not-allowed;
+            pointer-events: none
+        }
+      }
+
+      .btn-tool.active {
+          background-color: rgba(68,59,59,0.2);
+          border-radius: 4px;
+          box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.5);
+      }
+  }
+  
+
+  .zoomers {
+      margin-top: 150px;
+  }
+  /**End -  Markers,Rulers, Zoom icon - CSS */
+
+}
+/**End -  Sidebar Collapsed tools CSS */

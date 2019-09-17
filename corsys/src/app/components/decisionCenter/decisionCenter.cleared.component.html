@@ -1,0 +1,68 @@
+<sp3-comp-modal-querybuilder #modalQueryBuilder sourceType="decisionCenterCleared" (addAdvancedSearchCriterias)='onAddingAdvancedSearchCriterias($event)'></sp3-comp-modal-querybuilder>
+<sp3-comp-modal-case-detail #modal></sp3-comp-modal-case-detail>
+<div class="control-center-grid search-grid">
+    <div class="search-panel">
+        <sp3-comp-autocomplete #autocomplete [minLength]="3" placeholder="{{'StartSearching' | sp3Translate}}" id="basicSearch" [(suggestions)]="suggestions"
+            (searchQueryChanged)="getSearchData($event)" (selectionChanged)="onSelectionChanged($event)" [multiple]="false"></sp3-comp-autocomplete>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <button class="btn btn-link query-btn" type="button" (click)="openQueryBuilder()">{{'QueryBuilder'| sp3Translate}}</button>
+    </div>
+    <div class="search-builder-queries">
+        <div *ngFor='let query of querytagsToDisplay' class="query-tags">
+            <label>{{query.fieldName | sp3Translate}} </label>
+            <span *ngFor='let queryData of query.fieldValues' class="tag">
+                <p>{{queryData}} </p>
+                <button type="button" class="btn btn-link" (click)="removeSearch(query,queryData)">
+                    <span class="icn-close" aria-hidden="true"></span>
+                </button>
+            </span>
+            <span *ngFor='let fieldColor of query.fieldColor' class="tag">
+                <span *ngIf="fieldColor === '0'" ngClass="{{'rank-rating norisk queryData'}}"></span>
+                <span *ngIf="fieldColor === '1'" ngClass="{{'rank-rating moderate queryData'}}"></span>
+                <span *ngIf="fieldColor >= '2'" ngClass="{{'rank-rating highrisk queryData'}}"></span>
+                <button type="button" class="btn btn-link" (click)="removeSearch(query,fieldColor)">
+                    <span class="icn-close" aria-hidden="true"></span>
+                </button>
+            </span>
+        </div>
+        <div class="clearedCaseNote" *ngIf="!isGettingSettings">
+            {{'clearedCaseNote1' | sp3Translate}}{{clearCaseThreshold}}{{'clearedCaseNote2' | sp3Translate}}
+        </div>
+    </div>
+
+    <div class="col-sm-12" *ngIf="showGrid">
+        <div *ngIf="controlcenterActions.length > 0" class="override-actions" [style.marginLeft.px]="buttonMarginLeft">
+            <sp3-comp-casebutton [buttontitle]="'SendToScreen'" [buttonClass]="'btn btn-primary'" [caseButtonType]="caseButtonTypes.AwaitingScreeningInDC"
+                [caseIds]="selectedList" (callBackParent)="onScreenPopUpClick($event)" buttonid="screen" [pageTitle]="'SendToScreen'"
+                [disableButton]="selectedCases.length === 0"></sp3-comp-casebutton>
+
+        </div>
+        <sp3-comp-grid #actionCenter [value]="controlcenterActions" [dataKey]="caseId" [scrollable]="true" [scrollHeightGrid]="'600px'"
+            [headerCheckboxToggleAllPages]="false" [lazy]="true" [(selection)]="selectedCases" [customPaginator]="true" [customRowsPerPage]="actionPerPage"
+            (callBackButtonWidth)="callBackButtonWidth($event)" [customPaginationLoad]="loadCasesLazy" [(totalRecords)]="totalActions"
+            [lazyLoad]="onSorting" [emptyMessage]="emptyMessage" [valueSelectionChange]="onSelectFromGrid" (callBackButtonWidth)="callBackButtonWidth($event)">
+            <sp3-column [field]="" header="" [type]="3"></sp3-column>
+            <sp3-column field="containerIds" header="{{'Containers' | sp3Translate}}" [controlId]="'caseId'"  [type]="2" [hasClick]="true" [itemOnClick]="openCase"></sp3-column>
+            <!-- <sp3-column field="caseId" header="{{'ControlCenterCaseId' | sp3Translate}}" [isSortable]="true" [type]="2" [hasClick]="true"
+                [itemOnClick]="openCase"></sp3-column> -->
+            <sp3-column field="overAllRiskKeyValue" [type]="11" header="{{'RiskRating' | sp3Translate}}"></sp3-column>
+            <sp3-column field="lastUpdatedDate" [type]="12" header="{{'LastUpdatedDate' | sp3Translate}}" [isSortable]="true"></sp3-column>
+            <sp3-column field="shippingCompany" header="{{'ShippingCompany' | sp3Translate}}"></sp3-column>
+            <sp3-column field="hsCode" header="{{'HSCode' | sp3Translate}}"></sp3-column>
+            <sp3-column field="dateOfArrival" [type]="10" header="{{'DateOfArrival' | sp3Translate}}" [isSortable]="true"></sp3-column>
+            <sp3-column field="from" header="{{'Country' | sp3Translate}}"></sp3-column>
+            <sp3-column field="originPort" header="{{'OriginPort' | sp3Translate}}"></sp3-column>
+            <sp3-column field="destinationPort" header="{{'DestinationPort' | sp3Translate}}"></sp3-column>
+        </sp3-comp-grid>
+    </div>
+    <div *ngIf="noSearchData" class="container-blue">
+        <div class="no-results-found-msg-div">
+            <!--<i class="icn-search"></i>-->
+            <img src="assets/images/svg/icn-search-illust.svg" />
+            <h4>{{'NoResults'|sp3Translate}}</h4>
+            <p>{{'NoResultsMessage'|sp3Translate}}</p>
+        </div>
+
+    </div>
+
+</div>

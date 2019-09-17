@@ -1,0 +1,138 @@
+.loader-popup{
+    .modal-dialog {
+        margin: 23vh auto;
+    }
+}
+.modal.fade.loader-popup.in {
+    z-index: 99999 !important;
+}
+
+.sp3-spinner {
+    width: 120px;
+    height: 120px;
+    //top: 50%;
+    //left: 50%;
+    position: absolute;
+    //position: fixed;
+    display: inline-block;
+    animation: rotate 1.5s linear infinite;
+    left: calc(50% - 75px);
+    top: calc(50% - 75px);
+}
+
+.sp3-spinner .inner {
+    width: 120px;
+    height: 60px;
+    border: 5px solid #299ed9;
+    box-sizing: border-box;
+}
+
+.sp3-spinner .upper, .sp3-spinner .lower {
+    width: 100%;
+    position: absolute;
+    height: calc(50% - 5px);
+    overflow: hidden;
+}
+
+.sp3-spinner .upper {
+    top: 0;
+}
+
+.sp3-spinner .upper .inner {
+    border-radius: 120px 120px 0 0;
+    border-bottom: 0;
+    margin-bottom: -5px;
+}
+
+.sp3-spinner .lower {
+    bottom: 0;
+}
+
+.sp3-spinner .lower .inner {
+    margin-top: -5px;
+    border-radius: 0 0 123px 123px;
+    border-top: 0;
+}
+
+.sp3-spinner .middle {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    background-color: #299ed9;
+    position: absolute;
+    left: calc(50% - 20px);
+    top: calc(50% - 20px);
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.sp {
+    width: 120px;
+    height: 120px;
+    clear: both;
+    margin: 20px auto;
+}
+
+.sp-medium {
+    width: 80px;
+    height: 80px;
+    clear: both;
+    margin: 20px auto;
+}
+
+
+/* Spinner Circle Rotation */
+.sp-circle {
+    border: 10px rgba(#299ED9,0.25) solid;
+    border-top: 10px rgba(#299ed9,1) solid;
+    border-radius: 50%;
+    -webkit-animation: spCircRot .6s infinite linear;
+    animation: spCircRot .6s infinite linear;
+    
+}
+
+@-webkit-keyframes spCircRot {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+@keyframes spCircRot {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+
+//fullscreen spinner
+
+/* Absolute Center Spinner */
+
+.loading {
+    position: fixed;
+    z-index: 99999;
+    height: 100vh;
+    width: 100%;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(232,238,245,0.9);
+    padding: 40vh 0px;
+    text-align: center;
+  }

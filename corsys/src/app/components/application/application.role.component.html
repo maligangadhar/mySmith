@@ -1,0 +1,7 @@
+﻿<div *ngIf="appDetail" class="settings-title"><h2>{{'MappedRoles' | sp3Translate}}</h2>   </div>    
+<div *ngIf="appDetail">
+    <ul class="role-list-group" *ngFor="let keyValue of appsRolesList">
+        <li id="appRole{{keyValue.name}}" class="col-sm-6">{{keyValue.name}}({{keyValue.numberofUsers}})</li>
+    </ul>
+</div>
+  

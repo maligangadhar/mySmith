@@ -1,0 +1,13 @@
+﻿<div *ngIf="labelText">
+    <div class="{{sizeClassLabel}}">
+        <label class="filterTop" for="controlId">{{labelText}}<sup *ngIf="required">*</sup></label>
+    </div>
+</div>
+<div class="{{sizeClassValue}}">
+        <select id="{{controlId}}" title="{{tooltip}}" [ngModel]="selectedValue" (ngModelChange)="onChange($event)" class="form-control {{controlClass}}" disabled="{{isDisabled}}">
+            <option *ngFor="let keyValue of values" [ngValue]="keyValue">{{ keyValue.name }}</option>
+        </select>
+
+        <span class="help-block error-msg case-from-msg" *ngIf="isEmpty">{{'Required' | sp3Translate}}</span>
+
+</div>

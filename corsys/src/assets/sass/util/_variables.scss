@@ -1,0 +1,89 @@
+$bootstrap-sass-asset-helper: false !default;
+//
+// Variables
+// --------------------------------------------------
+
+$blue-base: #315064 !default;
+$brand-primary: darken(#428bca, 6.5%) !default; // #337ab7
+$brand-success: #5cb85c !default;
+$brand-info: #5bc0de !default;
+$brand-warning: #f0ad4e !default;
+$brand-danger: #d9534f !default;
+
+//## Gray and brand colors for use across Bootstrap.
+
+$gray-base: #443b3b !default;
+$gray-darker: #564E4E !default;
+$gray-dark: #7C7575 !default;
+$gray-light: #A19C9C !default;
+$gray-lighter: #C6C4C4 !default;
+
+$gray2-base: #c7c4c4 !default;
+$gray2-darker: #CCC9C9 !default;
+$gray2-dark: #D7D5D5 !default;
+$gray2-light: #8C8686 !default;
+$gray2-lighter: #EDECEC !default;
+
+$gray3-base: #EBEBEB !default;
+$gray3-darker: #EDEDED !default;
+$gray3-dark: #F1F1F1 !default;
+$gray3-light: #F5F5F5 !default;
+$gray3-lighter: #F9F9F9 !default;
+
+$pale-blue-base: #E8EEF5 !default;
+$pale-blue-darker: #EAEFF6 !default;
+$pale-blue-dark: #EEF3F8 !default;
+$pale-blue-light: #F3F6FA !default;
+$pale-blue-lighter: #F8F9FC !default;
+
+
+/** Global **/
+
+$body-bg: #fff !default;
+
+$font-family-primanova: ProximaNova-Regular !default;
+$font-family-primanova-bold: ProximaNova-Bold !default;
+$font-family-primanova-semi-bold: ProximaSoft-Semibold !default;
+
+$font-size-h1: 32px;
+$font-size-h2: 28px;
+$font-size-h3: 24px;
+$font-size-h4: 22px;
+
+$text-color: $gray-base !default;
+$text-color-white: #fff !default;
+
+//** Global textual link color.
+$link-color: $brand-primary !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color: darken($link-color, 15%) !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+
+$btn-default-color: #299ed9 !default;
+$btn-default-bg:  #e8eef5 !default;
+$btn-default-hover-bg:#e8eef5 !default;
+//**$btn-default-border: #ccc !default;
+
+$btn-primary-color: #fff !default;
+$btn-primary-bg: #299ed9 !default;
+$btn-primary-hover-bg: #248cbf !default;
+//$btn-primary-border: darken($btn-primary-bg, 5%) !default;
+
+$btn-success-color: #fff !default;
+$btn-success-bg: #3dae5e !default;
+$btn-success-hover-bg: #349451 !default;
+
+$btn-info-color: #fff !default;
+$btn-info-bg: #cc8022 !default;
+$btn-info-hover-bg: #e68f28 !default;
+
+$btn-warning-color: #fff !default;
+$btn-warning-bg: #ca3a3a !default;
+$btn-warning-hover-bg: #b03333 !default;
+
+$btn-default-reverse-color: #299ed9 !default;
+$btn-default-reverse-bg: #fff !default;
+$btn-default-reverse-hover-bg: #F1F4F9 !default;
+
+$btn-link-disabled-color: $gray-light !default;

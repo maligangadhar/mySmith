@@ -1,0 +1,173 @@
+.top-bar {
+    position: relative;
+    top: 0;
+    width: calc(100% - 180px);
+    left: 180px;
+    height: 40px;
+    padding: 8px;
+    background: #e8eef5;
+    transition: all 0.3s;
+    z-index: 999;
+
+    .btn {
+        margin-right: 4px;
+    }
+
+
+    .btn-badge > span {
+      
+        .badge {
+            line-height: 21px;
+            padding: 1px 4px 0px 8px;
+            font-size: 14px;
+            font-weight: normal;
+            border-radius: 0;
+            background: transparent;
+            border-left: 1px solid #299ed9;
+            margin-left: 8px;
+            color: #299ed9;
+            top: -1px;
+        }
+    }
+
+    .ui-splitbutton {
+        border-radius: 4px;
+
+        .ui-button {
+            border: 0px;
+            background: #299ed9;
+
+            .ui-button-text {
+                padding: 3px 8px 4px 8px;
+                font-size: 14px;
+                height: 24px;
+                text-transform: uppercase;
+                font-family: ProximaNova-Bold;
+                line-height: 17px;
+            }
+        }
+
+        .ui-button:enabled:hover{
+            border: 0px;
+        } 
+        .ui-button.ui-splitbutton-menubutton {
+            width: 24px;
+            padding: 0px;
+            height: 24px;
+            border: 0px;
+            background: #299ed9;
+        }
+
+        .ui-menu.ui-menu-dynamic {
+            border-radius: 4px;
+            background: #ffffff;
+            margin-top: 8px;
+            padding: 8px 0px;
+            border: 0px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3), 0 0 4px 0 rgba(0, 0, 0, 0.3);
+            width: max-content;
+            .ui-menu-list {
+                .ui-menuitem {
+                    margin: 0px;
+
+                    .ui-menuitem-link {
+                        color: #443b3b;
+                        height: 34px;
+                        padding: 8px 16px 6px;
+                        border-radius: 0px;
+                        text-transform: capitalize;
+                        font-size: 16px;
+                        font-family: ProximaNova-Regular;
+                        font-weight: normal;
+                        line-height: 16px;
+                        margin: 0px;
+                    }
+
+                    .ui-menuitem-link:hover {
+                        background-color: #ebebeb;
+                        color: #443b3b;
+                    }
+                }
+            }
+        }
+    }
+}
+.top-bar {
+    .verdict-buttons {
+        .ui-splitbutton {
+            .ui-menu.ui-menu-dynamic {
+                right: 0px;
+                left: auto !important;
+
+                .ui-menu-list {
+                    li.ui-menuitem:nth-child(1), li.ui-menuitem:nth-child(2) {
+                        display: none;
+                    }
+
+                    li.ui-menuitem a:hover {
+                        color: #fff;
+                    }
+
+                    li.ui-menuitem:nth-child(1) a:hover {
+                        background-color: #3dae5e;
+                    }
+
+                    li.ui-menuitem:nth-child(2) a:hover {
+                        background-color: #ca3a3a;
+                    }
+
+                    li.ui-menuitem:nth-child(3) a:hover {
+                        background-color: #e68f28;
+                    }
+
+                    li.ui-menuitem:nth-child(4) a:hover {
+                        background-color: #299ed9;
+                    }
+                    li.ui-menuitem:nth-child(5) a:hover {
+                        background-color: #299ed9;
+                    }
+                }
+            }
+        }
+    }
+}
+.top-bar.right-panel-open{
+    .verdict-buttons {
+        .ui-splitbutton {
+            .ui-menu.ui-menu-dynamic {
+                    .ui-menu-list {
+                        li.ui-menuitem:nth-child(1), li.ui-menuitem:nth-child(2) {
+                            display: block;
+                        }
+                    }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+
+    .top-bar {
+        .verdict-buttons {
+            width: auto;
+            float: right;
+            padding-left: 8px;
+
+            .ui-splitbutton {
+                .ui-menu.ui-menu-dynamic {
+                    .ui-menu-list {
+                        li.ui-menuitem:nth-child(1), li.ui-menuitem:nth-child(2) {
+                            display: block !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        .case-buttons {
+            width: auto;
+            padding-right: 8px;
+        }
+    }
+
+}

@@ -1,0 +1,43 @@
+<div class="settings-local-wrapper">
+    <div class="settings-inner-wrapper">
+            <form #form="ngForm" class="form-horizontal" novalidate>
+                <div class="settings-title">
+                    <h2>{{'ProfilerSettings' | sp3Translate}}
+                        <span class="pull-right">  
+                                <button id="saveChangesProfiler" class="btn btn-default" (click)="saveChanges()" id="profilerSaveChanges" [disabled] = "invalidFlag">{{'SaveChanges' | sp3Translate}}</button>
+                                <button id="cancelChangesProfiler" class="btn btn-default" (click)="revertDetails()" id="cancelProfileeChanges" [disabled]="invalidCancelFlag">{{'Cancel' | sp3Translate}}</button>
+                        </span>
+                    </h2>
+                </div> 
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover"> 
+                                        <thead>
+                                                <tr>
+                                                    <th>{{'RiskCategory'| sp3Translate}}</th>
+                                                    <th>{{'Threshold'| sp3Translate}} <i title="{{'ThresholdTitleMessage'| sp3Translate}}" class="fa fa-exclamation-circle" aria-hidden="true"></i></th>
+                                                </tr>
+                                        </thead>
+                                
+                                <tbody>
+                                    <tr>
+                                           <td colspan="2"> {{'ThresholdTitleMessage' | sp3Translate}}
+                                    </tr>
+                                    <tr *ngFor="let category of profilerCategories; let in = index">
+                                            <td>{{category.name}}</td>
+                                            <td><div class="form-group"><input [(ngModel)]="category.threshold" name="thresholdField - {{in}}" [id]="category.id" class="form-control" myNumberOnly regexKey="{{regexKey}}" minValue="0" maxValue="100" (input)="onDataChange()"></div></td>
+                                        </tr>
+                                </tbody>
+                                <tfoot>
+                                        <tr> 
+                                            <td colspan="2" class="text-danger" *ngIf="!invalidCancelFlag && invalidFlag">{{'ThresholdNumberRangeMessage' | sp3Translate}}</td>
+                                            </tr>
+                                    </tfoot>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+         </form>
+    </div>
+</div>

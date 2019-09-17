@@ -1,0 +1,50 @@
+<div class="dashboard-main-panel">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="col-title">{{'ProfilerchartHeader'| sp3Translate}}</h2>
+          </div>
+        <div class="col-sm-12">
+            <div class="panel sp3-charts panel-default">
+                <div class="panel-heading">{{'TotalChart'| sp3Translate}}
+                    <span class="chartBanner">
+                           <span class="actual"> </span>
+                           <span class="legend"> {{'TotalExpected' | sp3Translate}} </span>
+                           <span class="targetLegend"> - - - - </span> {{'TotalProfiled' | sp3Translate}}
+                     </span>
+                 </div>    
+                 <div class="panel-body">
+                    <div *ngIf="riskCategory1Loading" class="chartloading">
+                         <div class="appspinner"></div>
+                     </div>
+                   <sp3-comp-linechart chartId='lineChart' [data]="totalChart" [regions]="totalChartRegion" [lineLegends]="hideLegends" bindToX="date"></sp3-comp-linechart>
+                 </div>
+        </div>
+        
+    </div>
+    <div class="col-sm-12">
+        <div class="sp3-charts panel panel-default">
+          <div class="panel-heading">{{'RapColorChart' | sp3Translate }}
+            <span class="chartBanner">
+                    <span class="actual"> </span>
+                    <span class="legend"> {{'ProfiledCases' | sp3Translate}} </span>
+                    <span class="targetLegend"> - - - - </span> {{'ExpectedCase' | sp3Translate}}
+              </span>
+          </div>
+          <div class="panel-body">
+             <div *ngIf="riskCategory2Loading" class="chartloading">
+                  <div class="appspinner"></div>
+              </div>
+            <sp3-comp-linechart chartId='lineChart2' [data]="rapChart1" [regions]="rapChart1Region" [lineLegends]="hideLegends" bindToX="date"></sp3-comp-linechart>
+             <div *ngIf="lineChartLoading" class="chartloading">
+                  <div class="appspinner"></div>
+              </div>
+            <sp3-comp-linechart chartId='lineChart3' [data]="rapChart2" [regions]="rapChart2Region" [lineLegends]="hideLegends" bindToX="date"></sp3-comp-linechart>
+          </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="kpi-section">
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

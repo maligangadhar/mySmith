@@ -1,0 +1,2088 @@
+<div class="col-sm-12">
+    <div class="timeline">
+       <div *ngIf="isLoading">
+          <sp3-comp-loader [size]="'medium'"></sp3-comp-loader>
+       </div>
+       <div *ngFor="let section of timeLineSections">
+          <div *ngIf="section.sectionId==1" class="column" >
+             <div class="title">
+                <h4>{{'CaseCreation' | sp3Translate}}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                       <label>{{'Status' | sp3Translate}}</label>
+                       <p>{{'AwaitingProfiling' | sp3Translate }}</p>
+                    </div>
+                 </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Source' | sp3Translate}}</label>
+                         <p>{{'Automatic' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+                <hr>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==5" class="column" >
+             <div class="title">
+                <h4>{{'ImageAssessment' | sp3Translate}}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div *ngIf="details.isApprovalRequest">
+                   <div class="row">
+                      <div class="col-sm-12">
+                         <span class="sub-heading">{{'ApprovalRequest' | sp3Translate}}</span>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'ApprovalRequestType' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'UserTimeline' | sp3Translate}}</label>
+                            <p>{{details.user}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{  details.date | sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Comments' | sp3Translate}}</label>
+                            <p>{{details.comments}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Verdict' | sp3Translate}}</label>
+                            <p>{{details.verdict}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Status' | sp3Translate}}</label>
+                            <p>{{details.statusText}}</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div *ngIf="details.isFinding">
+                   <div class="row">
+                      <div class="col-sm-12">
+                         <span class="sub-heading">{{'Findings' | sp3Translate}}</span>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Action' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'UserTimeline' | sp3Translate}}</label>
+                            <p>{{details.user}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{  details.date |sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Type' | sp3Translate}}</label>
+                            <p>{{details.type}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{ 'HsCodeOrGoodsType' | sp3Translate}}</label>
+                            <p>{{details.hsCode}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Status' | sp3Translate}}</label>
+                            <p>{{details.statusText}}</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div *ngIf="details.isRuler">
+                   <div class="row">
+                      <div class="col-sm-12">
+                         <span class="sub-heading">{{'Ruler' | sp3Translate}}</span>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Action' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'UserTimeline' | sp3Translate}}</label>
+                            <p>{{details.user}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{ details.date | sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Length' | sp3Translate}}</label>
+                            <p>{{details.length}}</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div *ngIf="details.isView">
+                   <div class="row">
+                      <div class="col-sm-12">
+                         <span class="sub-heading">{{'View' | sp3Translate}}</span>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Action' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'UserTimeline' | sp3Translate}}</label>
+                            <p>{{details.user}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{ details.date | sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Type' | sp3Translate}}</label>
+                            <p>{{details.type}}</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div *ngIf="details.isVerdict">
+                   <div class="row">
+                      <div class="col-sm-12">
+                         <span class="sub-heading">{{'Verdict' | sp3Translate}}</span>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Action' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'UserTimeline' | sp3Translate}}</label>
+                            <p>{{details.user}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{ details.date | sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Comments' | sp3Translate}}</label>
+                            <p>{{details.comments}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Verdict' | sp3Translate}}</label>
+                            <p>{{details.verdict}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Status' | sp3Translate}}</label>
+                            <p>{{details.statusText}}</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                          <label>{{'UserTimeline' | sp3Translate}}</label>
+                          <p>{{details.user}}</p>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                          <label>{{'Date' | sp3Translate}}</label>
+                          <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                          <label>{{'Status' | sp3Translate}}</label>
+                          <p>{{details.statusText}}</p>
+                      </div>
+                    </div>
+                </div>
+             </div>
+             <!-- <div class="row">
+                <img (click)="viewTimeLineViews()" class="timelineView icn_apps" src="../../../assets/images/view-default.jpg"/>
+             </div> -->
+          </div>
+          <div *ngIf="section.sectionId==4" class="column" >
+             <div class="title">
+                <h4>{{'Scan' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Action' | sp3Translate}}</label>
+                         <p>{{details.actionText}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>Scan</label>
+                         <p>{{details.scan}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==7" class="column" >
+             <div class="title">
+                <h4>{{'Inspection' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div *ngIf="details.inspectorAssigned">
+                   <div class="row">
+                      <div class="col-sm-12">
+                         <span class="sub-heading">{{'InspectorAssigned' | sp3Translate}}</span>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'UserTimeline' | sp3Translate}}</label>
+                            <p>{{details.user}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{ details.date | sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Status' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div *ngIf="details.isVerdict">
+                   <div class="row">
+                      <div class="col-sm-12">
+                         <span class="sub-heading">{{'InspectorVerdict' | sp3Translate}}</span>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'UserTimeline' | sp3Translate}}</label>
+                            <p>{{details.user}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{ details.date | sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Action' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Comments' | sp3Translate}}</label>
+                            <p>{{details.comments}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Verdict' | sp3Translate}}</label>
+                            <p>{{details.verdict}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Status' | sp3Translate}}</label>
+                            <p>{{details.statusText}}</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div *ngIf="details.isApprovalRequest">
+                   <div class="row">
+                      <div class="col-sm-12">
+                         <span class="sub-heading">{{'ApprovalRequest' | sp3Translate}}</span>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'ApprovalRequestType' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'UserTimeline' | sp3Translate}}</label>
+                            <p>{{details.user}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{  details.date | sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Comments' | sp3Translate}}</label>
+                            <p>{{details.comments}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Status' | sp3Translate}}</label>
+                            <p>{{details.statusText}}</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==6" class="column" >
+             <div class="title">
+                <h4>{{'SupervisorDecisionOverride' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div *ngIf="details.isPriority">
+                   <div class="row">
+                      <div class="col-sm-12">
+                         <span class="sub-heading">{{'CasePriority' | sp3Translate}}</span>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Action' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'UserTimeline' | sp3Translate}}</label>
+                            <p>{{details.user}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{ details.date | sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>Priorty Flag</label>
+                            <p>{{details.priorityFlag}}</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div *ngIf="details.isHold">
+                   <div class="row">
+                      <div class="col-sm-12">
+                         <span class="sub-heading">{{'CaseHold' | sp3Translate}}</span>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Action' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'UserTimeline' | sp3Translate}}</label>
+                            <p>{{details.user}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{ details.date | sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>Hold Flag</label>
+                            <p>{{details.holdFlag}}</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                          <div class="form-group">
+                             <label>{{'User' | sp3Translate}}</label>
+                             <p>{{ details.user}}</p>
+                          </div>
+                       </div>
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Date' | sp3Translate}}</label>
+                            <p>{{ details.date | sp3DateTimeFormat}}</p>
+                         </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                        <div class="form-group">
+                           <label>{{'Status' | sp3Translate}}</label>
+                           <p>{{details.statusText}}</p>
+                        </div>
+                     </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                        <div class="form-group">
+                           <label>{{'Action' | sp3Translate}}</label>
+                           <p>{{details.actionText}}</p>
+                        </div>
+                     </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==3" class="column" >
+             <div class="title">
+                <h4>{{'Screening' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="col-sm-6 col-md-4">
+                         <div class="form-group">
+                            <label>{{'Action' | sp3Translate}}</label>
+                            <p>{{details.actionText}}</p>
+                         </div>
+                      </div>
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-8">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==30" class="column" >
+             <div class="title">
+                <h4>{{'SupervisorInspectionApproved' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'InspectionType' | sp3Translate}}</label>
+                         <p>{{details.type}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==45" class="column" >
+             <div class="title">
+                <h4>{{'InspectionRulersCreated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'User' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Action' | sp3Translate}}</label>
+                         <p>{{details.action}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Length' | sp3Translate}}</label>
+                         <p>{{details.length}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==39" class="column" >
+             <div class="title">
+                <h4>{{'InspectionVerdictInspect' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'User' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'AssessmentSummaryText' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==15" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserReScan' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'SavedViews' | sp3Translate }}</label>
+                         <p>{{details.views}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==16" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserInspect' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==10" class="column" >
+             <div class="title">
+                <h4>{{'SupervisorNIIScan' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==13" class="column" >
+             <div class="title">
+                <h4>{{'SupervisorCanineInspect' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <div class="form-group">
+                           <label>{{'Type' | sp3Translate}}</label>
+                           <p>{{'Canine' | sp3Translate}}</p>
+                        </div>
+                    </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==11" class="column" >
+             <div class="title">
+                <h4>{{'SupervisorRADInspect' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                        <div class="form-group">
+                           <label>{{'Type' | sp3Translate}}</label>
+                           <p>{{'RADNUC' | sp3Translate}}</p>
+                        </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==12" class="column" >
+            <div class="title">
+               <h4>{{'SupervisorDeStuffInspect' | sp3Translate }}</h4>
+            </div>
+            <div class="description" *ngFor="let details of section.details">
+               <div class="row">
+                  <div class="col-sm-6 col-md-4">
+                     <div class="form-group">
+                        <label>{{'UserTimeline' | sp3Translate}}</label>
+                        <p>{{details.user}}</p>
+                     </div>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                     <div class="form-group">
+                        <label>{{'Date' | sp3Translate}}</label>
+                        <p>{{ details.date | sp3DateTimeFormat}}</p>
+                     </div>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                     <div class="form-group">
+                        <label>{{'Status' | sp3Translate}}</label>
+                        <p>{{details.statusText}}</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Type' | sp3Translate}}</label>
+                         <p>{{'Destuff' | sp3Translate}}</p>
+                      </div>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                     <div class="form-group">
+                        <label>{{'Comments' | sp3Translate}}</label>
+                        <p>{{details.comments}}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+          <div *ngIf="section.sectionId==0" class="column" >
+             <div class="title">
+                <h4>{{'ManualCaseCreated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Source' | sp3Translate}}</label>
+                         <p>{{'Manual' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==2" class="column" >
+             <div class="title">
+                <h4>{{'ProfilerResult' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-4" *ngIf="details.actionText">
+                      <div class="form-group">
+                         <label>{{'Action' | sp3Translate}}</label>
+                         <p>{{details.actionText}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-4" *ngIf="details.statusText">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row" *ngIf="details.action !=='CVPCE'">
+                   <div class="col-sm-4" *ngIf="details.source">
+                      <div class="form-group">
+                         <label>{{'Source' | sp3Translate}}</label>
+                         <p>{{details.source}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-4" *ngIf="details.riskScore">
+                      <div class="form-group">
+                         <label>{{ 'RiskScore' | sp3Translate}}</label>
+                         <p>{{ details.riskScore}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-4" *ngIf="details.riskColor">
+                      <div class="form-group">
+                         <label>{{ 'RiskColor' | sp3Translate}}</label>
+                         <p *ngIf="details.riskColor==='0'"  ngClass="{{'rank-rating norisk'}}"></p>
+                         <p *ngIf="details.riskColor==='1'"  ngClass="{{'rank-rating moderate'}}"></p>
+                         <p *ngIf="details.riskColor==='2'"  ngClass="{{'rank-rating highrisk'}}"></p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==48" class="column" >
+             <div class="title">
+                <h4>{{'ManualCaseCreatedFileAttachment' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>Attached</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Source' | sp3Translate}}</label>
+                         <p>{{'Manual' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Attachment' | sp3Translate}}</label>
+                         <p>{{details.downloadPath}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==47" class="column" >
+             <div class="title">
+                <h4>{{'InspectionRulersDeleted' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Length' | sp3Translate}}</label>
+                         <p>{{details.length}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==46" class="column" >
+             <div class="title">
+                <h4>{{'InspectionRulersUpdated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Length' | sp3Translate}}</label>
+                         <p>{{details.length}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==42" class="column" >
+             <div class="title">
+                <h4>{{'InspectionFindingsCreated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'CategoryType' | sp3Translate}}</label>
+                         <p>{{details.categoryType}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'HsCodeOrGoodsType' | sp3Translate}}</label>
+                         <p *ngIf="details.type !== '2'">{{details.goodsType}}</p>
+                         <p *ngIf="details.type == '2'">{{details.hsCode}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==43" class="column" >
+             <div class="title">
+                <h4>{{'InspectionFindingsUpdated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'CategoryType' | sp3Translate}}</label>
+                         <p>{{details.categoryType}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'HsCodeOrGoodsType' | sp3Translate}}</label>
+                         <p *ngIf="details.type !== '2'">{{details.goodsType}}</p>
+                         <p *ngIf="details.type == '2'">{{details.hsCode}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==44" class="column" >
+             <div class="title">
+                <h4>{{'InspectionFindingsDeleted' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'CategoryType' | sp3Translate}}</label>
+                         <p>{{details.categoryType}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'HsCodeOrGoodsType' | sp3Translate}}</label>
+                         <p *ngIf="details.type !== '2'">{{details.goodsType}}</p>
+                         <p *ngIf="details.type == '2'">{{details.hsCode}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==38" class="column" >
+             <div class="title">
+                <h4>{{'InspectionVerdictEvidence' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Evidence' | sp3Translate}}</label>
+                         <p>{{details.Evidence}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==40" class="column" >
+             <div class="title">
+                <h4>{{'InspectionVerdictAddNewFinding' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.Evidence}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Type' | sp3Translate}}</label>
+                         <p>{{details.type}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>HS Code</label>
+                         <p>{{ details.hsCode}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==41" class="column" >
+             <div class="title">
+                <h4>{{'InspectionVerdictSuspect' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group" *ngIf="details.AssessmentSummary">
+                         <label>{{AssessmentSummaryText | sp3Translate}}</label>
+                         <p>{{details.AssessmentSummary}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==37" class="column" >
+             <div class="title">
+                <h4>{{'InspectionVerdictCleared' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group" *ngIf="details.AssessmentSummary">
+                         <label>{{AssessmentSummaryText | sp3Translate}}</label>
+                         <p>{{details.AssessmentSummary}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==36" class="column" >
+             <div class="title">
+                <h4>{{'InspectionInspectorAssignedCase' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==35" class="column" >
+             <div class="title">
+                <h4>{{'SupervisorFlagPriorityRemoved' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==34" class="column" >
+             <div class="title">
+                <h4>{{'SupervisorFlagPriorityCase' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==32" class="column" >
+             <div class="title">
+                <h4>{{'SupervisorFlagHoldRemoved' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==31" class="column" >
+             <div class="title">
+                <h4>{{'SupervisorFlagHoldOnHold' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==29" class="column">
+             <div class="title">
+                <h4>{{'SupervisorRescanRequestApproval' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{'ReScanRequested' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==28" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserVerdictInspect' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{'InspectionRequested' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==27" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserVerdictSuspect' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{'Suspect' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==26" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserVerdictCleared' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{'Cleared' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==25" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserViewsUpdated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Type' | sp3Translate}}</label>
+                         <p>{{details.type}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==24" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserViewsCreated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Type' | sp3Translate}}</label>
+                         <p>{{details.type}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==21" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserRulersCreated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Length' | sp3Translate}}</label>
+                         <p>{{details.length}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==22" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserRulersUpdated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Length' | sp3Translate}}</label>
+                         <p>{{details.length}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==23" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserRulersDeleted' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Length' | sp3Translate}}</label>
+                         <p>{{details.length}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==20" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserfindingDeleted' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-4" *ngIf="details.statusText">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{'Deleted' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'CategoryType' | sp3Translate}}</label>
+                         <p>{{details.categoryType}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'HsCodeOrGoodsType' | sp3Translate}}</label>
+                         <p *ngIf="details.type !== '2'">{{details.goodsType}}</p>
+                         <p *ngIf="details.type == '2'">{{details.hsCode}}</p>
+
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==19" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserfindingUpdated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-4" *ngIf="details.statusText">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p *ngIf="details.status !== '1'">{{'undeclared' | sp3Translate}}</p>
+                         <p *ngIf="details.status == '1'">{{'Declared' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'CategoryType' | sp3Translate}}</label>
+                         <p>{{details.categoryType}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{ 'HsCodeOrGoodsType' | sp3Translate }}</label>
+                         <p *ngIf="details.type !== '2'">{{details.goodsType}}</p>
+                         <p *ngIf="details.type == '2' && details.categoryType !=='undeclared'">{{details.hsCode}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==18" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserfindingCreated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-4" *ngIf="details.statusText">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p *ngIf="details.status !== '1'">{{'undeclared' | sp3Translate}}</p>
+                         <p *ngIf="details.status == '1'">{{'Declared' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'CategoryType' | sp3Translate}}</label>
+                         <p>{{details.categoryType}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'HsCodeOrGoodsType' | sp3Translate}}</label>
+                         <p *ngIf="details.type !== '2'">{{details.goodsType}}</p>
+                         <p *ngIf="details.type == '2'">{{details.hsCode}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==17" class="column" >
+             <div class="title">
+                <h4>{{'AnalyserReAssessment' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==14" class="column">
+             <div class="title">
+                <h4>{{'ScanAssociated' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p *ngIf="details.status === '2'">{{'AwaitingScan' | sp3Translate}}</p>
+                         <p *ngIf="details.status === '7'">{{'AwaitingAssessment' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Source' | sp3Translate}}</label>
+                         <p>{{details.source}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Scan' | sp3Translate}}</label>
+                         <p>{{details.scan | sp3Translate }}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==9" class="column" >
+             <div class="title">
+                <h4>{{'RapSelected' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'NIIStatus' | sp3Translate}}</label>
+                         <p>{{'AwaitingScan' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'RAPSelectedStatus' | sp3Translate}}</label>
+                         <p>{{'AwaitingInspection' | sp3Translate}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==8" class="column" >
+             <div class="title">
+                <h4>{{'SupervisorCaseCleared' | sp3Translate }}</h4>
+             </div>
+             <div class="description" *ngFor="let details of section.details">
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'UserTimeline' | sp3Translate}}</label>
+                         <p>{{details.user}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Date' | sp3Translate}}</label>
+                         <p>{{ details.date | sp3DateTimeFormat}}</p>
+                      </div>
+                   </div>
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Status' | sp3Translate}}</label>
+                         <p>{{details.statusText}}</p>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-6 col-md-4">
+                      <div class="form-group">
+                         <label>{{'Comments' | sp3Translate}}</label>
+                         <p>{{details.comments}}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div *ngIf="section.sectionId==49" class="column" >
+              <div class="title">
+                 <h4>{{'DecisionVerdictSuspect'| sp3Translate }}</h4>
+              </div>
+              <div class="description" *ngFor="let details of section.details">
+                 <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                       <div class="form-group">
+                          <label>{{'UserTimeline' | sp3Translate}}</label>
+                          <p>{{details.user}}</p>
+                       </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                       <div class="form-group">
+                          <label>{{'Date' | sp3Translate}}</label>
+                          <p>{{ details.date | sp3DateTimeFormat}}</p>
+                       </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                       <div class="form-group">
+                          <label>{{'Status' | sp3Translate}}</label>
+                          <p>{{details.statusText}}</p>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                       <div class="form-group">
+                          <label>{{'Comments' | sp3Translate}}</label>
+                          <p>{{details.comments}}</p>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+       </div>
+    </div>
+    <div *ngIf="!timeLineSections" style="height:350px;">
+    </div>
+ </div>

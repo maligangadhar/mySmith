@@ -1,0 +1,46 @@
+﻿
+<form class="form-horizontal" *ngIf="appDetail">
+    <div class="settings-title">
+        <h2 id="appDetailName">{{appDetail.name}}
+            <span class="pull-right">  
+                <form novalidate="" class="ng-untouched ng-pristine ng-valid">
+                    <!---->
+                    <button class="btn btn-primary" type="button" [disabled]="getSaveButtonDisabled()" (click)="saveApp()">{{'SaveChanges' | sp3Translate}}</button>
+                    <button class="btn btn-primary" type="button" [disabled]="getSaveButtonDisabled()" (click)="cancelAppEdit()">{{'Cancel' | sp3Translate}}</button>
+                </form>
+            </span> 
+        </h2>
+        <div class="col-sm-12 well well-sm bg-success" *ngIf="IsSuccess">
+                {{'ChangesSave' | sp3Translate}}
+        </div> 
+    </div>
+    <div id="viewAppsTab">
+        <div class="col-sm-12 settings-panel-profile">
+            <div class="media">
+                <div class="media-left media-middle">
+                    <img class="media-object" src="../../assets/images/landingImages/{{appDetail.id}}.png" id="appImg" />
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading" id="appDescription">{{appDetail.description}}</h4>
+                    <div class="row">
+                        <div class="col-sm-6" id="appAdded"><p>{{'AppAdded' | sp3Translate}}: {{appDetail.appAdded | sp3DateFormat}}</p></div>
+                        <div class="col-sm-6" id="appPublished"><p>{{'AppPublished' | sp3Translate}}: {{appDetail.appPublished | sp3DateFormat}}</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" id="appLastUpdated"><p>{{'AppLastUpdated' | sp3Translate}}: {{ appDetail.appLastUpdated | sp3DateFormat}}</p></div>
+                        <div class="col-sm-6" id="appVersion"><p>{{'AppVersion' | sp3Translate}}: {{appDetail.version}}</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" id="appType"><p>{{'Type' | sp3Translate}}: {{appDetail.type}}</p></div>
+                        <div class="col-sm-6" id="appCategory"><p>{{'Category' | sp3Translate}}: {{appDetail.category}}</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <sp3-comp-select controlId="appStatus" labelText="{{'Status' | sp3Translate}}" required="true" [size]="3" [(values)]="statusList" [(selectedValue)]="appStatus" (selectedChange)="onSelectChanged($event)"></sp3-comp-select>
+            </div>
+        </div>
+    </div>
+</form>

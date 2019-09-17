@@ -1,0 +1,487 @@
+﻿<div *ngIf="visible" class="modal fade full-height-modals" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visibleAnimate ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <sp3-comp-modal-case-match #modalMatchCase [pageTitle]="'MatchCaseHeaderText'" [caseDetails]="duplicateCaseResponse" [to]="destinationCountryName" [statusName]="statusName" [from]="sourceCountryName" [questionText]="'MatchCaseInfoText'" (sameCaseButtonStatus)="checkDuplicateCase($event)"></sp3-comp-modal-case-match>
+    <sp3-comp-modal-case-alert #modalDeleteCase [caseList]="selectedCaseIds" pageTitle="Delete" questionText="DeleteCaseQuestion" (confirmButtonStat)="deleteCase($event)"></sp3-comp-modal-case-alert>
+
+    <sp3-comp-modal-case-alert #modalDeleteAttachment [caseList]="selectedAttachmentIds" pageTitle="DeleteAttachments" questionText="{{'ConfirmAttachmentsDelete' | sp3Translate}}"
+        button1Text="Delete" button2Text="Close" (confirmButtonStat)="deleteAttachmentResult($event)"></sp3-comp-modal-case-alert>
+    <sp3-comp-modal-confirm #modalClose>
+        <div class="app-modal-header">
+            <h4 class="modal-title"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{'Cases' | sp3Translate}}</h4>
+        </div>
+        <div class="app-modal-body">
+            <p>{{'NotSavedChanges'| sp3Translate}}</p>
+            <p>{{'LeaveMessage'| sp3Translate}}</p>
+        </div>
+        <div class="app-modal-footer">
+            <button type="button" class="btn btn-reverse" id="caseCreateLeave" (click)="leaveClick()">{{'LeaveWithoutSaveButton'| sp3Translate}}</button>
+            <button type="button" class="btn btn-reverse" id="caseCreateBack" (click)="backClick()">{{'BackToWindowButton'| sp3Translate}}</button>
+        </div>
+    </sp3-comp-modal-confirm>
+
+    <sp3-comp-modal-confirm #modalValidationDraft>
+        <div class="app-modal-header">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{'Cases' | sp3Translate}}
+        </div>
+        <div id="alertCase" class="app-modal-body">
+           <p> {{'CaseDraftValidationMessage'| sp3Translate}}</p>
+        </div>
+        <div class="app-modal-footer">
+            <button type="button" class="btn btn-reverse" [id]="'caseDraftValidationOk'" (click)="validationDraftOkClick()">{{'Ok'| sp3Translate}}</button>
+        </div>
+    </sp3-comp-modal-confirm>
+
+    <div id="createNewCase" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" (click)="closeClick()" data-dismiss="modal"> <i class="icn-close"></i></a>
+                    <h4 class="modal-title">{{pageTitle}}</h4>
+                </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="modal-details-header">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <sp3-comp-message-display [id]="'caseMessage'"></sp3-comp-message-display>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="manualCaseCaseID">{{'CaseIdText' | sp3Translate}} </label>
+                                            <div class="col-sm-12">
+                                                <span id="manualCaseCaseID">{{generatedCaseId[0]}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="manualCaseUpdatedDate">{{'CaseLastUpdated'| sp3Translate}}</label>
+                                            <div class="col-sm-12">
+                                                <span id="manualCaseUpdatedDate">{{caseCreateDetails.lastUpdateDate | sp3DateTimeFormat}}</span>
+                                                <span *ngIf="!caseCreateDetails.lastUpdateDate">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="manualCaseUpdatedBy">{{'CaseLastUpdatedBy'| sp3Translate}}</label>
+                                            <div class="col-sm-12">
+                                                <span id="manualCaseUpdatedBy">{{caseCreateDetails.lastUpdatedBy}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12 " for="manualCaseStatus">{{'CaseStatusText' | sp3Translate}}</label>
+                                            <div class="col-sm-12">
+                                                <span id="manualCaseStatus">{{caseStatus}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12 col-md-4">{{'CargoType'| sp3Translate}}</label>
+                                            <div class="col-sm-12 col-md-8">
+                                                <div class="radio-group">
+                                                    <span *ngFor="let keyValue of cargoTypesList">
+                                                        <input (change)="onCargoTypeChange(keyValue)" id="cargoType{{keyValue.name}}" name="cargoTypes" type="radio" [value]="keyValue" [(ngModel)]="selectedCargoType" disabled="{{isDisabled}}">
+                                                        <label for="cargoType{{keyValue.name}}">{{keyValue.name}}</label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button type="button" class="{{expandAllClasss}}" id="expandAllCasePanels" [disabled]="isExpandAllDisabled" (click)="expandAll()">{{'ExpandAllCasePanels'| sp3Translate}}</button>
+                                        <button type="button" class="{{collapseAllClass}}" id="collapseAllCasePanels" [disabled]="isCollapseAllDisabled" (click)="collapseAll()">{{'CollapseAllCasePanels'| sp3Translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row">
+                        <!-- Start : : Collapsable Panal  -->
+                        <div class="panel-group" id="accordion">
+                            <!--Panel 1-->
+                            <div class="panel panel-default">
+                                <div class="{{column1Expanded?'panel-open active':'panel-close '}} panel-heading panel-clr" (click)="IsColumn1Collapsed(column1Expanded)">
+                                    <span id="{{column1Expanded? 'caseInformationExpandAccordion' : 'caseInformationCollapseAccordion' }}" class="{{column1Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                                    <h4 class="panel-title">
+                                        {{'CaseInformation' | sp3Translate}}
+                                        <span *ngIf="isCasePanelValid == 1" id="caseInformationValidSymbol"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                                        <span *ngIf="isCasePanelValid==2" id="caseInformationInValidSymbol">
+                                            <span id="isCasePanelInvalidWarning" class="validation-msg">{{warningMessageCasepanel}}<i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="{{column1Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #sender controlId="manualCaseSender" placeholderText="{{isDisabled ? '' : 'sender'| sp3Translate}}" labelText="{{'sender'| sp3Translate}}"
+                                                        (textAdded)="onTextAdded(sender)" [(isDisabled)]="isDisabled" [(value)]="caseCreateDetails.senderName"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #senderAddress controlId="manualCaseSenderAdd" placeholderText="{{isDisabled ? '' : 'SenderAddress'| sp3Translate}}" labelText="{{'SenderAddress'| sp3Translate}}"
+                                                        (textAdded)="onTextAdded(senderAddress)" [(isDisabled)]="isDisabled"
+                                                        [(value)]="caseCreateDetails.senderAddress"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-select #caseFrom controlId="manualCaseFrom" labelText="{{'CaseFrom'| sp3Translate}}" [size]="size" [(values)]="caseFromCountryNameList"
+                                                        [(selectedValue)]="selectedFromCountry" required="true" [(isDisabled)]="isDisabled"
+                                                        (selectedChange)="onSelectChanged('caseFrom', $event)"></sp3-comp-select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-select #caseFrom controlId="originalPort" labelText="{{'OriginPort'| sp3Translate}}" [size]="size" [(values)]="sourcePortList"
+                                                        [(selectedValue)]="selectedOriginalPort" [(isDisabled)]="isDisabled"></sp3-comp-select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-select #caseTo controlId="manualCaseTo" labelText="{{'CaseTo'| sp3Translate}}" [size]="5" [(values)]="caseToCountryNameList"
+                                                        [(selectedValue)]="selectedToCountry" required="true" [(isDisabled)]="isDisabled"
+                                                        (selectedChange)="onSelectChanged('caseTo', $event)"></sp3-comp-select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-select #caseFrom controlId="DestinationPort" labelText="{{'DestinationPort'| sp3Translate}}" [size]="size" [(values)]="destinationPortList"
+                                                        [(selectedValue)]="selectedDestinationPort" required="true" [(isDisabled)]="isDisabled"></sp3-comp-select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-4" for="ManualCaseArrivalDate">{{'ArrivalDateText'| sp3Translate}}<sup>*</sup> :</label>
+                                                    <div class="col-sm-8 ">
+                                                        <sp3-comp-datepicker #arrivaldate [(selectedDate)]="caseDate" [required]="true" (dateChange)="handleDateUpdate($event)" controlId="caseArrivalDate" [enablecontrols]="isDisabled"></sp3-comp-datepicker>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #overallWeight controlId="ManualCaseOverallWght" inputType="overallWeight" placeholderText="{{isDisabled ? '' : 'OverAllWeight'| sp3Translate }}"
+                                                        labelText="{{'OverAllWeight'| sp3Translate}}" [(isDisabled)]="isDisabled"
+                                                        (textAdded)="onTextAdded(overallWeight)" [(value)]="overAllWeightValue"></sp3-comp-textbox>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-multi-textbox #notes controlId="ManualCaseNotes" placeholderText="{{isDisabled ? '' : 'Notes' | sp3Translate}}" labelText="{{'NotesText' | sp3Translate}}"
+                                                        rows="{{4}}" maxLengthValue="300" [(textValue)]="caseCreateDetails.notes"
+                                                        [(isDisabled)]="isDisabled" (textAdded)="onNotesTextAdded(notes)"></sp3-comp-multi-textbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Panel 2-->
+                            <div class="panel panel-default">
+                                <div class="{{column2Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="IsColumn2Collapsed(column2Expanded)">
+                                    <span id="{{column2Expanded? 'shipInformationExpandAccordion' : 'shipInformationCollapseAccordion' }}" class="{{column2Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                                    <h4 class="panel-title">
+                                        {{'ShipInfomation' | sp3Translate}}
+
+                                        <span *ngIf="isShipPanelValid==1" id="shipInformationValidSymbol"><i id="shipInformationValidSymbolImg" class="fa fa-check-circle" aria-hidden="true"></i></span>
+                                        <span *ngIf="isShipPanelValid==2" id="shipInformationInValidSymbol">
+                                            <span id="isShipPanelInvalidWarning" class="validation-msg">{{warningMessageShipPanel}}<i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="{{column2Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #shipId controlId="manualCaseShipId" inputType="shipId" [(isDisabled)]="isDisabled" placeholderText="{{isShipDisabled ? '' : 'ShipId'| sp3Translate}}"
+                                                        labelText="{{'ShipId'| sp3Translate}}" showTooltip="false" (textAdded)="onShipIdTextAdded(shipId)"
+                                                        [(value)]="caseCreateDetails.shipping.shipId"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #shipCompany controlId="manualCaseShipCompany" [(isDisabled)]="isShipDisabled" placeholderText="{{isShipDisabled ? '' : 'ShipCompany'| sp3Translate}}"
+                                                        labelText="{{'ShipCompany'| sp3Translate}}" [required]="isShipCompanyRequired"
+                                                        showTooltip="false" (textAdded)="onTextAdded(shipCompany)" [(value)]="caseCreateDetails.shipping.shippingCompany"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #shipContact controlId="manualCaseContact" [(isDisabled)]="isShipDisabled" placeholderText="{{isShipDisabled ? '' : 'Contact'| sp3Translate}}"
+                                                        labelText="{{'Contact'| sp3Translate}}" [required]="isshipContactRequired" (textAdded)="onTextAdded(shipContact)"
+                                                        [(value)]="caseCreateDetails.shipping.contactDetails"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-select #nationality controlId="manualCaseNationality" [(isDisabled)]="isShipDisabled" labelText="{{'Nationality'| sp3Translate}}"
+                                                        [size]="size" [(values)]="nationalityNameList" [(selectedValue)]="selectedNationality"
+                                                        [required]="isNationalityRequired" (selectedChange)="onSelectChanged('nationality', $event)"></sp3-comp-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--- Last 3 panals-->
+                            <!--Panel 3-->
+                            <div class="panel panel-default">
+                                <div class="{{column3Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="IsColumn3Collapsed(column3Expanded)">
+                                    <span id="{{column3Expanded? 'vehicleInformationExpandAccordion' : 'vehicleInformationCollapseAccordion' }}" class="{{column3Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                                    <h4 class="panel-title">
+                                        {{'VehicleInformation' | sp3Translate}}
+                                        <span *ngIf="isVehiclePanelValid == 1" id="vehicleInformationValidSymbol"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                                        <span *ngIf="isVehiclePanelValid == 2" id="vehicleInformationInValidSymbol">
+                                            <span id="isVehiclePanelInvalidWarning" class="validation-msg"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="collapse3" class="{{column3Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #plateNumber controlId="manualCasePlateNumberId" [(isDisabled)]="isDisabled" placeholderText="{{isDisabled ? '' : 'PlateNumber' | sp3Translate}}"
+                                                        labelText="{{'PlateNumber' | sp3Translate}}"  showTooltip="false"
+                                                        (textAdded)="onTextAdded(plateNumber)" [(value)]="caseCreateDetails.vehicle.licensePlateNumber"></sp3-comp-textbox>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #vehicleMake controlId="manualCaseVehicleMakeId" [(isDisabled)]="isDisabled" placeholderText="{{ isDisabled ? '' : 'VehicleMake' | sp3Translate}}"
+                                                        labelText="{{'VehicleMake' | sp3Translate}}"  showTooltip="false"
+                                                        (textAdded)="onTextAdded(vehicleMake)" [(value)]="caseCreateDetails.vehicle.make"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #driverName controlId="manualCaseDriverNameId" [(isDisabled)]="isDisabled" placeholderText="{{isDisabled ? '' : 'DriverName' | sp3Translate}}"
+                                                        labelText="{{'DriverName' | sp3Translate}}" (textAdded)="onTextAdded(driverName)"
+                                                        [(value)]="caseCreateDetails.vehicle.driverName"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #vehicleCompany controlId="manualCaseVehicleCompanyId" [(isDisabled)]="isDisabled" placeholderText="{{isDisabled ? '' : 'VehicleCompany' | sp3Translate}}"
+                                                        labelText="{{'VehicleCompany' | sp3Translate}}" (textAdded)="onTextAdded(vehicleCompany)"
+                                                        [(value)]="caseCreateDetails.vehicle.company"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #vehicleCompany controlId="manualCaseVehicleCompanyId" [(isDisabled)]="isDisabled" placeholderText="{{isDisabled ? '' : 'VehicleModal' | sp3Translate}}"
+                                                        labelText="{{'VehicleModal' | sp3Translate}}" (textAdded)="onTextAdded(vehicleModal)"
+                                                        [(value)]="caseCreateDetails.vehicle.model"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #driverLicense controlId="manualCaseDriverLicenseId" [(isDisabled)]="isDisabled" placeholderText="{{isDisabled ? '' : 'DriverLicense' | sp3Translate}}"
+                                                        labelText="{{'DriverLicense' | sp3Translate}}" showTooltip="false"
+                                                        [(value)]="caseCreateDetails.vehicle.driverLicenseNumber" (textAdded)="onTextAdded(driverLicense)"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Panel 4-->
+                            <div class="panel panel-default">
+                                <div class="{{column4Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="IsColumn4Collapsed(column4Expanded)">
+                                    <span id="{{column4Expanded? 'containerInformationExpandAccordion' : 'containerInformationCollapseAccordion' }}" class="{{column4Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                                    <h4 class="panel-title">
+                                        {{'ContainerInformation' | sp3Translate}}
+                                        <span *ngIf="isContainerPanelValid == 1" id="containerInformationValidSymbol"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                                        <span *ngIf="isContainerPanelValid == 2" id="containerInformationInValidSymbol">
+                                            <span id="isContainerPanelInvalidWarning" class="validation-msg">{{warningMessageContainerPanel}}<i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="collapse4" class="{{column4Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <sp3-comp-textbox #containerId inputType="containerId" controlId="manualCaseContainerId" [(isDisabled)]="isDisabled" placeholderText="{{isDisabled ? '' : 'ContainerId' | sp3Translate}}"
+                                                        labelText="{{'ContainerId'| sp3Translate}}" required="isShipContainerIdRequired" showTooltip="false"
+                                                        (textAdded)="onTextAdded(containerId)" [(value)]="containerIdValue"></sp3-comp-textbox>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="hsCode" class="col-sm-4">{{'HSCodesText' | sp3Translate}}</label>
+                                                    <div class="col-sm-8">
+                                                        <sp3-comp-multi-textbox #hsCode inputType="hsCode" [labelVisible]="false" controlId="manualCaseHSCode" placeholderText="{{isDisabled ? '' : 'HSCodes' | sp3Translate}}" labelText="{{isDisabled ? '' : 'HSCodesText' | sp3Translate}}"
+                                                        rows="{{3}}" [(textValue)]="hsCodeValue" toolTip="{{'hscodeToolTip'|sp3Translate}}"
+                                                        [(isDisabled)]="isDisabled" (textAdded)="onTextAdded(hsCode)"></sp3-comp-multi-textbox>
+                                                    <!-- <sp3-comp-textbox #hsCode controlId="manualCaseHSCode" inputType="hsCode" placeholderText="{{'HSCode'| sp3Translate}}" labelText="{{'HSCode'| sp3Translate}}"
+                                                        showTooltip="false" (textAdded)="onTextAdded(hsCode)" [(isDisabled)]="isDisabled"
+                                                        [(value)]="hsCodeValue"></sp3-comp-textbox> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Panel 5-->
+                            <div class="panel panel-default">
+                                <div class="{{column5Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="IsColumn5Collapsed(column5Expanded)">
+                                    <span id="{{column5Expanded? 'attachmentsExpandAccordion' : 'attachmentsCollapseAccordion' }}" class="{{column5Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                                    <h4 class="panel-title">
+                                        {{'Attachments' | sp3Translate}} <span *ngIf="attachments.length > 0">({{attachments.length}})</span>
+                                        <span *ngIf="isAttachmentPanelValid == 1" id="attachmentInformationValidSymbol"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                                        <span *ngIf="isAttachmentPanelValid == 2" id="attachmentInformationInValidSymbol">
+                                            <span id="isAttachmentPanelInvalidWarning" class="validation-msg"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
+                                        </span>
+                                    </h4>
+                                </div>
+                                <div id="collapse5" class="{{column5Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }} upload-attachment">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-4 col-md-3">
+                                                        <button type="button" id="deleteAttachemnt" class="btn btn-block btn-primary" [disabled]="GetDeleteButtonDisabled()" (click)="deleteAttachmentClick()">{{'DeleteAllSelected'| sp3Translate}}</button>
+
+                                                    </div>
+                                                    <div class="col-sm-8 col-md-9 text-right">
+                                                        <sp3-comp-attachment-upload [isDisabled]="isDisabled" [attachmentButtonTitle] ="'AddNewAttachment'" (confirmButtonStat)="onUploadAttachment($event)" #addAttachment></sp3-comp-attachment-upload>
+                                                        <label>{{'allowedImageFormats' | sp3Translate}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="table-responsive attachcheckbox" id="uploadAttachment" style="clear:both;">
+                                                    <p-dataTable #attachmentDataTable [tableStyle]="{'text-align':'left', 'width':'100%', 'overflow-x': 'visible' }" [value]="attachments"
+                                                        [(selection)]="selectedAttachments" [stacked]="stacked" [editable]="true"
+                                                        resizableColumns="true" columnResizeMode="false" (onHeaderCheckboxToggle)="onTableHeaderCheckboxToggle($event)" emptyMessage="{{'NoAttachmentsFound' | sp3Translate}}">
+
+                                                        <p-column field="" header="" selectionMode="multiple"> </p-column>
+                                                        <p-column field="title" header="{{'Title'| sp3Translate}}">
+                                                            <ng-template let-col let-attachment="rowData" pTemplate="body">
+                                                                <div class="input-group" *ngIf="attachment['isEditable']">
+                                                                    <input type="text" class="form-control" [(ngModel)]="attachment['title']" maxlength="255" />
+                                                                    <span class="input-group-btn">
+                                                                        <button *ngIf="attachment['title'].length != 0" class="btn btn-primary btn-lg" type="reset" (click)="crossClick(attachment,col.field)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                    </span>
+                                                                </div>
+                                                                <a *ngIf="!attachment['isEditable']" (click)="downloadAttachment(attachment)">{{attachment.title}}</a>
+                                                            </ng-template>
+                                                        </p-column>
+                                                        <p-column field="description" header="{{'Description'| sp3Translate}}">
+                                                            <ng-template let-col let-attachment="rowData" pTemplate="body">
+                                                                <span class="input-group" *ngIf="attachment['isEditable']">
+                                                                    <textarea [(ngModel)]="attachment['description']" class="form-control" rows="2" maxlength="1200"></textarea>
+                                                                    <span class="input-group-btn"><button *ngIf="attachment['description'].length != 0" class="btn btn-primary btn-lg" type="reset" (click)="crossClick(attachment,col.field)"><i class="fa fa-times" aria-hidden="true"></i></button></span>
+                                                                </span>
+                                                                <i *ngIf="attachment['isEditable']" id="attachemntDescriptionCount">{{1200 - attachment['description'].length}} {{'CharactersLeft'| sp3Translate}}</i>
+                                                                <span *ngIf="!attachment['isEditable']">{{attachment.description}}</span>
+                                                            </ng-template>
+                                                        </p-column>
+                                                        <p-column styleClass="col-button">
+                                                            <ng-template let-rowIndex="rowIndex" let-attachment="rowData" pTemplate="body">
+                                                                <span *ngIf="!attachment['isEditable']"><button type="button" class="btn btn-primary" [disabled]="isDisabled" (click)="selectAttachment(attachment)">{{'Edit'| sp3Translate}}</button></span>
+
+                                                                <span *ngIf="pageStatus === checkType.IsCreateCaseOpened">
+                                                                    <span *ngIf="attachment['isEditable']"><button type="button" class="btn btn-primary" [disabled]="attachment['title'].length == 0" (click)="selectAttachment(attachment)">{{'Save'| sp3Translate}}</button></span>
+                                                                </span>
+                                                                <span *ngIf="(pageStatus ===  checkType.IsExistingCaseOpened || pageStatus === checkType.IsExistingDraftCaseOpened)">
+                                                                    <span *ngIf="attachment['isEditable']"><button type="button" class="btn btn-primary" [disabled]="attachment['title'].length == 0" (click)="selectAttachment(attachment)">{{'Update'| sp3Translate}}</button></span>
+                                                                </span>
+                                                                <span *ngIf="attachment['isEditable']"><button type="button" class="btn btn-primary" (click)="cancelAttachment(attachment, rowIndex)">{{'Cancel'| sp3Translate}}</button></span>
+                                                            </ng-template>
+                                                        </p-column>
+                                                    </p-dataTable>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- End : : Collapsable Panal  -->
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="col-sm-12">
+                        <div class="row">
+
+                            <div class="right-btns">
+                                <span>
+                                    <span *ngIf="pageStatus === checkType.IsCreateCaseOpened">
+                                        <span *ngIf="IsDraftCreationSuccess">
+                                            <button type="button" id="deleteDraft" class="btn btn-reverse" (click)="deleteCaseClick()">{{'Delete'| sp3Translate}}</button>
+                                        </span>
+                                <span *ngIf="!IsCreationSuccess && !attachmentSaved">
+                                            <button type="button" id="createCase" class="btn btn-reverse" (click)="createCaseClick()" [disabled]="saveInProgress">{{'Create'| sp3Translate}}</button>
+                                        </span>
+                                <span *ngIf="!IsDraftCreationSuccess && !IsCreationSuccess && !attachmentSaved">
+                                            <button type="button" id="saveDraft" class="btn btn-reverse" (click)="saveAsDraftClick()" [disabled]="saveInProgress">{{'SaveAsDraft'| sp3Translate}}</button>
+                                        </span>
+                                <span *ngIf="IsDraftCreationSuccess">
+                                            <button type="button" id="updateDraft" class="btn btn-reverse" (click)="updateDraftClick()">{{'UpdateDraft'| sp3Translate}}</button>
+                                        </span>
+                               <span *ngIf="IsCreationSuccess">
+                                <span *ngIf="isExistingCaseSaveChanges && !saveInProgress">
+                                                <button type="button" id="saveCaseChanges" class="btn btn-reverse" (click)="saveChangesClick()">{{'SaveChanges'| sp3Translate}}</button>
+                                            </span>
+                                </span>
+                                </span>
+
+                                <span *ngIf="pageStatus === checkType.IsExistingCaseOpened">
+                                <span *ngIf="isExistingCaseSaveChanges && !saveInProgress">
+                                            <button type="button" id="saveCaseChanges" class="btn btn-reverse" (click)="saveChangesClick()">{{'SaveChanges'| sp3Translate}}</button>
+                                        </span>
+                                </span>
+
+                                <span *ngIf="pageStatus === checkType.IsExistingDraftCaseOpened">
+
+                                        <button type="button" id="deleteDraft" class="btn btn-reverse" (click)="deleteCaseClick()">{{'Delete'| sp3Translate}}</button>
+
+
+                                        <button type="button" id="createCase" class="btn btn-reverse" (click)="createCaseClick()">{{'Create'| sp3Translate}}</button>
+
+
+                                        <button type="button" id="updateDraft" class="btn btn-reverse" (click)="updateDraftClick()">{{'UpdateDraft'| sp3Translate}}</button>
+
+
+                                    </span>
+
+                                </span>
+
+                                <button type="button" id="closeCaseModal" class="btn btn-reverse" (click)="closeClick()" data-dismiss="modal">{{'Close'| sp3Translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <sp3-comp-message-display [id]="'caseCreationMessage'"></sp3-comp-message-display>
+</div>

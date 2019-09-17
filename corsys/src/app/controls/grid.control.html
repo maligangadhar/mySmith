@@ -1,0 +1,138 @@
+﻿<div id="dashboard" class="dashboard-container col-sm-12" *ngIf="customPaginator===true">
+    <div class="row">
+        <div class="pull-left">
+            <div class="buttons-align-bottom">
+                <button title="{{'Refresh' | sp3Translate}}" type="button" class="btn btn-reverse refresh" id="GridRefresh" #GridRefresh
+                    (click)="refreshButtonClick()">{{'Refresh' | sp3Translate}}</button>
+                <!-- <span *ngIf='!isPrintHidden'>
+                    <button type="button" title="{{'Print' | sp3Translate}}" class="btn btn-default print" [disabled]="isPrintDisabled"></button>
+                    <button type="button" title="{{'Download' | sp3Translate}}" class="btn btn-default download" [disabled]="isPrintDisabled"></button>
+                </span> -->
+                <span *ngIf='assignToSelf'>
+                    <button type="button" title="{{'AssignToSelf' | sp3Translate}}" [disabled]="!enableAssignToSelf" (click)="assignToSelfClick()"
+                        class="btn btn-reverse assignToSelf">{{'AssignToSelf'| sp3Translate}}</button>
+                </span>
+
+            </div>
+        </div>
+        <div class="pull-right">
+            <div class="pagination">
+                <span *ngIf="value && value.length > 0">
+                    <span *ngIf="totalRecords < 1 && value && value.length > 0">
+                        <span class="paginationLoader"></span>
+                    </span>
+                    <span *ngIf="totalRecords >= 1">{{'Displaying' | sp3Translate}} {{startActionNumber}} - {{endActionNumber}} {{'of' | sp3Translate}} {{totalRecords}}</span>
+                      <button type="button" class="btn btn-default arrow-left" [disabled]="isLeftArrowDisabled" (click)="previousButtonClick()"></button>
+                      <button type="button" class="btn btn-default arrow-right" [disabled]="isRightArrowDisabled" (click)="nextButtonClick()"></button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="isShow" class="row">
+    <div class="col-sm-12">
+    <p-dataTable #dataTable [tableStyle]="{'text-align':'center'}"  scrollable="{{scrollable}}" scrollWidth="{{scrollWidthGrid}}" scrollHeight="{{scrollHeightGrid}}"
+        [value]="value" [(selection)]="selectedValues" (selectionChange)="onSelect($event)" rows="20" [paginator]="paginator"
+        [pageLinks]="3" [rowsPerPageOptions]="[20,50,100]" resizableColumns="true" [headerCheckboxToggleAllPages]="headerCheckboxToggleAllPages"
+        dataKey="{{dataKey}}" [lazy]="lazy" (onLazyLoad)="onGridLazyLoad($event)" columnResizeMode="expand" [totalRecords]="totalRecords"
+        [emptyMessage]="emptyMessage" [rowStyleClass]="applyRowStyle">
+        <div *ngFor="let column of columns">
+            <p-column *ngIf="column.type != 3 && column.type != 9 && column.type != 11" field="{{column.field}}" sortable="{{column.isSortable}}"
+                header="{{column.header}}" [style]="{'height':'auto'}" frozen="{{column.isColFrozen}}">
+                <ng-template let-col let-case="rowData" pTemplate="body">
+                    <div *ngIf="column.type == 1 && column.mode == 3 && (!editRecord || case[dataKey] != editRecord[dataKey])">
+                        {{case[column.field]}}
+                    </div>
+                    <div class="grid-caseid" *ngIf="column.type == 2 && column.mode == 3 && (!editRecord || case[dataKey] != editRecord[dataKey])">
+                        <a title="{{ 'ViewCaseDetails' | sp3Translate}}" (click)="column.itemOnClick(case)">{{case[column.field]}}</a>
+                    </div>
+                    <div *ngIf="column.type == 7">
+                        <button id="edit{{column.controlId}}" *ngIf="!editRecord || case[dataKey] != editRecord[dataKey]" (click)="onEditClick(case, col)">{{'Edit' | sp3Translate}}</button>
+                        <button id="save{{column.controlId}}" *ngIf="editRecord && case[dataKey] == editRecord[dataKey]" (click)="onSaveClick(case)">{{'Save' | sp3Translate}}</button>
+
+                        <button *ngIf="editRecord && case[dataKey] == editRecord[dataKey]" (click)="onCancelClick(case)">{{'Cancel' | sp3Translate}}</button>
+                    </div>
+                    <div *ngIf="column.type == 4 || (column.editType == 4 && column.editable && editRecord && case[dataKey] == editRecord[dataKey])">
+                        <input id="{{column.controlId}}" type="text" [(ngModel)]="case[column.field]" maxlength="{{column.maxLengthValue}}" />
+                        <input *ngIf="case[column.field].length != 0" class="input-text-reset" type="reset" value=" X " (click)="crossClick(case,col.field)"
+                        />
+                    </div>
+                    <div *ngIf="column.type == 8 || (column.editType == 8 && column.editable && editRecord && case[dataKey] == editRecord[dataKey])">
+                        <textarea id="{{column.controlId}}" [(ngModel)]="case[column.field]" rows="3" maxlength="{{column.maxLengthValue}}"></textarea>
+                        <input *ngIf="case[column.field].length != 0" class="input-tarea-reset" type="reset" value=" X " (click)="crossClick(case,col.field)"
+                        />
+                        <p>
+                            <i>{{column.maxLengthValue - case[column.field].length}} {{'CharactersLeft'| sp3Translate}}</i>
+                        </p>
+                    </div>
+                    <div *ngIf="column.type == 21">
+                        {{[column.field]}}
+                    </div>
+                    <div *ngIf="column.type == 10">
+                        {{case[column.field] | sp3DateFormat: generalDateFormat}}
+                    </div>
+                    <div *ngIf="column.type == 12">
+                        {{case[column.field] | sp3DateTimeFormat: generalDateTimeFormat}}
+                    </div>
+                    <div *ngIf="column.type == 20">
+                        <button class="btn btn-primary" type="button" (click)="column.itemOnClick(case)">{{'Pair' | sp3Translate}}</button>
+                    </div>
+
+                </ng-template>
+            </p-column>
+            <p-column *ngIf="column.type == 3 && column.mode == 3" id="check{{column.controlId}}" field="" header="" selectionMode="multiple"
+                [style]="{'width':'50px','height':'30px'}" [styleClass]="'uicheckboxgrid'" frozen="{{column.isColFrozen}}"></p-column>
+            <p-column *ngIf="column.type == 9" id="icon{{column.controlId}}" [styleClass]="'uiflaggrid'" field="{{column.field}}" header="{{column.header}}"
+                [style]="{'width':'100px', 'height':'30px'}" frozen="{{column.isColFrozen}}">
+                <ng-template pTemplate="header">
+                    <i [ngClass]="column.iconHeaderClass"></i>
+                </ng-template>
+                <ng-template let-col let-case="rowData" pTemplate="body">
+                    <div *ngIf="column.type == 9">
+                        <i [ngClass]="case[column.field]" (click)="column.itemOnClick(case)"></i>
+                    </div>
+                </ng-template>
+            </p-column>
+            <p-column *ngIf="column.type == 11" id="icon{{column.controlId}}" field="{{column.field}}" header="{{column.header}}" sortable="{{column.isSortable}}"
+                [style]="{'height':'auto'}" frozen="{{column.isColFrozen}}">
+                <ng-template let-col let-case="rowData" pTemplate="body">
+                    <div *ngIf="column.type == 11">
+                        <!-- <div>{{case[column.field] | sp3RiskValueFormat}}</div>
+                         ng-class="condition ? 'class-if-true' : 'class-if-false'"
+                         *ngIf="(case[column.field] | sp3RiskColorFormat)==='0'" ngClass="{{'rank-rating norisk'}}"
+                        -->
+                        <div *ngIf="(case[column.field] | sp3RiskColorFormat)==='0'" ngClass="{{'rank-rating norisk'}}">{{case[column.field] | sp3RiskValueFormat}}</div>
+                        <div *ngIf="(case[column.field] | sp3RiskColorFormat)==='1'" ngClass="{{'rank-rating moderate'}}">{{case[column.field] | sp3RiskValueFormat}}</div>
+                        <div *ngIf="(case[column.field] | sp3RiskColorFormat)>='2'" ngClass="{{'rank-rating highrisk'}}">{{case[column.field] | sp3RiskValueFormat}}</div>
+                    </div>
+                </ng-template>
+            </p-column>
+            <ng-template #saveButtonTemplate let-col let-case="rowData" pTemplate="body">
+                <button id="edit{{column.controlId}}" *ngIf="!editRecord || case[dataKey] != editRecord[dataKey]" (click)="onEditClick(case)">{{'Edit' | sp3Translate}}</button>
+                <button id="save{{column.controlId}}" *ngIf="editRecord && case[dataKey] == editRecord[dataKey]" (click)="onSaveClick(case)">{{'Save' | sp3Translate}}</button>
+
+                <button *ngIf="editRecord && case[dataKey] == editRecord[dataKey]" (click)="onCancelClick(case)">{{'Cancel' | sp3Translate}}</button>
+
+            </ng-template>
+            <ng-template #linkTemplate let-col let-case="rowData" pTemplate="body">
+                <a (click)="column.onClick(case[column.field])">{{case[column.field]}}</a>
+            </ng-template>
+            <ng-template #textAreaTemplate let-col let-case="rowData" pTemplate="body">
+                <textarea id="{{column.controlId}}" [(ngModel)]="case[column.field]" rows="3" maxlength="{{column.maxLengthValue}}"></textarea>
+                <input *ngIf="case[column.field].length != 0" class="input-tarea-reset" type="reset" value=" X " (click)="crossClick(case,col.field)"
+                />
+            </ng-template>
+
+            <ng-template #textTemplate let-col let-case="rowData" pTemplate="body">
+                <input id="{{column.controlId}}" type="text" [(ngModel)]="case[column.field]" maxlength="{{column.maxLengthValue}}" />
+                <input *ngIf="case[column.field].length != 0" class="input-text-reset" type="reset" value=" X " (click)="crossClick(case,col.field)"
+                />
+            </ng-template>
+
+            <ng-template #labelTemplate let-col let-case="rowData" pTemplate="body">
+                <label>{{case[column.field]}}</label>
+            </ng-template>
+        </div>
+    </p-dataTable>
+</div>
+</div>

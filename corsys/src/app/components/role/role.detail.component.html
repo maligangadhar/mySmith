@@ -1,0 +1,51 @@
+﻿<form class="form-horizontal">
+        <div class="settings-title" *ngIf="roleDetail">
+            <h2 id="userDetailName"> 
+                {{roleDetail.name}}
+                <span class="pull-right">  
+                    <form novalidate="" class="ng-untouched ng-pristine ng-valid">
+                        <!---->
+                        <button class="btn btn-primary" type="button" [disabled]="getSaveButtonDisabled()"  (click)="updateRoleClick()">{{'SaveChanges' | sp3Translate}}</button>
+                        <button class="btn btn-primary" type="button"[disabled]="getSaveButtonDisabled()"  (click)="cancelUpdateRole()">{{'Cancel' | sp3Translate}}</button>
+                    </form>
+                </span>
+            </h2>
+            <div class="col-sm-12 well well-sm bg-success" *ngIf="IsSuccess">
+                    {{'ChangesSave' | sp3Translate}}
+            </div>
+        </div>
+        <div class="row" *ngIf="roleDetail">
+            <div class="col-sm-12">
+                <div class="form-group"> 
+                    <div class="col-sm-12">    
+                        <sp3-comp-multi-textbox [labelVisible]="false" controlId="roleDescription" placeholderText="{{'NewRoleDescription' | sp3Translate}}" [rows]="5" [(textValue)]="roleDescription" [maxLengthValue]="300" required="true" (textAdded)="onTextAdded($event)"></sp3-comp-multi-textbox>
+                    </div>                    
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                        <sp3-comp-select controlId="roleDetailStatus" [size]="7" labelText="{{'Status' | sp3Translate}}" required="true" [(values)]="statusList" [(selectedValue)]="roleStatus" (selectedChange)="onSelectChanged($event)"></sp3-comp-select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                        <sp3-comp-select controlId="roleLinkLocation" [size]="7" labelText="{{'Location' | sp3Translate}}" required="true" [(values)]="locationList" [(selectedValue)]="selectedLocation" (selectedChange)="onLocationChanged($event)"></sp3-comp-select>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <sp3-comp-modal-confirm #modalRoleInactiveAlert>
+                 <div class="app-modal-header">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>  {{'Alert' | sp3Translate}}
+                </div>
+                <div class="app-modal-body">
+                        <p>{{'RoleInactiveMessage1' | sp3Translate}}</p>
+                        <p>{{'RoleInactiveMessage2' | sp3Translate}}</p>
+                        <p>{{'RoleInactiveLeaveMessage' | sp3Translate}}</p> 
+                </div>
+                <div class="app-modal-footer">
+                        <button type="button" class="btn btn-reverse" id="roleInactiveYes" (click)="yesClick()">{{'Yes' | sp3Translate}}</button>
+                        <button type="button" class="btn btn-reverse" id="roleInactiveNo" (click)="noClick()">{{'No' | sp3Translate}}</button>      
+                </div>
+    </sp3-comp-modal-confirm>
+</form>

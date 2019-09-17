@@ -1,0 +1,15 @@
+﻿
+       <div class="settings-title"><h2>{{'Roles'| sp3Translate}}</h2>   </div>    
+            <div id="{{controlId}}Roles" class="row checkbox-group">
+                <div class="checkbox-container col-sm-6" *ngFor="let option of usersSelectedRolesList">
+                    <label class="form-check-label">
+                        <input class="form-check-input" id="user{{option.name}}"
+                            type="checkbox"
+                            name="usersSelectedRolesList"
+                            value="{{option.value}}"
+                            [(ngModel)]="option.checked"
+                            (ngModelChange)="onChange($event, option.id)" />
+                        <span>{{option.name}}</span>
+                    </label>
+                </div>
+            </div>

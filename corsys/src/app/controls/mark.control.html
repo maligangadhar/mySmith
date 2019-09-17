@@ -1,0 +1,32 @@
+﻿<!--<div #myOverlayDiv style="position: absolute; cursor: crosshair;z-index:100"
+     [style.width.px]="width" [style.height.px]="height"
+     ></div>
+<div>-->
+<div *ngFor="let mark of marks; let i = index">
+    <div *ngFor="let mark of marks; let i = index" class="border-blue select-areas-background-area;" [attr.id]="mark.id"
+         style="position: absolute  ; cursor: move;z-index:150" [style.width.px]="mark.width" [style.height.px]="mark.height" [style.left.px]="mark.left"
+         (mouseup)="onMouseUp($event, mark)"
+         (mousedown)="onMouseDown($event)"
+         (mousemove)="onMouseMove($event, mark)"
+         (touchstart)="onTouchStart($event)"
+         (touchend)="onTouchEnd($event)"
+         (touchmove)="onTouchMove($event, mark)"
+         [style.top.px]="mark.top">
+       
+        <!--<div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <ng-content select=".app-modal-header"></ng-content>
+                    </div>
+                    <div class="modal-body">
+                        <ng-content select=".app-modal-body"></ng-content>
+                    </div>
+                    <div class="modal-footer">
+                        <ng-content select=".app-modal-footer"></ng-content>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    </div>

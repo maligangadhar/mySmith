@@ -1,0 +1,277 @@
+﻿<div class="viewer-container sopen case-analyzer" (mouseup)="onAnalyzerMouseUp($event)" (mouseleave)="onAnalyzerMouseLeave($event)" (touchend)="onTouchEnd($event)">
+    <div *ngIf="isNextButtonVisible" class="next-case-overlay">
+        <button type="button" class="btn btn-primary" id="LoadNextCase" (click)="loadNextCaseClick()">{{'LoadNextCase' | sp3Translate}}</button>
+    </div>
+    <span [hidden]="scanFlag">
+    <sp3-comp-collapsible-panel [isMenuClose]="isMenuClose" [enabled]="false" (sidePanelToggleEvent)="getSidePanelState($event)">
+        <div class="expanded-panel-body image-tools">
+            <div class="row">
+                <div class="col-sm-12 analyzer-tools">
+                    <div class="row markers">
+                        <div class="col-sm-12">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div (click)="annotate()" title="{{'CreateFinding'  | sp3Translate }}" class="{{pencilEnabled ? 'btn-tool active':(viewMode ? 'btn-tool readmode': 'btn-tool')}}">
+                                                <img src="../../assets/images/svg/icn-draw-box.svg" />
+                                            </div>
+                                        </td>
+                                        <td class="markers-left">
+                                            <div *ngIf="findingsCount === 0" class="btn-tool" title="{{'NoFindings' | sp3Translate}}">
+                                                <img src="{{'../../assets/images/svg/icn-visible.svg'}}"/>
+                                            </div>
+                                            <div *ngIf="findingsCount > 0" (click)="showHideFindings()" title="{{showFindings? ('HideFindings'  | sp3Translate): ('ShowFindings'  | sp3Translate)}}" class="btn-tool">
+                                                <img src="{{showFindings ?'../../assets/images/svg/icn-visible.svg':'../../assets/images/svg/icn-hidden.svg'}}"/>
+                                            </div>
+                                        </td>
+                                        <td class="markers-right">
+                                            <div (click)="rulerDraw()" title="{{'CreateRuler'  | sp3Translate }}" class="{{rulerEnabled ?'btn-tool active':(viewMode ? 'btn-tool readmode': 'btn-tool')}}">
+                                                <img src="../../assets/images/svg/icn-draw-ruler.svg" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div *ngIf="imageRulers.length === 0" title="{{'NoRulers' | sp3Translate}}" class="btn-tool">
+                                                    <img src="{{'../../assets/images/svg/icn-visible.svg'}}"/>
+                                            </div>
+                                            <div *ngIf="imageRulers.length > 0" (click)="showHideRulers()" title="{{showRulers ? ('HideRulers'  | sp3Translate)  : ('ShowRulers'  | sp3Translate)}}" class="btn-tool">
+                                                <img src="{{showRulers ?'../../assets/images/svg/icn-visible.svg':'../../assets/images/svg/icn-hidden.svg'}}"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row border-medium" [style.height.px]="stampHeight">
+                        <div #selDiv class="col-sm-12">
+                            <div class="marker-square">
+                                <canvas class="viewer selectorHeight" #imageSelector style="z-index: 1;" [style.height.px]="stampHeight"
+                                (mousedown)="onSelectorMouseDown($event)" (mouseup)="onSelectorMouseUp($event)"></canvas>
+                            <sp3-comp-mark #selectorArea [width]="selMarkWidth" [height]="stampHeight" [toAnnotate]="false" [marks]="zoomMarks" [maxPosition]="zoomBounding"
+                                [offset]="left" (updateMarks)="updateZoom($event)"></sp3-comp-mark>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 zoomers">
+                            <div class="btn-tool viewselection" *ngIf="!viewMode">
+                                <sp3-comp-select [size]="6" [(selectedValue)]="selectedZoomOption" [(values)]="zoomLevelOptions" (selectedChange)="onZoomSelectionChange($event,false,true)"></sp3-comp-select>
+                            </div>
+                            <div class="btn-tool" title="{{'ZoomIn' | sp3Translate}}" (click)="zoom(1,false,true)" ng-hide="options.controls.disableZoom"><img src="../../assets/images/svg/icn-zoom-in.svg" /></div>
+                            <div class="btn-tool" title="{{'ZoomOut' | sp3Translate}}" (click)="zoom(-1,false,true)" ng-hide="options.controls.disableZoom"><img src="../../assets/images/svg/icn-zoom-out.svg" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!viewMode">
+                    <sp3-comp-effects [title]="effects">
+                        <div card-type="includeSlide">
+                            <div class="row">
+                                <div class="col-sm-12 preset-tools">
+                                    <div (click)="presetChange(75,75);" class="preset preset-sm"><span>75</span><span>75</span></div>
+<div (click)="presetChange(50,50);" class="preset preset-sm"><span>50</span><span>50</span></div>
+<div (click)="presetChange(25, 75);" class="preset preset-sm"><span>75</span><span>25</span></div>
+</div>
+</div>
+<sp3-comp-slider [range]="brightnessLevel" (rangeChanged)="onBrightnessChangeEvent($event)" [label]="'Brightness'" [emitChangeFlag]="emitOnEffectChange"></sp3-comp-slider>
+<sp3-comp-slider [range]="contrastLevel" (rangeChanged)="onContrastChangeEvent($event)" [label]="'Contrast'" [emitChangeFlag]="emitOnEffectChange"></sp3-comp-slider>
+<div class="row">
+    <div class="col-sm-12" *ngIf="!toggleDiscriminationSwitchButtonFlag">
+        <label>{{'ColorPreset' | sp3Translate}}</label>
+        <button class="btn btn-dots" (click)="toggleColorList(0)" [ngClass]="{active: !toggleColorListDropDownFlag && !initialPageReloadFlag,inactive:initialPageReloadFlag }" title="{{'ScanToColourMapping' | sp3Translate}}">
+                                    <img src="../../assets/images/svg/icn-dots.svg">
+                                    </button>
+        <button class="btn btn-dots-grey" (click)="toggleColorList(1)" [ngClass]="{active: toggleColorListDropDownFlag && !initialPageReloadFlag,inactive:initialPageReloadFlag}" title="{{'ScanToOriginalGreyscale' | sp3Translate}}">
+                                    <img src="../../assets/images/svg/icn-dots-grey.svg">
+                                    </button>
+        <!-- <button type="button" class="btn btn-dots-grey"><img src="../../assets/images/svg/icn-invert.svg"></button> -->
+    </div>
+    <div class="col-sm-12 sp3dropdown" *ngIf="!toggleDiscriminationSwitchButtonFlag && !toggleColorListDropDownFlag">
+        <sp3-comp-pdropdown [itemList]="colorPresetList" [selectedItem]="selectedItem" (fetchChangedEvent)="onColorTypeChange($event)"></sp3-comp-pdropdown>
+    </div>
+</div>
+</div>
+</sp3-comp-effects>
+<sp3-comp-effects [title]="viZual">
+    <div card-type="includeSlide">
+        <sp3-comp-inputswitch labelText="{{'Display' | sp3Translate}}" [buttonState]="toggleDiscriminationSwitchButtonFlag" (getButtonState)="getDiscriminationSwitchState($event)" [disableSwitch]="!toggleSwitchFlag"></sp3-comp-inputswitch>
+        <div class="material-selectors col-sm-12" *ngIf="toggleDiscriminationSwitchButtonFlag">
+            <div class="checkbox organic">
+                <label>
+                                    <input type="checkbox" value="" checked disabled>
+                                    <span>{{'Organic' | sp3Translate}}</span>
+                                </label>
+            </div>
+            <div class="checkbox nonorganic">
+                <label>
+                                    <input type="checkbox" value="" checked disabled>
+                                    <span>{{'NonOrganic' | sp3Translate}}</span>
+                                </label>
+            </div>
+            <div class="checkbox metal">
+                <label>
+                                    <input type="checkbox" value="" checked disabled>
+                                    <span>{{'Metal' | sp3Translate}} </span>
+                                </label>
+            </div>
+        </div>
+    </div>
+</sp3-comp-effects>
+</div>
+</div>
+</div>
+<div class="collapsed-panel-body image-tools">
+    <div class="row">
+        <div class="col-sm-12 analyzer-tools">
+            <div class="row markers">
+                <div class="col-sm-12 markers-left">
+                    <div class="row">
+                        <div class="{{pencilEnabled ?'btn-tool active':(viewMode ? 'btn-tool readmode': 'btn-tool')}}" title="{{'CreateFinding'  | sp3Translate }}" (click)="annotate()">
+                            <img src="../../assets/images/svg/icn-draw-box.svg" />
+                        </div>
+                        <div *ngIf="findingsCount > 0" (click)="showHideFindings()" title="{{showFindings? ('HideFindings'  | sp3Translate) : ( 'ShowFindings'  | sp3Translate)}}" class="btn-tool">
+                            <img src="{{showFindings ?'../../assets/images/svg/icn-visible.svg':'../../assets/images/svg/icn-hidden.svg'}}" />
+                        </div>
+                        <div *ngIf="findingsCount === 0" class="btn-tool" title="{{'NoFindings' | sp3Translate}}">
+                            <img src="{{'../../assets/images/svg/icn-visible.svg'}}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 markers-right">
+                    <div class="row">
+                        <div (click)="rulerDraw()" title="{{'CreateRuler'  | sp3Translate }}" class="{{rulerEnabled ?'btn-tool active':(viewMode ? 'btn-tool readmode': 'btn-tool')}}">
+                            <img src="../../assets/images/svg/icn-draw-ruler.svg" />
+                        </div>
+                        <div *ngIf="imageRulers.length === 0" title="{{'NoRulers' | sp3Translate}}" class="btn-tool">
+                            <img src="{{'../../assets/images/svg/icn-visible.svg'}}" />
+                        </div>
+                        <div *ngIf="imageRulers.length > 0" (click)="showHideRulers()" title="{{showRulers? ('HideRulers' | sp3Translate) : ('ShowRulers'  | sp3Translate)}}" class="btn-tool">
+                            <img src="{{showRulers ?'../../assets/images/svg/icn-visible.svg':'../../assets/images/svg/icn-hidden.svg'}}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row zoomers">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="btn-tool" title="{{'ZoomIn' | sp3Translate}}" (click)="zoom(1,false,true)" ng-hide="options.controls.disableZoom"><img src="../../assets/images/svg/icn-zoom-in.svg" /></div>
+                        <div class="btn-tool" title="{{'ZoomOut' | sp3Translate}}" (click)="zoom(-1,false,true)" ng-hide="options.controls.disableZoom"><img src="../../assets/images/svg/icn-zoom-out.svg" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</sp3-comp-collapsible-panel>
+</span>
+
+<div class="viewer-main-panel">
+    <div [hidden]="scanFlag" class="{{isMenuClose? 'top-bar tool-closed' : 'top-bar' }} {{isRightPanelVisible? 'right-panel-open' : 'right-panel-closed' }}">
+        <div class="row">
+            <div *ngIf="!isRightPanelVisible" class="{{isActionsDisabled?'col-sm-7 disablemenu case-buttons':'col-sm-7 case-buttons'}}">
+                <button type="button" class="btn btn-sm btn-reverse" [disabled]="!imagePath" (click)="caseDetailsClick()">{{'CaseDetails' | sp3Translate}}</button>
+                <!-- <button type="button" class="btn btn-sm btn-reverse">OCR Images</button> -->
+                <button type="button" *ngIf="!viewMode" class="btn btn-sm findings">{{'NoOfFindings'  | sp3Translate }} <span title="{{'NoOfFindingsTooltip'  | sp3Translate }}">{{findingsCount}}</span></button>
+                <button *ngIf="!editFinding" type="button" class="btn btn-sm btn-reverse" (click)="openCase()">{{'CaseTimeline' | sp3Translate }}</button>
+                <button *ngIf="editFinding" type="button" class="btn btn-sm btn-reverse" (click)="backToInspection()">{{'CaseTimeline' | sp3Translate }}</button>
+            </div>
+            <div *ngIf="isRightPanelVisible" class="{{isActionsDisabled?'col-sm-7 disablemenu case-buttons':'col-sm-7 case-buttons'}}">
+                <sp3-comp-splitbutton [items]="imageTopButtonOptions" [title]="caseInformation" (splitAction)="caseInfoAction($event)"></sp3-comp-splitbutton>
+            </div>
+            <div class="{{isActionsDisabled?'col-sm-5 disablemenu verdict-buttons':'col-sm-5 verdict-buttons'}}" *ngIf="!viewMode">
+                <span class="pull-right">
+                      <sp3-comp-splitbutton [items]="imageActionOptions" [title]="caseInfoActions" (splitAction)="onImageActionOptionChange($event,false)"></sp3-comp-splitbutton>
+                      </span>
+                <div *ngIf="isCaseButtonsVisible">
+                    <sp3-comp-casebutton [buttontitle]="'Suspect'" [buttonClass]="'btn btn-red btn-sm visible-lg pull-right'" [caseButtonType]="caseButtonTypes.SuspectOnImage" [caseIds]="generatedCaseId" (callBackParent)="onSuspectCasePopUpClick($event)" (callBackLeaveMessage)="onLeaveMessageClick($event)"
+                        buttonid="suspect">
+                    </sp3-comp-casebutton>
+                    <sp3-comp-casebutton [buttontitle]="'Clear'" [buttonClass]="'btn btn-green btn-sm visible-lg pull-right'" [caseButtonType]="caseButtonTypes.ClearOnImage" [caseIds]="generatedCaseId" (callBackParent)="onClearCasePopUpClick($event)" (callBackLeaveMessage)="onLeaveMessageClick($event)"
+                        buttonid="clear">
+                    </sp3-comp-casebutton>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="scanFlag" style="position:relative;width:100%;">
+
+        <sp3-comp-loadscanimage [scanDetails]="scan"></sp3-comp-loadscanimage>
+    </div>
+    <div style="position:relative; padding: 0px; height:calc(100vh - 128px); background: #fff;">
+        <canvas class="viewer" #imageViewer [ngStyle]="{'top':scanFlag ? '0px' : '0px'}" style="position:absolute" (mousedown)="onCanvasMouseDown($event)" (mouseup)="onCanvasMouseUp($event)" (mousemove)="onCanvasMouseMove($event)" (touchstart)="onTouchStart($event)"
+            (mouseout)="onCanvasMouseUp($event)" (mouseleave)="onCanvasMouseUp($event)" (touchmove)="onTouchMove($event)" (mousewheel)="onMouseWheel($event)">
+            </canvas>
+        <canvas class="viewer" #imageViewerHemd id="imageViewerHemd" (mousedown)="onCanvasMouseDown($event)" (mousemove)="onCanvasMouseMove($event)" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (mousewheel)="onMouseWheel($event)"></canvas>
+        <div *ngIf="case && !scanFlag">
+            <sp3-comp-mark-area #markArea [width]="marAreaWidth" [height]="marAreaHeight" [viewMode]="viewMode" [editFinding]="editFinding" [toAnnotate]="toAnnotate" [selectedView]="selectedView" [showHideAllFindings]="showFindings" [case]="case" [metadataImages]="metadataImages"
+                [imageMarks]="imageFindings" (onFindingsAddRemove)='updateFindings($event)' (onOpeningOfDetailsBox)="updateButtonsEnableDisable($event)" [resetMarkArea]="resetMarkArea" [leftStart]="mainLeft" [topStart]="mainTop" [readerWidth]="reader.width"
+                [readerHeight]="reader.height" [picPos]="picPos" [actZoomValue]="options.zoom.min" [zoomValue]="options.zoom.value">
+
+            </sp3-comp-mark-area>
+            <sp3-comp-ruler #imageRuler [width]="marAreaWidth" [height]="marAreaHeight" [contextSize]="contextSize" [viewMode]="viewMode" [editFinding]="editFinding" [toDrawRuler]="toRuler" [selectedView]="selectedView" [showHideAllRulers]="showRulers" [case]="case"
+                [rulerArray]="imageRulers" (onRulerAddRemove)='updateRuler($event)' [resetRulerArea]="resetRulerArea" (onOpeningOfDetailsBox)="updateButtonsEnableDisable($event)" [leftStart]="mainLeft" [topStart]="mainTop" [readerWidth]="reader.width" [readerHeight]="reader.height"
+                [picPos]="picPos" [actZoomValue]="options.zoom.min" [zoomValue]="options.zoom.value">
+
+            </sp3-comp-ruler>
+        </div>
+    </div>
+    <div class="animated {{isMenuClose? 'bottom-bar tool-closed' : 'bottom-bar' }}  {{isRightPanelVisible? 'right-panel-open' : 'right-panel-closed' }}" [ngClass]="{'slideInUp ': toggleBottomPanelFlag, 'slideInDown': !toggleBottomPanelFlag}">
+        <div class="bottom-action-bar">
+            <div class="row">
+                <div class="{{isActionsDisabled?'col-sm-3  disablemenu':'col-sm-3'}}">
+                </div>
+                <div class="{{isActionsDisabled?' col-sm-3 disablemenu':' col-sm-3'}}">
+                    <select [disabled]="viewMode" class="form-control" id="imageView" [(ngModel)]="selectedView" (ngModelChange)="onViewChange($event)">
+                            <option *ngFor="let keyValue of imageViews" [ngValue]="keyValue">{{ keyValue.name | sp3Translate}}</option>
+                        </select>
+                </div>
+                <div class="{{isActionsDisabled?'col-sm-6  disablemenu': viewMode ?'col-sm-9' : 'col-sm-6' }}">
+                    <button type="button" class="btn btn-sm btn-reverse pull-right" (click)="toggleBottomPanel()">
+                            <i class="fa" aria-hidden="true" [ngClass]="{'fa-angle-down': toggleBottomPanelFlag, 'fa-angle-up': !toggleBottomPanelFlag}"></i>
+                        </button>
+                    <button type="button" *ngIf="!viewMode" class="btn btn-sm btn-reverse pull-right" (click)="imageSaveAsClick()" [disabled]="getSaveAsButtonStatus()">{{ 'CreateNewView' | sp3Translate }}</button>
+                    <button type="button" *ngIf="!viewMode" class="btn btn-sm btn-reverse pull-right" (click)="imageSaveClick()" [disabled]="getSaveButtonStatus()">{{ 'Update' | sp3Translate }}</button>
+                </div>
+            </div>
+        </div>
+        <div class="img-analyze-scroller " id="scrollerControllerDiv" [ngClass]="{'views-open slideInUp': toggleBottomPanelFlag, 'views-close slideInDown': !toggleBottomPanelFlag}">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="img-analyzer-container">
+                        <div *ngFor="let view of viewList" (click)="onViewClick(view)" class="{{view.isSelected? 'img-analyzer-slide-item active' : 'img-analyzer-slide-item' }}">
+                            <img src="assets/images/placehold.jpg" /><span class="title">{{view.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="isRightPanelVisible">
+    <sp3-comp-collapsible-panel [isMenuClose]="isRightMenuClose" [type]="1" (sidePanelCloseEvent)="closeRightSidePanelState($event)">
+        <div class="case-details-rightpanel">
+            <div class="modal">
+                <!-- Modal content generic-->
+                <sp3-comp-case-detail [caseId]="generatedCaseId" [appName]="appName" [viewMode]="1" (onCloseClick)="closeRightSidePanelState(false)"></sp3-comp-case-detail>
+            </div>
+        </div>
+    </sp3-comp-collapsible-panel>
+</div>
+
+</div>
+
+<!-- Modal Dialogs -->
+<div *ngIf="visible" class="modal fade full-height-modals" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visibleAnimate ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <sp3-comp-case-detail [caseId]="caseId" [isFooterVisible]="isFooterVisible" [isFromIATimeline]="true" [appName]="appName" [source]="verdictSource" (onCloseClick)="hide($event)"></sp3-comp-case-detail>
+</div>
+<sp3-comp-modal-clear-case #inspectionCallBackPopUp [case]="generatedCaseId" (confirmButtonStat)="onInspectCallback($event)" [(questionText)]="queryText" [(buttonTitle)]="popUpButtonTitle"></sp3-comp-modal-clear-case>
+<sp3-comp-modal-clear-case #requestAssessmentPopUp [case]="generatedCaseId" (confirmButtonStat)="onRequestAssessmentCallback($event)" [(questionText)]="queryText" [(buttonTitle)]="popUpButtonTitle"></sp3-comp-modal-clear-case>
+<sp3-comp-modal-clear-case [case]="generatedCaseId" #modalCaseImagePopup (confirmButtonStat)="onClearCallback($event)" [(questionText)]="queryText" [(buttonTitle)]="popUpButtonTitle"></sp3-comp-modal-clear-case>
+<sp3-comp-modal-clear-case [case]="generatedCaseId" #modalSuspectCaseImagePopup (confirmButtonStat)="onSuspectCallback($event)" [(questionText)]="queryText" [(buttonTitle)]="popUpButtonTitle"></sp3-comp-modal-clear-case>
+<sp3-comp-modal-verdict-prompt #reScanCallBackPopUp (confirmButtonStat)="onReScanCallback($event)" questionText="{{queryText}}" querydynamicId="{{querydynamicId}}" headerText="{{popUpButtonTitle}}" yesButtonTitle="{{ 'Ok' | sp3Translate}}"></sp3-comp-modal-verdict-prompt>
+<span *ngIf="caseId"><sp3-comp-inspect-case-verdict #caseVerdict [caseId]="caseId" [isReadOnly]="true" [inspectiontype]="inspectiontype" (backToMyCases)="backtolist()"></sp3-comp-inspect-case-verdict></span>
+<!-- Modal Dialogs Ends Here-->

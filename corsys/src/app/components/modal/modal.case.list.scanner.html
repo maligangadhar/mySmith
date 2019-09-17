@@ -1,0 +1,142 @@
+
+<div *ngIf="visible" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+[ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+
+<div role="dialog" class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">      
+                    <div class="modal-header">
+                            {{'PairCase' | sp3Translate}}<a (click)="dismissNoModalpopup()" class="close"><i class="icn-close"></i></a>
+                    </div>
+                    <div class="modal-body" >
+                            <div *ngIf="isLoading">
+                                    <sp3-comp-loader [size]="'medium'"></sp3-comp-loader>
+                                </div>
+                        <div *ngIf="!isLoading">
+                        <div class="row" *ngIf="caseList.cases.length>0">
+                            <sp3-comp-grid [tableStyle]="{'text-align':'center'}" [value]="caseList.cases" sortMode="single" reorderableColumns="true" [globalFilter]="gb" scrollable="true" scrollHeight="100%" [(selection)]="selectedItems" columnResizeMode="expand"> 
+                                <sp3-column field="caseId" header="{{'ControlCenterCaseId' | sp3Translate}}" [type]="2" [hasClick]="false"></sp3-column>
+                                <sp3-column field="dateOfArrival" [type]="10" header="{{'DateOfArrival' | sp3Translate}}"></sp3-column>
+                                <sp3-column field="shippingCompany" header="{{'ShippingCompany' | sp3Translate}}"></sp3-column>
+                                <sp3-column field="from" header="{{'From' | sp3Translate}}"></sp3-column> 
+                                <sp3-column field="pair" [type]="20" [itemOnClick]="pairCase" header=""></sp3-column>               
+                            </sp3-comp-grid>
+                        </div>
+                        <div class="nocasefound" *ngIf="caseList.cases.length==0">
+                                <h3>{{'NoCaseFound' | sp3Translate}}</h3>
+                                <p>{{'CheckCase' | sp3Translate}}</p>
+                            </div>
+                            </div>
+
+                    </div>
+        </div>
+</div>
+
+
+<!-- <ng-template #noModalFound>
+        <div class="modal fade in">
+            <div class="modal-dialog">
+                <div class="modal-content confirm" >
+                    <div class="modal-header">
+                        No case found<a (click)="dismissNoModalpopup()" class="close"><i class="icn-close"></i></a>
+                    </div>
+                    <div class="modal-body">
+                        <div class="nocasefound">
+                            <h3>No case found with this container ID</h3>
+                            <p>Please double check the number is correct or create a new case.</p>
+                        </div>
+                        <button class="btn btn-transparent" (click)="pairModalpopup()" type="button">Create Case</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</ng-template> -->
+
+
+<!-- <div class="col-sm=-12">
+
+        <div class="modal-dialog">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                       
+                    </div>
+                    <div class="modal-body">
+                       
+                                <div *ngIf="isLoading">
+                                        <sp3-comp-loader [size]="'medium'"></sp3-comp-loader>
+                                    </div>
+                                    <div *ngIf="!isLoading">
+                                            <div class="verdict-list col-sm-12" *ngIf="caseList.cases.length > 0;else noFindingData">
+                                                <div class="row">
+                                                    <ul>
+                                                        <li class="list-header hidden-sm hidden-md">
+                                                            <div class="col-sm-3 zeropadding">{{'CaseId' | sp3Translate}}</div>
+                                                            <div class="col-sm-3 zeropadding">{{'LastUpdated' | sp3Translate}}</div>
+                                                            <div class="col-sm-6 zeropadding">{{'Arrival' | sp3Translate}}</div>
+                                                            <div class="col-sm-3 zeropadding">{{'ShippingCompany' | sp3Translate}}</div>
+                                                            <div class="col-sm-6 zeropadding">{{'From' | sp3Translate}}</div>
+                                                          
+                                                        </li>
+                                                        <div class="findings-result-list">
+                                                            <li *ngFor="let case of caseList">
+                                                                <div class="col-sm-6 col-lg-3">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-2 co zeropadding">
+                                                                            <div class="two-layer-container">
+                                                                                <div class="two-layer-square">
+                                                                                    <div class="two-layer-overlay"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="text-on-2-layers">
+                                                                                {{''}}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-10">
+                                                                            <div class="visible-md visible-sm fidingslabels">{{'CaseId' | sp3Translate}} <br/></div> {{case.caseId}}</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 col-lg-3 paddingtrim">
+                                                                    <div class="visible-md visible-sm fidingslabels">{{'Finding_GoodsType' | sp3Translate}} <br/></div>{{''}}
+                                                                </div>
+                                                                <div class="col-sm-11 col-lg-6 col-sm-offset-1 col-lg-offset-0 paddingtrim findingscolumns">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12 col-lg-7">
+                                                                            <div class="visible-md visible-sm fidingslabels">{{'Finding_Description' | sp3Translate}} <br/></div>{{''}}</div>
+                                                                        <div class="col-sm-12 col-lg-5 text-right">
+                                                                            <p class="findingsactionsbtns">
+                                                                                <button [ngClass]="(finding.status === 0) ? 'btn btn-transparent':'btn btn-primary'" [disabled]="isUpdating" type="button"
+                                                                                    (click)="declare(finding)" id="declare">
+                                                                                 <span  *ngIf = "finding.status === 0"> {{ 'Finding_Declare' | sp3Translate }}</span>
+                                                                                 <span  *ngIf = "finding.status === 1"> {{ 'Finding_Declared' | sp3Translate}}</span>
+                                                                            </button>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </div>
+                                                    </ul>
+                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!---End:: Grid Table
+                                        <ng-template #noFindingData>
+                                            <div class="panel-warning">{{'NoFindings' | sp3Translate}}</div>
+                                        </ng-template>
+                                    
+                                   
+                       
+                    </div>
+                    <div class="modal-footer">
+                      
+                    </div>
+                </div>
+            </div> -->
+
+       
+        <!---Start:: Grid Table-->
+       
+
+</div>
+

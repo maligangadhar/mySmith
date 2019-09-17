@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="136" height="136" viewBox="0 0 136 136">
+    <defs>
+        <circle id="a" cx="24.5" cy="24.5" r="24.5"/>
+        <radialGradient id="c" cy="0%" r="100%" fx="50%" fy="0%" gradientTransform="matrix(0 1 -.99815 0 .5 -.5)">
+            <stop offset="0%" stop-color="#FFF"/>
+            <stop offset="100%"/>
+        </radialGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd" transform="translate(-18)">
+        <circle cx="86" cy="68" r="68" fill="#6C7F95" opacity=".15"/>
+        <g transform="translate(46 8)">
+            <rect width="80" height="99" fill="#FFF" stroke="#91C5DF" rx="4"/>
+            <rect width="59" height="3" x="10" y="26" fill="#91C5DF" rx="1.5"/>
+            <rect width="59" height="3" x="10" y="36" fill="#C1BEBE" rx="1.5"/>
+            <rect width="59" height="3" x="10" y="46" fill="#C1BEBE" rx="1.5"/>
+            <rect width="59" height="3" x="10" y="56" fill="#C1BEBE" rx="1.5"/>
+            <rect width="59" height="3" x="10" y="66" fill="#C1BEBE" rx="1.5"/>
+            <rect width="59" height="3" x="10" y="76" fill="#C1BEBE" rx="1.5"/>
+        </g>
+        <g transform="translate(60 21)">
+            <rect width="80" height="99" fill="#FFF" stroke="#91C5DF" rx="4"/>
+            <rect width="59" height="3" x="10" y="26" fill="#91C5DF" rx="1.5"/>
+            <rect width="59" height="3" x="10" y="36" fill="#91C5DF" rx="1.5"/>
+            <rect width="59" height="3" x="10" y="46" fill="#91C5DF" rx="1.5"/>
+            <rect width="59" height="3" x="10" y="56" fill="#91C5DF" rx="1.5"/>
+            <rect width="59" height="3" x="10" y="66" fill="#91C5DF" rx="1.5"/>
+            <rect width="59" height="3" x="10" y="76" fill="#91C5DF" rx="1.5"/>
+        </g>
+        <g transform="translate(63 35)">
+            <mask id="b" fill="#fff">
+                <use xlink:href="#a"/>
+            </mask>
+            <use fill="#414042" xlink:href="#a"/>
+            <circle cx="24.5" cy="24.5" r="29" stroke="#E8EEF5" stroke-width="9"/>
+            <g mask="url(#b)">
+                <g transform="translate(-19 -40)">
+                    <rect width="146.058" height="182" x="11.942" fill="#FFF" rx="7.6"/>
+                    <rect width="107.718" height="5.515" x=".804" y="47.798" fill="#91C5DF" rx="2.758"/>
+                    <rect width="107.718" height="5.515" x=".804" y="66.182" fill="#91C5DF" rx="2.758"/>
+                    <rect width="107.718" height="5.515" x=".804" y="84.566" fill="#91C5DF" rx="2.758"/>
+                    <rect width="107.718" height="5.515" x="30.199" y="102.949" fill="#C1BEBE" rx="2.758"/>
+                    <rect width="107.718" height="5.515" x="30.199" y="121.333" fill="#C1BEBE" rx="2.758"/>
+                    <rect width="107.718" height="5.515" x="30.199" y="139.717" fill="#C1BEBE" rx="2.758"/>
+                </g>
+            </g>
+        </g>
+        <g transform="scale(-1 1) rotate(-45 4.23 197.752)">
+            <path fill="#6ABFEA" stroke="#1B94B5" stroke-width="1.078" d="M30.177 77.977H42.63l2.93 36.316c0 4.104-.733 6.771-2.198 8.002-2.197 1.847-11.72 2.462-13.917 0-1.465-1.641-2.198-4.309-2.198-8.002l2.93-36.316z"/>
+            <path stroke="#1B94B5" stroke-linecap="square" stroke-width=".65" d="M30.474 81.287h11.658M26.881 111.448h18.327M26.881 114.39h18.327"/>
+            <path fill="#6ABFEA" stroke="#1B94B5" stroke-width=".65" d="M30.91 70.62h10.255v7.357H30.91z"/>
+            <path fill="#EEF08B" stroke="#1B94B5" stroke-width="1.078" d="M36.77 70.62c-19.419 0-35.16-15.809-35.16-35.31C1.61 15.81 17.35 0 36.77 0c19.418 0 35.16 15.809 35.16 35.31 0 19.501-15.742 35.31-35.16 35.31zm0-6.62c15.777 0 28.568-12.845 28.568-28.69S52.548 6.62 36.77 6.62c-15.778 0-28.568 12.845-28.568 28.69S20.992 64 36.77 64z"/>
+            <path stroke="#FDFF8B" stroke-width="1.078" d="M55.815 9.96a30.908 30.908 0 0 0-18.72-6.282c-7.663 0-14.679 2.78-20.103 7.392M5.954 27.71a30.908 30.908 0 0 0 1.189 19.71 30.929 30.929 0 0 0 14.384 15.87"/>
+            <path stroke="#ABE1FC" stroke-linecap="square" stroke-width="1.078" d="M38.235 82.39l1.465 27.954"/>
+            <ellipse cx="37.477" cy="34.729" fill="url(#c)" opacity=".126" rx="24.421" ry="24.376" style="mix-blend-mode:multiply" transform="rotate(168 37.477 34.73)"/>
+        </g>
+    </g>
+</svg>

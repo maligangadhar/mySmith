@@ -1,0 +1,15 @@
+﻿<div *ngIf="visible" class="modal fade in" tabindex="-1" style="display: block;opacity: 1;"  [ngClass]="{'in': visibleAnimate}">
+        <div class="modal-dialog modal-generic modal-sm" style="opacity: 0.5; margin-top: 10%;">
+            <div class="modal-content">
+                <div class="modal-header modal-success-header">
+                        <h2 class="modal-title text-center">{{'Success' | sp3Translate }}</h2>
+                        </div>
+                    <div class="modal-body">
+                          <div class="text-center">   
+                    <i class="fa fa-check-circle" aria-hidden="true" style="font-size: 130px; color: #3dae5e ;"></i>
+                       <p class="text-uppercase" style="margin-top: 20px;color: #299ed9 ;">{{'StatusUpdated' | sp3Translate }}</p>
+                </div>
+                          </div>      
+                   </div>
+            </div>
+    </div>

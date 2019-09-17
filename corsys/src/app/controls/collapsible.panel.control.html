@@ -1,0 +1,25 @@
+﻿<div *ngIf="type === panelType.Left" [ngClass]="{ 'menu-close': isMenuClose, 'menu-open': !isMenuClose  }">
+    <a *ngIf="title.length > 0">
+        <div class="logo">
+            <p>{{title}}</p>
+        </div>
+    </a>
+    <ng-content *ngIf="isMenuClose===false && enabled===false" select=".expanded-panel-body"></ng-content>
+    <ng-content *ngIf="isMenuClose===true" select=".collapsed-panel-body"></ng-content>
+
+    <a (click)="openCloseMenu($event)">
+        <span class="logo sidebar-openclose">
+            <i class="side-toggle expand-sidebar icn-arrow-right" *ngIf="enabled===false"></i>
+        </span>
+    </a>
+    <a (click)="openCloseMenu($event)">
+        <span class="sidebar-openclose" >
+            <i class="side-toggle collapse-sidebar icn-arrow-left"></i>
+        </span>
+    </a>
+</div>
+<div *ngIf="type === panelType.Right" [ngClass]="{ 'rightpanel-close animated SlideOutnRight': isMenuClose, 'rightpanel-open animated SlideInRight': !isMenuClose  }">
+    <ng-content *ngIf="isMenuClose===false">
+      
+    </ng-content>
+</div>

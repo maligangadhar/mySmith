@@ -1,0 +1,38 @@
+
+<div *ngIf="visible" class="modal fade cancelBox" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div id="cancelCase" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" (click)="closeClick()" data-dismiss="modal"><i class="icn-close"></i></a>
+                    <h4>{{'CancelCase' | sp3Translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <sp3-comp-select #cancelReason controlId="CancelReasonForm" labelText="{{'Reason'| sp3Translate}}" [size]="4" [(values)]="reasonsTypes" [(selectedValue)]="selectedReason" required="true" (selectedValueChange)="onValueChange($event)"></sp3-comp-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                    <label class="control-label col-sm-4" for="cancelCaseNotes">{{'NotesText' | sp3Translate}}</label>
+                                    <div class="col-sm-8">
+                                        <textarea id="cancelCaseNotes" placeholder="Notes" rows="4" class="form-control" maxlength="300" [(ngModel)]="reasonNotes"></textarea>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-reverse" id="cancelCaseSubmit" (click)="yesClick()">{{'Submit' | sp3Translate}}</button>
+                    <button type="button" class="btn btn-reverse" data-dismiss="modal" id="cancelCaseLeave" (click)="noClick()">{{'Leave' | sp3Translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

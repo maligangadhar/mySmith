@@ -1,0 +1,35 @@
+<div class="dashboard-main-panel">
+     <div class="row">
+        <div class="col-sm-12">
+            <h2>{{'ProfilerResultHeader'| sp3Translate}}</h2>
+          </div>
+        <div class="col-sm-12">
+            <div class="sp3-charts panel panel-default">
+                    <div class="panel-heading"><h2>{{'profilerResultDashboard'| sp3Translate}}</h2></div>
+                    <div class="panel-body">
+                        <div class="col-md-4">
+                            <sp3-comp-profilerresult-screening-component></sp3-comp-profilerresult-screening-component>
+                        </div>
+                        <div class="col-md-8">
+                            <sp3-comp-profilerresult-screening-daily-component></sp3-comp-profilerresult-screening-daily-component>
+                        </div>
+                    </div>
+            </div>
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="sp3-charts panel panel-default">
+                <div class="panel-heading"><h2>{{'profilerVerdict'| sp3Translate}}</h2></div>
+                <div class="panel-body">
+                    <div class="col-md-4">
+                        <sp3-comp-profilerresult-verdict-component></sp3-comp-profilerresult-verdict-component>
+                    </div>
+                    <div class="col-md-8">
+                        <sp3-comp-profilerresult-verdict-daily-component></sp3-comp-profilerresult-verdict-daily-component>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

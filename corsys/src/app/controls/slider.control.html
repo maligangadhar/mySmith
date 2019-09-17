@@ -1,0 +1,7 @@
+<div>
+  <form>
+  <p>{{label | sp3Translate}}</p> 
+  <p-slider [(ngModel)]="range" class="slider-bar" [animate]="true" (onChange)="onValueChanged()" [formControl] = "searchFormControl"></p-slider>
+  <span class="slider-perse"> {{range}} </span><span class="layer">&#37;</span>
+  </form>
+</div>

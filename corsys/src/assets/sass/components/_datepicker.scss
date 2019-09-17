@@ -1,0 +1,40 @@
+.sp3-datepicker-com {
+    .dp-material{
+        width: 100%;
+        .dp-picker-input{
+            width: 100% !important;
+            font-size: 14px !important;    
+            padding: 6px 12px;
+            border-radius: 4px 0px 0px 4px;
+            border: 1px solid #ccc;
+            color: #555555;
+            height: 40px !important;
+        }
+       
+    .dp-picker-input:focus,.dp-picker-input:active{
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    }
+    .dp-current-location-btn{
+            display: none !important;
+    }
+}
+.input-group-addon{
+    border-left: solid 0px #c7c4c4 !important;
+    border-right: solid 1px #c7c4c4 !important;
+    background: #fff;
+    cursor: pointer;
+}
+.alert-warning .dp-picker-input{
+    border: 1px solid #ca3a3a !important;
+    background: #fff;
+    color: #443b3b;
+}
+
+}
+.mydrp .selection{
+    position: relative !important;
+    padding: 0 10px !important;
+}

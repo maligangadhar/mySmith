@@ -1,0 +1,95 @@
+.rulerNormal {
+  background-image: linear-gradient(rgb(41, 158, 217) 15px, transparent 15px), linear-gradient(90deg, transparent 0px, rgb(41, 158, 217) 0px, rgb(255, 255, 255) 3px, transparent 0px), linear-gradient(rgb(129, 187, 217) 20px, transparent 20px), linear-gradient(90deg, transparent 6px, rgb(41, 158, 217) 6px, rgb(255, 255, 255) 8px, transparent 6px, transparent 12px, rgb(41, 158, 217) 12px, rgb(255, 255, 255) 14px, transparent 12px, transparent 18px, rgb(41, 158, 217) 18px, rgb(255, 255, 255) 20px, transparent 18px, transparent 24px, rgb(41, 158, 217) 24px, rgb(255, 255, 255) 26px, transparent 24px);
+  background-size: 30px 34px;
+  background-color: rgb(129, 187, 217);
+  min-height: 34px;
+  background-repeat: repeat-x;
+  /* only needed for labels */
+  white-space:nowrap;
+  font-size:0;
+  margin:0;
+  padding:0;
+  counter-reset: section;
+  transform-origin: 0 center;
+-webkit-transform-origin: 0 center; /* Safari and Chrome */
+text-align: center;
+color: #fff;
+label{
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  bottom: 18px;
+  text-align: center;
+  opacity: 1;
+  font-size: 12px;
+  height: 15px;
+  line-height: 12px;
+  padding-bottom: 0px;
+  margin: 0px;
+}
+.btn-link{
+  opacity:1;
+  color: #fff;
+  position: absolute;
+  top: -9px;
+  right: 0px;
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+  transform: rotate(180deg);
+}
+}
+
+.rulerFlipHorizontal {
+  background-image: linear-gradient(rgb(41, 158, 217) 15px, transparent 15px), linear-gradient(90deg, transparent 0px, rgb(41, 158, 217) 0px, rgb(255, 255, 255) 3px, transparent 0px), linear-gradient(rgb(129, 187, 217) 20px, transparent 20px), linear-gradient(90deg, transparent 6px, rgb(41, 158, 217) 6px, rgb(255, 255, 255) 8px, transparent 6px, transparent 12px, rgb(41, 158, 217) 12px, rgb(255, 255, 255) 14px, transparent 12px, transparent 18px, rgb(41, 158, 217) 18px, rgb(255, 255, 255) 20px, transparent 18px, transparent 24px, rgb(41, 158, 217) 24px, rgb(255, 255, 255) 26px, transparent 24px);
+  background-size: 30px 34px;
+  background-color: rgb(129, 187, 217);
+  min-height: 34px;
+  background-repeat: repeat-x;
+  /* only needed for labels */
+  white-space:nowrap;
+  font-size:0;
+  margin:0;
+  padding:0;
+  counter-reset: section;
+  transform-origin: 0 center;
+-webkit-transform-origin: 0 center; /* Safari and Chrome */
+  color: #fff;
+  text-align: center;
+label{
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  bottom: 18px;
+  text-align: center;
+  opacity: 1;
+  font-size: 12px;
+  height: 15px;
+  line-height: 12px;
+  padding-bottom: 0px;
+  margin: 0px;
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+  transform: rotate(180deg);
+
+}
+label::selection{
+  background: none;
+}
+.btn-link{
+  color: #fff;
+  position: absolute;
+  top: -8px;
+  opacity:1;
+  left: 0px;
+}
+}
+
+/*label {
+  font-size:12px;
+  padding-top:2px;
+  display:inline-block;
+  width:100%;
+  text-align: center;
+  -webkit-user-select: none; 
+  text-indent:3px;
+}*/

@@ -1,0 +1,268 @@
+.settings-wrapper{
+    height: 100%;
+    overflow-y: auto; 
+    h2{
+        margin-bottom: 20px;
+    }
+    h3{
+        margin-bottom: 20px;
+    }
+    .form-group{
+        margin-bottom: 20px;
+    }
+    .settings-local-wrapper{
+        padding: 75px 150px;
+        float: left;
+        width: 100%;
+        .settings-inner-wrapper{
+            background: #fff;
+            float: left;
+            width: 100%;
+            padding: 60px;
+            border-radius: 4px;
+            .regional-settings{
+                .form-group{
+                    float: left;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    table{
+        td{
+            padding: 8px !important;
+        }
+        .form-group{
+            float: none;
+            margin: 0px !important;
+        }
+    }
+    .settings-control{
+        width: 300px;
+        background: #fff;
+        position: absolute;
+        transition: all;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        padding: 0 15px;
+        border-right: 2px solid #c7c4c4;
+        .settings-innercontrol{
+            position: relative;
+            .filtersettings{
+                height: auto;
+                background: #e8eef5;
+                padding: 16px 32px;
+                .input-group-addon{
+                    background: #fff;
+                    border-right: 0px;
+                }
+            }
+            .filtersettings.devicefilter{
+                height: 70px;
+            }
+            .users-list{
+                padding: 0px;
+                overflow-y: auto;
+                .radio{
+                    margin: 0px;
+                    padding: 0px;
+                    input[type="radio"]{
+                        display: none;
+                    }
+                    input[type="radio"] + label{
+                        height: 44px;
+                        font-family: 'ProximaNova-Regular', Helvetica, Arial, sans-serif;
+                        margin: 0px;
+                        padding: 12px 32px;
+                        font-size: 16px;
+                        color: $gray-base;
+                        opacity: 1;
+                    }
+                    input[type="radio"]:checked + label{
+                        background-color: rgba(238, 240, 139, 0.3);
+                        font-family: 'ProximaNova-Bold', Helvetica, Arial, sans-serif;
+                        color: $blue-base;
+                    }
+                }
+            }
+            .addnewcontrolbtn{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                background: #e8eef5;
+                left: 0;
+                padding: 16px;
+                height: 72px;
+                z-index: 99999;
+            }
+        }
+    }
+    .settings-viewer{
+        width: calc(100% - 300px);
+        float: left;
+        margin-left: 300px;
+        padding: 0 120px;
+        .settings-innerviewer{
+            background: #fff;
+            padding: 32px 80px;
+            float: left;
+            width: 100%;
+            min-height: calc(100vh - 48px);
+            .settings-title{
+                margin-bottom: 32px
+            }
+            hr{
+                margin: 16px 0px;
+                border-top: 1px solid #aeaaaa;
+            }
+
+            .settings-panel-profile {
+                background-color: #ebebeb;
+                margin-bottom: 32px;
+                padding: 16px 24px;
+                border: solid 1px #c7c4c4;
+                border-radius: 4px;
+                float: left;
+                width: 100%;
+                label{
+                    opacity: 1;
+                }
+                .form-group{
+                    margin-bottom: 0px;
+                }
+                img{
+                    width: 125px;
+                }
+                
+            }
+            .checkbox-group {
+                margin: 16px -15px;
+                input.form-check-input {
+                    height: 18px;
+                    width: 18px;
+                    border: 2px solid #d6d6d6;
+                    float: left;
+                }
+                label.form-check-label {
+                    opacity: 1;
+                    margin-bottom: 10px;
+                }
+                input.form-check-input[type=checkbox] {
+                    -webkit-appearance: none;
+                    background-image: url('../images/svg/icn-checkbox-normal.svg');
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    margin: 0px;
+                    background: #FFF;
+                }
+                input.form-check-input[type="checkbox"]:checked {
+                    background-image: url('../images/svg/icn-checkbox-selected.svg');
+                    background-repeat: no-repeat;
+                    border: none;
+                    color: #fff;
+                    cursor: pointer;
+                }
+                .form-check-label input[type="checkbox"] + span {
+                    margin-left: 20px;
+                    font-family: ProximaNova-Regular;
+                }
+                .form-check-label input[type="checkbox"]:checked + span {
+                    color: #1b94b5;
+                }
+            }
+            .role-list-group{
+                list-style: none;
+                padding: 0px;
+                li{
+                    padding: 0px;
+                }
+            }
+            
+        }
+    }
+    .application-control{
+        .app-block{
+            width: 16.6%;
+            text-align: center;
+        }
+        .app-container{
+            margin: 0 -15px;
+            float: left;
+            width: 100%;
+            h3{
+                font-size: 20px;
+                color: #443b3b;
+                font-family: ProximaNova-Regular;
+            }
+        }
+        .img-container{
+            border-radius: 4px;
+            background-color: rgba(235, 235, 235, 0.5);
+            text-align: center;
+            img{
+                margin: 0 auto;
+            }
+        }
+        
+    }
+    .radiobtns{
+        .img-container{ 
+            display: none;
+            opacity: 0.5;
+        }
+        .img-container:hover{
+            opacity: 1;
+        }
+        .img-container.unchecked{
+            display: block;
+            border: solid 2px rgba(235, 235, 235, 0.5);
+        }
+        .img-container.checked{
+            border: solid 2px #1b94b5;
+            display: block;
+            opacity: 1;
+        }
+        .img-container.checked + h3{
+            color: #1b94b5;
+            font-weight: bold;
+        }
+    }
+}
+@media only screen and (max-width: 1280px) {
+
+    .settings-wrapper{
+        .settings-viewer{
+            padding: 0px 16px;
+            .settings-innerviewer{
+                padding: 16px;
+            }
+        }
+        .settings-local-wrapper{
+            padding: 32px;
+            .settings-inner-wrapper{
+                padding: 32px;
+            }
+        }
+        .application-control{
+            .app-block{
+                width: 33.33% !important;
+            }
+        }
+    }
+ }
+ @media only screen and (min-width: 1025px) {
+    .users-list{
+        height: calc(100% - 252px);
+    }
+ }
+ @media only screen and (max-width: 991px) {
+    .settings-wrapper{
+        .application-control{
+            .app-block{
+                width: 50% !important;
+            }
+        }
+    }
+ }

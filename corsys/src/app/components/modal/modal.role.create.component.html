@@ -1,0 +1,75 @@
+﻿        <sp3-comp-modal-confirm #modalClose>
+            <div class="app-modal-header">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{'Roles' | sp3Translate}}
+            </div>
+            <div class="app-modal-body">
+                       <p>{{'RoleCloseMessage'| sp3Translate}}</p>
+                        <p>{{'SureCloseMessage'| sp3Translate}}</p>
+            </div>
+            <div class="app-modal-footer"> 
+                <button type="button" class="btn btn-reverse" id="roleCreateLeave" (click)="leaveClick()">{{'LeaveWithoutSaveButton'| sp3Translate}}</button>
+                <button type="button" class="btn btn-reverse " id="roleCreateBack" (click)="backClick()">{{'BackToWindowButton'| sp3Translate}}</button>
+            </div>
+        </sp3-comp-modal-confirm>
+
+        <sp3-comp-modal-confirm #modalAppAlert>
+            <div class="app-modal-header">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{'Roles' | sp3Translate}}
+            </div>
+            <div class="app-modal-body">
+                <p>{{'NotAssignedApps' | sp3Translate}}</p>
+                <p>{{'CreateRoleQuestion' | sp3Translate}}</p>
+            </div>
+            <div class="app-modal-footer">
+                        <button type="button" class="btn btn-reverse" (click)="yesClick()">{{'Yes' | sp3Translate}}</button>
+                        <button type="button" class="btn btn-reverse " (click)="noClick()">{{'No' | sp3Translate}}</button>
+            </div>
+        </sp3-comp-modal-confirm>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="settings-title">
+                        <h2 id="userDetailName">{{'CreateNewRole' | sp3Translate}}
+                        <span class="pull-right">  
+                                <button class="btn btn-primary" type="button" id="createRoleButton" [disabled]="GetCreateButtonEnabled()" (click)="createRoleClick()">{{'Create' | sp3Translate}}</button>                                    
+                                <button class="btn btn-primary" (click)="closeClick()" type="button">{{'Cancel' | sp3Translate}}</button>
+                        </span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <sp3-comp-message-display></sp3-comp-message-display>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <sp3-comp-textbox #name controlId="roleNameText" [size]="6" placeholderText="{{'RoleName' | sp3Translate}}" labelText="{{'RoleName' | sp3Translate}}" required="true" [(value)]="roleName" maxLengthValue="50" (textAdded)="onTextAdded($event)"></sp3-comp-textbox>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <sp3-comp-textbox #description controlId="roleDescrText" [size]="6" placeholderText="{{'NewRoleDescription' | sp3Translate}}" labelText="{{'Description' | sp3Translate}}" [(value)]="roleDescription" required="true" (textAdded)="onTextAdded($event)"></sp3-comp-textbox>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                        <sp3-comp-select controlId="roleStatusId" [size]="6" labelText="{{'Status' | sp3Translate}}" required="true" [(values)]="statusList" [(selectedValue)]="roleStatus" (selectedChange)="onSelectChanged($event)"></sp3-comp-select>
+                </div>
+            </div>
+
+            <!-- Commented for AOT.  Location List does not exist the componentso removed it-->
+            <div class="col-sm-6">
+                <div class="form-group">
+                        <sp3-comp-select controlId="roleLinkLocation" [size]="6" labelText="{{'Location' | sp3Translate}}" required="true" [(values)]="locationList" [(selectedValue)]="selectedLocation" (selectedChange)="onSelectChanged($event)"></sp3-comp-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 application-control radiobtns">
+                <sp3-comp-applications #selectedApps [controlId]="id" [mode]="3" [allowNavigate]="true" [showNoAppMessage]="false" [allowSelect]="true" [showAllApps]="true" [showSelect]="true" [hasSelectedApps]="false"></sp3-comp-applications>
+            </div>
+        </div>

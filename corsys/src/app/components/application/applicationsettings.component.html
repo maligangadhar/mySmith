@@ -1,0 +1,18 @@
+<div class="settings-wrapper">
+    <div class="settings-control col-sm-4">
+      <div class="row">
+        <div class="col-sm-12 settings-innercontrol" [style.height.px]="innerControlHeight">
+            <sp3-comp-application-header></sp3-comp-application-header>
+            <sp3-comp-application-view (cardDisplayUpdate)="onFilterChange($event)"></sp3-comp-application-view>
+      </div>
+      </div>
+    </div>
+    <div class="settings-viewer col-sm-8">
+        <div class="settings-innerviewer">
+            <div [hidden] = "isHideDetails" class="row">
+                <div class="col-sm-12"><sp3-comp-application-detail></sp3-comp-application-detail><hr></div>
+                <div class="col-sm-12"><sp3-comp-application-role></sp3-comp-application-role></div>
+            </div>
+        </div>
+     </div>
+</div>

@@ -1,0 +1,27 @@
+﻿
+<div *ngIf="visible" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div id="deleteCase" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" (click)="closeClick()" data-dismiss="modal"><i class="icn-close"></i></a>
+                    <h4 class="modal-title">{{pageTitle | sp3Translate}}</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>{{questionText | sp3Translate}}</p>
+                    <select id="listofCases"class="form-control" multiple="multiple" [disabled]="true">
+                        <option *ngFor="let caseValue of caseList" value="{{caseValue}}">{{caseValue}}</option>
+                    </select>
+                </div>
+
+                <div class="modal-footer">  
+                    <button type="button" class="btn btn-reverse" data-dismiss="modal" id="deleteCaseSubmit" (click)="yesClick()">{{button1Text | sp3Translate}}</button>
+                    <button type="button" class="btn btn-reverse" data-dismiss="modal" id="deleteCaseLeave" (click)="noClick()">{{button2Text  | sp3Translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

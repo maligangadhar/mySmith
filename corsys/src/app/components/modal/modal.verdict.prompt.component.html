@@ -1,0 +1,22 @@
+<div *ngIf="visible" class="modal" tabindex="-1" [ngClass]="{'in': visibleAnimate, 'fade': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}"> 
+    <div id="alertCase" role="dialog" class="modal-dialog" [ngClass]="customContainerCSS">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">                    
+                <!-- <a class="close" (click)="cancelAction()" data-dismiss="modal"><i class="icn-close"></i></a> -->
+                 {{headerText| sp3Translate}}
+            </div>
+            <div class="modal-body">
+                <p>{{questionText | sp3Translate}}</p>
+                <ul *ngIf="querydynamicId"><li>{{querydynamicId}}</li></ul>
+                <ul id="listofCases">
+                    <li *ngFor="let caseValue of caseList" title="{{caseValue}}">{{caseValue}}</li>
+                </ul>              
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-reverse" data-dismiss="modal" id="noCase" (click)="cancelAction()">{{'Cancel' | sp3Translate}}</button>
+                <button type="button" class="btn btn-reverse" id="yesCase" (click)="confirmAction()">{{yesButtonTitle}}</button>   
+                
+            </div>
+    </div>
+</div>

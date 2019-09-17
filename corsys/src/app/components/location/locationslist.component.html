@@ -1,0 +1,62 @@
+<div class="settings-wrapper">
+    <div class="settings-control col-sm-4"><!-- Left Panel starts here-->
+        <div class="row">
+            <div class="col-sm-12 settings-innercontrol" [style.height.px]="innerControlHeight">
+                <div class="users-list row" [style.height.px]="innerControlHeight">
+                    <div id="userList">
+                        <div class="radio" *ngFor="let location of locationList; let idx = index">
+                            <input id="{{location.id}}" name="locationInfo" type="radio" [checked]="idx === 0" [value]="location" (change)="onSelectionChange(location, idx)">
+                            <label for="{{location.id}}">{{location.locationName}}</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="locationList.length == 0">
+                        <h4 class="col-sm-12 error-info">{{'NoResultFound' | sp3Translate}}</h4>
+                    </div>
+            </div>
+            </div>
+        </div>
+      
+    </div> <!-- Left Panel ends here-->
+    <div class="settings-viewer col-sm-8"> <!-- Right Panel Starts here-->
+        <div class="settings-innerviewer">
+            <div class="settings-title">
+                <h2 id="locationName">{{selectedLocation.locationName}}</h2>
+            </div>
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="userOrgId">{{'LocationID' | sp3Translate}}</label>
+                                    <p class="body-text" id="userOrgId">{{selectedLocation.id}}</p>
+                                </div>
+                            </div>
+                        <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="usersIdNo">{{'LocationName' | sp3Translate}}</label>
+                                    <p class="body-text">{{selectedLocation.locationName}}</p>
+                                </div>
+                            </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="userCreatedDate">{{'LocationCode' | sp3Translate}}</label>
+                                <p class="body-text">{{selectedLocation.locationCode}}</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="userOrgId">{{'Status' | sp3Translate}}</label>
+                                <p class="body-text" [ngSwitch]="selectedLocation.status">
+                                    <span *ngSwitchCase=1>{{'None' | sp3Translate}}</span>
+                                    <span *ngSwitchCase=2>{{'Active' | sp3Translate}}</span>
+                                    <span *ngSwitchCase=3>{{'Inactive' | sp3Translate}}</span>
+                                    <span *ngSwitchCase=4>{{'Disabled' | sp3Translate}}</span>
+                                </p>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> <!-- Right Panel ends here-->
+</div>

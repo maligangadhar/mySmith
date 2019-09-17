@@ -1,0 +1,46 @@
+﻿<header id="crosys-hdr" class="site-header">
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-collapse">
+            <div class="row">
+                <div class="col-lg-5 col-sm-5 col-xs-4" >
+                    <ul class="nav navbar-nav navbar-left">
+                        <li *ngIf="authorizedFlag">
+                            <a (click)="navigateToHome()" id="hdrHomeIcon" class="icn_apps">
+                                <img src="../../assets/images/svg/icn-apps.svg">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-sm-2 col-xs-4">
+                    <div class="navbar-header">
+                        <span class="navbar-brand">
+                            <img class="logo_corsys" src="../../assets/images/corsys-logo.svg">
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-sm-5 col-xs-4">
+                    <ul *ngIf="this.service.userInfo.authenticated" class="nav navbar-nav navbar-right">
+                        <li *ngIf="authorizedFlag">
+                            <div class="locationdiv" *ngIf="!isLocationDisabled">
+                                <img src="../../assets/images/svg/icn-finder.svg">
+                                <sp3-comp-select [size]="7" title="{{'LocationTitle' | sp3Translate }}" controlId="sp3LocationSelection" [(selectedValue)]="selectedLocation" required="true"  [(values)]="locationNameList" (selectedChange)="selectLocation($event)" [(isDisabled)]="isLocationDisabled"></sp3-comp-select>
+                            </div>
+                            <p class="navbar-text selectlocation" *ngIf="isLocationDisabled"><img src="../../assets/images/svg/icn-finder.svg"> {{selectedLocationText}}</p>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" id="something" (click)="showDropdown()">
+                                <img src="../../assets/images/svg/icn-user.svg" style="margin-right: 6px;margin-top: -4px;">
+                                <span class="hidden-sm hidden-md"> {{UserfullName}}</span>
+                                <img src="../../assets/images/svg/icn-arrow-down.svg">
+                            </a>
+                            <ul class="dropdown-menu sub-menu" *ngIf="isShowDropdown">
+                                <li><a class="visible-md visible-sm visible-xs"><img class="logo_corsys" src="../../assets/images/svg/icn-user.svg"> {{UserfullName}}</a></li>
+                                <li><a (click)="logOut()"><img src="../../assets/images/svg/icn-power.svg" style="margin-top: -4px;"> {{'LogOut' | sp3Translate}}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

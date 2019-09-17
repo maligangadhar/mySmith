@@ -1,0 +1,47 @@
+<div class="settings-wrapper">
+<div class="settings-local-wrapper">
+    <div class="settings-inner-wrapper">
+            <form #form="ngForm" class="form-horizontal" novalidate>
+                <div class="settings-title">
+                    <h2>{{'OperationalDashBoardSetting' | sp3Translate}}
+                        <span class="pull-right">  
+                            <button class="btn btn-default" id="opdSaveChanges" [disabled]="isInvalid" (click)="saveChanges()">{{'SaveChanges' | sp3Translate}}</button>
+                            <button class="btn btn-default" id="cancelopdChanges" (click)="cancelChanges()">{{'Cancel' | sp3Translate}}</button>
+                        </span>
+                    </h2>
+                </div> 
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover"> 
+                                <thead>
+                                    <tr>
+                                        <th>{{'Parameter'| sp3Translate}}</th>
+                                        <th>{{'Value'| sp3Translate}} 
+                                            <i title="{{'ThresholdTitleMessage'| sp3Translate}}" class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        </th>
+                                    </tr>
+                                </thead>                            
+                                <tbody>
+                                    <tr>
+                                        <td>{{'TargetImageAccessed' | sp3Translate}}</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input [(ngModel)]="opdThreshold.settings[0].settingsValue" name="opdThreshold" id="opdSettingInfo" class="form-control" myNumberOnly regexKey="{{regexKey}}" minValue="0" maxValue="100" placeholder="0" (input)="onParamChange()">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr> 
+                                        <td colspan="2" class="text-danger" *ngIf="isInvalid">{{'ThresholdNumberRangeMessage' | sp3Translate}}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+         </form>
+    </div>
+</div>
+</div>

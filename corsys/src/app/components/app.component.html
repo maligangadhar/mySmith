@@ -1,0 +1,43 @@
+﻿<sp3-comp-app-header *ngIf="this.service.userInfo.authenticated"></sp3-comp-app-header>
+<div class="menu">
+    <div class="container-fluid">
+        <!--<sp3-comp-modal-leave-message #ModalLeaveMessageComponent></sp3-comp-modal-leave-message>-->
+        <!--<div class="col-lg-2">
+        <a class="home" [routerLink]="['/home']">Home</a>
+        </div>-->
+        <div class="row">
+            <sp3-comp-modal-confirm #modalDataChangeAlert>
+                <div class="app-modal-header">
+                        {{pageKey | sp3Translate}}
+                </div>
+                <div class="app-modal-body">
+                    <div *ngIf="isDefaultMessage && !isDefaultHomeMessage">
+                        <span ><i class="icn-error"> </i>
+                            {{'NotSavedChanges' | sp3Translate}} {{'LeaveMessage' | sp3Translate}}</span>
+                    </div>
+                    <div *ngIf="!isDefaultMessage && !isDefaultHomeMessage">
+                            {{newMessage | sp3Translate}}
+                    </div>
+                    <div *ngIf="isDefaultHomeMessage">
+                            <span ><i class="icn-error"> </i> {{'DiscardMessage' | sp3Translate}}  </span>
+                    </div>
+                </div>
+                <div class="app-modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12" *ngIf="!isDefaultHomeMessage">
+                            <button type="button" class="btn btn-reverse" (click)="yesClick()">{{'Yes' | sp3Translate}}</button>
+                            <button type="button" class="btn btn-reverse" (click)="noClick()">{{'No' | sp3Translate}}</button>
+                        </div>
+                        <div class="col-sm-12" *ngIf="isDefaultHomeMessage">
+                            <button type="button" class="btn btn-reverse" (click)="yesClick()">{{'DiscardAndLeave' | sp3Translate}}</button>
+                            <button type="button" class="btn btn-reverse" (click)="noClick()">{{'StayInApp'| sp3Translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </sp3-comp-modal-confirm>
+            <sp3-comp-modal-loader #modalSp3Loader></sp3-comp-modal-loader>
+            <sp3-comp-modal-timeout #modalTimeout></sp3-comp-modal-timeout>
+            <router-outlet></router-outlet>
+         </div>
+    </div>
+</div>

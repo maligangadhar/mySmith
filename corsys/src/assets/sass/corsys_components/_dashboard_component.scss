@@ -1,0 +1,77 @@
+﻿.viewer-container {
+    width: 100%;
+    height: calc(100vh - 48px);
+    overflow: hidden;
+    position: absolute;
+    top: 48px;
+}
+
+.viewer-main-panel {
+    margin-left: 300px;
+    width: calc(100% - 300px);
+    float: left;
+    height: 100%;
+    position: relative;
+    transition: all 0.3s;
+    background-color: #e8eef5;
+
+    canvas .viewer {
+        height: 100%;
+    }
+}
+
+.viewer-container.sopen .viewer-main-panel {
+    width: calc(100% - 40px);
+    margin-left: 40px;
+    transition: all 0.3s;
+
+}
+
+canvas.viewer {
+    z-index: 99;
+    background: #fff;
+    cursor: pointer;
+    left: 0;
+    
+}
+
+/**Start -  Top and Bottom Bar Collapse **/
+.top-bar.tool-closed, .bottom-bar.tool-closed {
+    width: 100%;
+    left: 0px;
+    transition: all 0.3s;
+}
+
+.top-bar.right-panel-open, .bottom-bar.right-panel-open {
+    width: calc(100% - 830px);
+    transition: all 0.3s;
+}
+
+.top-bar.tool-closed.right-panel-open, .bottom-bar.tool-closed.right-panel-open {
+    width: calc(100% - 650px);
+    left: 0px;
+    transition: all 0.3s;
+}
+/**End -  Top and Bottom Bar Collapse **/
+
+.dashboard-container {
+    //background-color: #e8eef5;
+    padding: 16px;
+
+    button span {
+        vertical-align: middle;
+        color: #299ed9;
+        width: auto;
+        height: 14px;
+    }
+
+    .pagination {
+        margin: 0px;
+
+        p {
+            display: inline-block;
+            margin-right: 10px;
+            opacity: 0.6;
+        }
+    }
+}

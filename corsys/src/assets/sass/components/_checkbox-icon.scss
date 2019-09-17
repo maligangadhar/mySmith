@@ -1,0 +1,39 @@
+                /*the first method: Using 2 tags with predefined bootstrap icons*/
+                
+                input[type='checkbox'].tags-checkbox:checked + label > i:first-of-type,
+                input[type='checkbox'].tags-checkbox + label > i:last-of-type {
+                    display: none;
+                }
+                input[type='checkbox'].tags-checkbox:checked + label > i:last-of-type {
+                    display: inline-block;
+                }
+                /*the second method - much cleaner look: Using 2 :pseudo classes from predefined bootstrap icons*/
+                
+                input[type='checkbox'].pseudo-checkbox + label:before,
+                input[type='checkbox'].pseudo-checkbox + label:after {
+                    position: relative;
+                    top: 1px;
+                    display: inline-block;
+                    font-family: FontAwesome;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: 1;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+                input[type='checkbox'].pseudo-checkbox + label:before {
+                    /*unchecked icon*/
+                    
+                    content: "\f096";
+                }
+                input[type='checkbox']:checked.pseudo-checkbox + label:before {
+                    /*checked icon*/
+                    
+                    content: "\f046";
+                }
+                i.fa-check-square-o,
+                i.fa-square-o {
+                    top: 0.6em;
+                    left: 2.0em;
+                    font-size: 1.1em;
+                }

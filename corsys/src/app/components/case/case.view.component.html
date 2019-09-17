@@ -1,0 +1,42 @@
+﻿<div *ngIf="controlId === 'Cases'" class="row">
+    <div class="arrivals-case-creation col-sm-12">
+        <button type="button" class="btn btn-lg btn-absolute btn-reverse btn-add" id="caseAddNew" (click)="createCase()">
+            <i class="fa fa-plus" aria-hidden="true"></i> &nbsp;&nbsp; {{'CreateNewCase' | sp3Translate}}</button>
+        <sp3-comp-modal-case-creation #modal></sp3-comp-modal-case-creation>
+    </div>
+</div>
+<div *ngIf="controlId === 'Draft'" class="col-sm-12 mydraftsgrid">
+    <sp3-comp-modal-case-creation #modal controlId='Draft'></sp3-comp-modal-case-creation>
+    <div id="caseCreation" class="row">
+        <div class="col-sm-12" *ngIf="showError">
+            <div id="caseMessage" class="error bg-danger alert alert-danger text-left">
+                {{message | sp3Translate}}
+            </div>
+        </div>
+
+        <div id="grid-caseView" class="col-sm-12">
+            <div class="topbarbtns" [style.marginLeft.px]="buttonMarginLeft">
+                    <sp3-comp-casebutton #deleteCases class="arrivals-actions-btns" buttonid="deleteAllSelected" [buttontitle]="'DeleteAllSelected'"
+                        [buttonClass]="deleteClass" [caseButtonType]="caseButtonTypes.DeleteAllSelected" [disableButton]="isDeleteDisabled"
+                        [caseIds]="selectedList"></sp3-comp-casebutton>
+                </div>
+            <sp3-comp-grid #caseDataTable [value]="cases" dataKey="caseId" [scrollable]="true" [valueSelectionChange]="onSelectFromGrid"
+                (callBackButtonWidth)="callBackButtonWidth($event)"
+                [headerCheckboxToggleAllPages]="false" [lazy]="true" [customPaginator]="true" [customRowsPerPage]="gridRows"
+                [customPaginationLoad]="loadCasesLazy" [lazyLoad]="onSorting" [(totalRecords)]="totalCases" [isShow]="isShow">
+                <sp3-column [field]="'caseId'" header="" [controlId]="'caseId'" [type]="3"></sp3-column>
+                <sp3-column [field]="'caseId'" header="{{'CaseId' | sp3Translate}}" [controlId]="'caseId'" [type]="2" [hasClick]="true" [itemOnClick]="openCase"></sp3-column>
+                <sp3-column field="status" header="{{'Status' | sp3Translate}}"></sp3-column>
+                <sp3-column field="containerIds" header="{{'Containers' | sp3Translate}}"></sp3-column>
+                <sp3-column field="dateOfArrival" [type]="10" header="{{'DateOfArrival' | sp3Translate}}"></sp3-column>
+                <sp3-column field="shippingCompany" header="{{'ShippingCompany' | sp3Translate}}"></sp3-column>
+                <sp3-column field="from" header="{{'Country' | sp3Translate}}"></sp3-column>
+                <sp3-column field="originPort" header="{{'OriginPort' | sp3Translate}}"></sp3-column>
+                <sp3-column field="destinationPort" header="{{'DestinationPort' | sp3Translate}}"></sp3-column>
+                <sp3-column field="lastUpdatedDate" [type]="12" header="{{'LastModifiedDate' | sp3Translate}}" [isSortable]= "true"></sp3-column>
+
+            </sp3-comp-grid>
+
+        </div>
+    </div>
+</div>

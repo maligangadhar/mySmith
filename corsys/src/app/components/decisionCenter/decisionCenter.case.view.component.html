@@ -1,0 +1,25 @@
+﻿<sp3-comp-modal-case-detail #modal (closeAction)="captureCaseCloseAction($event)"></sp3-comp-modal-case-detail>
+<sp3-comp-duplicate-action #modalDuplicateActionPopUp [duplicateActionMessage]="messageCode" (closeAction)="captureCloseAction($event)"></sp3-comp-duplicate-action>
+
+<div id="wrapper-body" class="col-sm-12">
+    <div id="grid-actionView" class="control-center-grid">
+        <sp3-comp-grid #actionCenter [value]="controlcenterActions" dataKey="caseId" [scrollable]="true" [scrollHeightGrid]="'600px'"
+            [headerCheckboxToggleAllPages]="false" [lazy]="true" [(selection)]="selectedCases" [customPaginator]="true" [customPaginationLoad]="loadCasesLazy"
+            [lazyLoad]="onSorting" [customRowsPerPage]="actionPerPage" [(totalRecords)]="totalActions" [isShow]="isShow">
+            <sp3-column [field]="" header="" [type]="3"></sp3-column>
+            <sp3-column field="containerIds" header="{{'Containers' | sp3Translate}}" [controlId]="'caseId'" [type]="2" [hasClick]="true"
+                [itemOnClick]="openCase"></sp3-column>
+            <!-- <sp3-column field="caseId" header="{{'ControlCenterCaseId' | sp3Translate}}" [isSortable]="true" [type]="2" [hasClick]="true"
+                [itemOnClick]="openCase"></sp3-column> -->
+            <sp3-column field="statusText" header="{{'Status' | sp3Translate}}"></sp3-column>
+            <!-- <sp3-column field="containerIds" header="{{'ContainerID' | sp3Translate}}"></sp3-column> -->
+            <sp3-column field="priority" [type]="9" [iconHeaderClass]="'svg-icn-flag-black'" [hasClick]="true" [itemOnClick]="priorityIconClick"></sp3-column>
+            <sp3-column field="hold" [type]="9" [iconHeaderClass]="'svg-icn-hold-black'" [hasClick]="true" [itemOnClick]="holdIconClick"></sp3-column>
+            <sp3-column field="dateOfArrival" [type]="10" header="{{'DateOfArrival' | sp3Translate}}" [isSortable]="true"></sp3-column>
+            <sp3-column field="shippingCompany" header="{{'ShippingCompany' | sp3Translate}}"></sp3-column>
+            <sp3-column field="from" header="{{'Country' | sp3Translate}}"></sp3-column>
+            <sp3-column field="originPort" header="{{'OriginPort' | sp3Translate}}"></sp3-column>
+            <sp3-column field="destinationPort" header="{{'DestinationPort' | sp3Translate}}"></sp3-column>
+        </sp3-comp-grid>
+    </div>
+</div>

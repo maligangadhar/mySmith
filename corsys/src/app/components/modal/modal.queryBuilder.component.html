@@ -1,0 +1,226 @@
+﻿<div *ngIf="visible" class="modal fade full-height-modals modal-short" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="query-build-form" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" (click)="hide()" data-dismiss="modal">
+                        <i class="icn-close"></i>
+                    </a>
+                    <h4 class="modal-title">{{'QueryBuilder'| sp3Translate}}</h4>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Start : : Collapsable Panal  -->
+                    <div class="row">
+                        <div class="panel-group" id="accordion">
+                            <!--Panel 1-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-clr" (click)="columnExpandCollapse(1)">
+                                    <div class="pull-right">
+                                        <span id="caseIdExpandAccordion" *ngIf="column1Expanded===true" class="fa fa-angle-up" aria-hidden="true"></span>
+                                        <span id="caseIdCollapseAccordion" *ngIf="column1Expanded===false" class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </div>
+                                    <h4 class="panel-title">
+                                        {{'CaseId' | sp3Translate}}
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="{{column1Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <sp3-comp-autocomplete #autocompleteCaseId [minLength]="1" id="advancedSearchCaseId" [(suggestions)]="caseIdSuggestions"
+                                                (searchQueryChanged)="getSearchCaseIdData($event)" (selectionChanged)="searchCriteriaAddedCase($event)"
+                                                (OnBlur)="getCaseIdOnBlur($event)"
+                                                [multiple]="true" [displayFieldName]="false"></sp3-comp-autocomplete>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Panel 2-->
+                            <div class="panel panel-default" *ngIf="sourceType === 'decisionCaseManage'">
+                                <div class="panel-heading panel-clr" (click)="columnExpandCollapse(2)">
+                                    <div class="pull-right">
+                                        <span id="statusExpandAccordion" *ngIf="column2Expanded===true" class="fa fa-angle-up" aria-hidden="true"></span>
+                                        <span id="statusCollapseAccordion" *ngIf="column2Expanded===false" class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </div>
+                                    <h4 class="panel-title">
+                                        {{'Status' | sp3Translate}}
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="{{column2Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <p-multiSelect id="queryBuilderStatus" defaultLabel="{{'Choose' | sp3Translate}}" [options]="resultsStatus" [(ngModel)]="selectedStatuses"></p-multiSelect>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default" *ngIf="sourceType && (sourceType == 'decisionCenterCleared' || sourceType=='clearedCases' || sourceType=='decisionCenterScreening')">
+                                <div class="panel-heading panel-clr" (click)="columnExpandCollapse(9)">
+                                    <div class="pull-right">
+                                        <span id="riskRatingExpandAccordion" *ngIf="column9Expanded===true" class="fa fa-angle-up" aria-hidden="true"></span>
+                                        <span id="riskRatingCollapseAccordion" *ngIf="column9Expanded===false" class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </div>
+                                    <h4 class="panel-title">
+                                        {{'RiskRating' | sp3Translate}}
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="{{column9Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <p-multiSelect id="queryBuilderStatus" defaultLabel="{{'Choose' | sp3Translate}}" [options]="riskRating" [(ngModel)]="selectedRiskRatings"></p-multiSelect>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default" *ngIf="sourceType && (sourceType === 'decisionCenterScreening' || sourceType === 'decisionCenterCleared')">
+                                <div class="panel-heading panel-clr" (click)="columnExpandCollapse(10)">
+                                    <div class="pull-right">
+                                        <span id="containerIdExpandAccordion" *ngIf="column10Expanded===true" class="fa fa-angle-up" aria-hidden="true"></span>
+                                        <span id="containerIdCollapseAccordion" *ngIf="column10Expanded===false" class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </div>
+                                    <h4 class="panel-title">
+                                        {{'RiskScore' | sp3Translate}}
+                                    </h4>
+                                </div>
+                                <div id="collapse10" class="{{column10Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <sp3-comp-text #riskScore controlId="riskScore" placeholderText="" [size]="6" labelText="" required="false" showTooltip="false"
+                                                [(value)]="riskScoreValue"></sp3-comp-text>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Panel 3-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-clr" (click)="columnExpandCollapse(3)">
+                                    <div class="pull-right">
+                                        <span id="containerIdExpandAccordion" *ngIf="column3Expanded===true" class="fa fa-angle-up" aria-hidden="true"></span>
+                                        <span id="containerIdCollapseAccordion" *ngIf="column3Expanded===false" class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </div>
+                                    <h4 class="panel-title">
+                                        {{'ContainerId' | sp3Translate}}
+                                    </h4>
+                                </div>
+                                <div id="collapse3" class="{{column3Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <sp3-comp-text #searchContainer controlId="searchContainer" [size]="6" placeholderText="" labelText="" required="false" showTooltip="false"
+                                                [(value)]="searchContainerValue"></sp3-comp-text>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Panel 4-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-clr" (click)="columnExpandCollapse(4)">
+                                    <div class="pull-right">
+                                        <span id="shippingCompanyExpandAccordion" *ngIf="column4Expanded===true" class="fa fa-angle-up" aria-hidden="true"></span>
+                                        <span id="shippingCompanyCollapseAccordion" *ngIf="column4Expanded===false" class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </div>
+                                    <h4 class="panel-title">
+                                        {{'ShippingCompany' | sp3Translate}}
+                                    </h4>
+                                </div>
+                                <div id="collapse4" class="{{column4Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <sp3-comp-autocomplete #autocompleteShippingCompany  [minLength]="1" id="advancedSearchShippingCompany" [suggestions]="shippingCompanySuggestions"
+                                                (OnBlur)="getShippingcompOnBlur($event,shipid)"
+                                                (searchQueryChanged)="getSearchShippingCompanyData($event)" (selectionChanged)="searchCriteriaAddedShippingCompany($event)"
+                                                [multiple]="true" [displayFieldName]="false"></sp3-comp-autocomplete>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Panel 5-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-clr" (click)="columnExpandCollapse(5)">
+                                    <div class="pull-right">
+                                        <span id="fromExpandAccordion" *ngIf="column5Expanded===true" class="fa fa-angle-up" aria-hidden="true"></span>
+                                        <span id="fromCollapseAccordion" *ngIf="column5Expanded===false" class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </div>
+                                    <h4 class="panel-title">
+                                        {{'From' | sp3Translate}}
+                                    </h4>
+                                </div>
+                                <div id="collapse5" class="{{column5Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <p-multiSelect id="queryBuilderFrom" [options]="countryList" defaultLabel="{{'Choose' | sp3Translate}}" [(ngModel)]="selectedFromCountries"></p-multiSelect>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Panel 6-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-clr" (click)="columnExpandCollapse(6)">
+                                    <div class="pull-right">
+                                        <span id="toExpandAccordion" *ngIf="column6Expanded===true" class="fa fa-angle-up" aria-hidden="true"></span>
+                                        <span id="toCollapseAccordion" *ngIf="column6Expanded===false" class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </div>
+                                    <h4 class="panel-title">
+                                        {{'To' | sp3Translate}}
+                                    </h4>
+                                </div>
+                                <div id="collapse6" class="{{column6Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <p-multiSelect id="queryBuilderTo" defaultLabel="{{'Choose' | sp3Translate}}" [options]="countryList" [(ngModel)]="selectedToCountries"></p-multiSelect>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Panel 7-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-clr" (click)="columnExpandCollapse(7)">
+                                    <div class="pull-right">
+                                        <span id="lastModifiedExpandAccordion" *ngIf="column7Expanded===true" class="fa fa-angle-up" aria-hidden="true"></span>
+                                        <span id="lastModifiedCollapseAccordion" *ngIf="column7Expanded===false" class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </div>
+                                    <h4 class="panel-title">
+                                        {{'LastModified' | sp3Translate}}
+                                    </h4>
+                                </div>
+                                <div id="collapse7" class="{{column7Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <sp3-comp-daterangepicker #dateRangeLastModified controlId='qeryBuilderDateRange' [dateRange]="dateRangeSetLastModified"></sp3-comp-daterangepicker>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Panel 8-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-clr" (click)="columnExpandCollapse(8)">
+                                    <div class="pull-right">
+                                        <span id="arrivalDateExpandAccordion" *ngIf="column8Expanded===true" class="fa fa-angle-up" aria-hidden="true"></span>
+                                        <span id="arrivalDateCollapseAccordion" *ngIf="column8Expanded===false" class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </div>
+                                    <h4 class="panel-title">
+                                        {{'ArrivalDateSearch' | sp3Translate}}
+                                    </h4>
+                                </div>
+                                <div id="collapse8" class="{{column8Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <sp3-comp-daterangepicker #dateRangeArrivaDate [dateRange]="dateRangeSetArrival"></sp3-comp-daterangepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End : : Collapsable Panal  -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="searchCases" class="btn btn-block btn-lg btn-primary" (click)="onSearchButtonClick()" [disabled]="toggleSearchButton">{{'SearchCases'| sp3Translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

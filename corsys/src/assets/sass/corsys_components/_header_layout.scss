@@ -1,0 +1,138 @@
+.site-header {
+    float: left;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    height: 48px;
+    .navbar-inverse {
+        border: 0px;
+        border-radius: 0px;
+        height: 48px;
+        margin-bottom: 0px;
+        min-height: auto;
+        background: #315064;
+        .navbar-text{
+            color: #fff;
+            font-size: 16px;
+            margin: 14px 0px 12px;
+        }
+
+        .navbar-collapse {
+            // padding: 0px 8px;
+            height: 48px;
+            .navbar-left {
+                .icn_apps {
+                    img{
+                    width: 24px;
+                    height: 24px;
+                    }
+                }
+            }
+
+            .navbar-nav > li > a {
+                padding: 14px 0px 12px;
+                font-size: 16px;
+                color: #fff;
+            }
+
+            .navbar-header {
+                width: auto;
+                display: inline-block;
+                float: none;
+
+                .navbar-brand {
+                    padding: 11px 0px 11px;
+                    height: 48px;
+                    .logo_corsys{
+                        width: 132px;
+                        height: 25px;
+                        display: inline-block;
+                        background-repeat: no-repeat;
+                        margin-top: 0px;
+                    }
+                }
+            }
+
+            .navbar-right {
+                margin-right: 8px;
+                select.form-control{
+                    height: 30px;
+                    border: 1px solid #299ed9;
+                    margin: 9px 0px;
+                    padding: 0px 10px;
+                    color: #fff;
+                    background: #299ed9;
+                    option{
+                        border: 0px;
+                    }
+                    option:hover{
+                        background: #1e6e96;
+                    }
+                }
+                .icn_user_profile, .icn_user_alerts {
+                    width: 24px;
+                    height: 24px;
+                    margin-left: 8px;
+                }
+                .icn_user_profile{
+                    width: 24px;
+                    height: 24px;
+                    background: url(../images/svg/icn-user-profile.svg) no-repeat;
+                    background-size: 24px 24px;
+                    -o-object-fit: contain;
+                    object-fit: contain;
+                    margin: -4px 8px;
+                    display: inline-block;
+                }
+                .fa-angle-down{
+                    margin-left: 4px;
+                }
+                .selectlocation{
+                    padding: 5px 16px 5px 12px;
+                    border-radius: 4px;
+                    margin: 8px 16px;
+                    img{
+                        margin-right: 8px;
+                        margin-top: -4px;
+                    }
+                }
+            }
+        }
+        
+        .dropdown-menu li:hover .sub-menu {
+            visibility: visible;
+            transition: all .3s;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0px;
+        }
+        .dropdown-menu {
+            background: #1e6e96;
+            box-shadow: 0px 0px 0px;
+            border: 0px;
+            min-width: 150px;
+            z-index: 1007;
+            li{
+                a{
+                    color: #fff;
+                    padding: 8px;
+                    font-size: 16px;
+                    text-align: right;
+                    .fa{
+                        margin: 0px 4px;
+                    }
+                }
+                a:hover{
+                    color: #fff;
+                    background: #299ed9;
+                }
+            }
+        }
+
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1200px){
+    .site-header .navbar-inverse .navbar-collapse .navbar-right select.form-control{ margin-left: 5px;}
+}

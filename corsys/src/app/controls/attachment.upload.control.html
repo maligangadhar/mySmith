@@ -1,0 +1,9 @@
+<div>
+    <label class="btn-file btn btn-lg btn-primary" [ngClass]="{'disable-selection': isDisabled}">
+    <span [ngClass]="{'input-blur': isDisabled}">
+       {{attachmentButtonTitle | sp3Translate}}
+        <input type="file" title=" "  [disabled]="isDisabled"  name="file_source" size="40" (change)="onFileUpload($event);$event.stopPropagation()" [accept]="acceptedMimeTypes" #inputElem>
+    </span>
+    </label>
+</div>
+<sp3-comp-modal-input (confirmButtonStat)="modalInputClick($event)" #modalInputForm></sp3-comp-modal-input>

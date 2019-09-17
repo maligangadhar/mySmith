@@ -1,0 +1,817 @@
+﻿<sp3-comp-modal-confirm #modalClose>
+    <div class="modal-header">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{'Cases' | sp3Translate}}
+    </div>
+    <div class="modal-body">
+                {{'NotSavedChanges'| sp3Translate}}
+                <br /> {{'LeaveMessage'| sp3Translate}}
+    </div>
+    <div class="modal-footer">
+                <button type="button" class="btn btn-reverse" id="caseCreateLeave" (click)="leaveClick()">{{'LeaveWithoutSaveButton'| sp3Translate}}</button>
+                <button type="button" class="btn btn-reverse" id="caseCreateBack" (click)="backClick()">{{'BackToWindowButton'| sp3Translate}}</button>
+    </div>
+</sp3-comp-modal-confirm>
+<div class="modal-lg modal-dialog modal-larger inspection-popups" role="dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <a class="close" (click)="closeClick()" data-dismiss="modal"><i class="icn-close"></i></a>
+            <h4 class="modal-title">{{pageTitle}}<span class="hideonrightpaneltitle">: {{generatedCaseId[0]}}</span></h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="modal-details-header">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <sp3-comp-message-display id="caseMessage"></sp3-comp-message-display>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3 box-border-grey">
+                                <div class="form-group">
+                                    <label for="manualContainerID">{{'ContainerId'| sp3Translate}}</label>
+                                    <p id="manualContainerID" class="body-text">{{containerIdValue}}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3 box-border-grey">
+                                <div class="form-group">
+                                    <label for="manualCaseUpdatedDate">{{'CaseLastUpdated'| sp3Translate}}</label>
+                                    <p class="body-text" id="manualCaseUpdatedDate">{{caseCreateDetails.lastUpdateDate | sp3DateTimeFormat}}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3 box-border-grey">
+                                <div class="form-group">
+                                    <label for="manualCaseUpdatedBy">{{'CaseLastUpdatedBy'| sp3Translate}}</label>
+                                    <p class="body-text" id="manualCaseUpdatedBy">{{caseCreateDetails.lastUpdatedBy}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-3 box-border-grey">
+                                <div class="form-group">
+                                    <label for="manualCaseStatus">{{'CaseStatusText' | sp3Translate}}</label>
+                                    <p id="manualCaseStatus">{{caseStatus}}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 time-line-col" *ngIf="!viewMode">
+                                <div class="box-border-grey">
+                                    <div class="form-group icon-group">
+                                        <span *ngIf="isFlagVisible"><button [ngClass]="flagClass" [disabled]="(appName===3)?true:false" id="caseFlag" (click)="setFlagAndHold('flag')"></button></span>
+                                        <span *ngIf="isHoldVisible"><button [ngClass]="holdClass" [disabled]="(appName===3)?true:false" id='caseHold' (click)="setFlagAndHold('hold')"></button></span>
+                                        <button class="btn btn-lg btn-primary" type="button" *ngIf="hasViews && source === checkVerdictSources.Inspection" id="savedViews" (click)="viewSavedViews()">{{'SavedViews'| sp3Translate}}</button>
+                                    </div>
+                                </div>
+                                <div class="box-border-grey text-center" *ngIf="!viewMode">
+                                    <form>
+                                        <div class="radio-group" *ngIf="!isFromIATimeline">
+                                            <input type="radio" id="option-one"   name="selector"  (click)="toggleTimeLineAndDetail('timeline')" [checked]="!isDetailsVisible"><label class="first-radio" for="option-one">{{'Timeline'| sp3Translate}}</label>
+                                            <input type="radio" id="option-three" name="selector"  (click)="toggleTimeLineAndDetail('detail')" [checked]="isDetailsVisible" ><label class="last-radio" for="option-three">{{'Detail'| sp3Translate}}</label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="box-border-grey" *ngIf="!viewMode && (appName===3)">
+                                </div>
+                                <!-- <div class="box-border-grey" *ngIf="!viewMode  && (appName===3)">
+                                    <button class="btn btn-lg btn-primary" type="button" (click)="backtolist()">{{'BackToList'| sp3Translate}}</button>
+                                </div> -->
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 caseExpandCollapse">
+                                <div class="form-group" *ngIf="isDetailsVisible">
+                                    <button type="button" class="{{expandAllClasss}}" id="expandAllCasePanels" [disabled]="isExpandAllDisabled"  (click)="expandAll()">{{'ExpandAllCasePanels'| sp3Translate}}</button>
+                                    <button type="button" class="{{collapseAllClass}}" id="collapseAllCasePanels" [disabled]="isCollapseAllDisabled" (click)="collapseAll()">{{'CollapseAllCasePanels'| sp3Translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <div *ngIf="isDetailsVisible">
+            <!-- Start : : Collapsable Panal  -->
+            <div class="row">
+                <div class="panel-group" id="accordion">
+                    <!--Panel 0-->
+                      <div class="panel panel-default" *ngIf="source === checkVerdictSources.DecisionCentre || checkVerdictSources.Inspection">
+                        <div class="{{column0Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="columnExpandCollapse(0)">
+                            <span id="{{column0Expanded? 'NotesExpandAccordian' : 'NotesCollapseAccordian' }}" class="{{column0Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                            <h4 class="panel-title">
+                                {{'RiskLevel' | sp3Translate}}
+                            </h4>
+                        </div>
+                        <div id="collapse0" class="{{column0Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="riskScoreDiv" class="control-label col-sm-4">{{'CaseRiskScore' | sp3Translate}}</label>
+                                            <div controlId="riskScoreDiv" class="col-sm-8">
+                                                <div *ngIf="riskColor === 0" ngClass="{{'rank-rating norisk'}}">{{overAllRiskRating}}</div>
+                                                <div *ngIf="riskColor === 1" ngClass="{{'rank-rating moderate'}}">{{overAllRiskRating}}</div>
+                                                <div *ngIf="riskColor === 2" ngClass="{{'rank-rating highrisk'}}">{{overAllRiskRating}}</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                   <label for="categoryScoreDiv" class="control-label col-sm-12">{{'CategoryScores' | sp3Translate}}</label>
+                                                </div>
+                                                <div controlId="categoryScoreDiv" class="categoryscorediv col-sm-12">
+                                                    <sp3-comp-grid #categoryScoreDataTable [value]="riskCategories" [dataKey]="'categoryId'" [scrollWidthGrid]="'400px'" [scrollHeightGrid]="'600px'"
+                                                    [lazy]="true" [rowStyleLoad]="onRowStyleLoad" [scrollable]="true">
+                                                            <sp3-column field="category" header="{{'RuleCategory' | sp3Translate}}" ></sp3-column>
+                                                            <sp3-column field="categoryScore" header="{{'CategoryScore' | sp3Translate}}" ></sp3-column>
+                                                            <sp3-column field="thresholdScore" header="{{'Threshold' | sp3Translate}}" ></sp3-column>
+                                                            <sp3-column field="breachValue" header="{{'ThresholdBreach' | sp3Translate}}" ></sp3-column>
+                                                    </sp3-comp-grid>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Panel 1-->
+                    <div class="panel panel-default">
+                        <div class="{{column1Expanded?'panel-open active':'panel-close '}} panel-heading panel-clr" (click)="columnExpandCollapse(1)">
+                            <span id="{{column1Expanded? 'caseInformationExpandAccordion' : 'caseInformationCollapseAccordion' }}" class="{{column1Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                            <h4 class="panel-title">
+                                {{'CaseInformation' | sp3Translate}}
+                            </h4>
+                        </div>
+                        <div class="{{column1Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-textbox #sender controlId="manualCaseSender" placeholderText="" labelText="{{'sender'| sp3Translate}}" [(isDisabled)]="isDisabled" [(value)]="caseCreateDetails.senderName"></sp3-comp-textbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-textbox #senderAddress controlId="manualCaseSenderAdd" placeholderText="" labelText="{{'SenderAddress'| sp3Translate}}" [(isDisabled)]="isDisabled" [(value)]="caseCreateDetails.senderAddress"></sp3-comp-textbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label class="control-label col-sm-4">{{'CaseFrom' | sp3Translate}}</label>
+                                          <div class="col-sm-8">{{selectedFromCountry}}  </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                                <div class="row">
+                                  <div class="col-sm-12">
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-4">{{'OriginPort' | sp3Translate}}</label>
+                                        <div class="col-sm-8">{{selectedOriginalPort}}  </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label class="control-label col-sm-4">{{'CaseTo' | sp3Translate}}</label>
+                                          <div class="col-sm-8">{{selectedToCountry}}  </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                                <div class="row">
+                                  <div class="col-sm-12">
+                                      <div class="form-group">
+                                        <label class="control-label col-sm-4">{{'DestinationPort' | sp3Translate}}</label>
+                                        <div class="col-sm-8">{{selectedDestinationPort}}  </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="ManualCaseArrivalDate">{{'ArrivalDateText'| sp3Translate}}</label>
+                                            <div class="col-sm-8">
+                                                    {{caseDate | sp3DateTimeFormat}}
+                                                    <!-- <sp3-comp-datepicker [(selecteedDate)]="caseDate" controlId="caseArrivalDate" [enablecontrols]="isDisabled"></sp3-comp-datepicker> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4">{{'OverAllWeightText'| sp3Translate}}</label>
+                                            <div class="col-sm-8">
+                                                    <!-- <sp3-comp-textbox #overallWeight controlId="ManualCaseOverallWght" inputType="overallWeight" placeholderText="" labelText="{{'OverAllWeight'| sp3Translate}}" [(isDisabled)]="isDisabled" [(value)]="overAllWeightValue"></sp3-comp-textbox> -->
+                                                    {{overAllWeightValue}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row notes-textarea">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="manualCaseHSCode" class="col-sm-4">{{'NotesText' | sp3Translate}}</label>
+                                            <div class="col-sm-8">
+                                                    {{caseCreateDetails.notes}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--Panel 2-->
+                    <div class="panel panel-default">
+                        <div class="{{column2Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="columnExpandCollapse(2)">
+                            <span id="{{column2Expanded? 'shipInformationExpandAccordion' : 'shipInformationCollapseAccordion' }}" class="{{column2Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                            <h4 class="panel-title">
+                                {{'ShipInfomation' | sp3Translate}}
+
+                            </h4>
+                        </div>
+                        <div class="{{column2Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                                <label class="control-label col-sm-4">{{'ShipIdText'| sp3Translate}}</label>
+                                                <div class="col-sm-8">
+                                                    {{caseCreateDetails.shipping.shipId}}
+                                                </div>
+                                            <!-- <sp3-comp-textbox #shipId controlId="manualCaseShipId" inputType="shipId" [(isDisabled)]="isDisabled" placeholderText="" labelText="{{'ShipId'| sp3Translate}}" showTooltip="false" [(value)]="caseCreateDetails.shipping.shipId"></sp3-comp-textbox> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-textbox #shipCompany controlId="manualCaseShipCompany" [(isDisabled)]="isDisabled" placeholderText="" labelText="{{'ShipCompany'| sp3Translate}}" [required]="isShipCompanyRequired" showTooltip="false" [(value)]="caseCreateDetails.shipping.shippingCompany"></sp3-comp-textbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-textbox #shipContact controlId="manualCaseContact" [(isDisabled)]="isDisabled" placeholderText="" labelText="{{'Contact'| sp3Translate}}" [(value)]="caseCreateDetails.shipping.contactDetails"></sp3-comp-textbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-select #nationality controlId="manualCaseNationality" [(isDisabled)]="isDisabled" labelText="{{'Nationality'| sp3Translate}}" [size]="5" [(values)]="nationalityNameList" [(selectedValue)]="selectedNationality" [required]="isNationalityRequired"></sp3-comp-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Panel 3-->
+                    <div class="panel panel-default">
+                        <div class="{{column3Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="columnExpandCollapse(3)">
+                            <span id="{{column3Expanded? 'vehicleInformationExpandAccordion' : 'vehicleInformationCollapseAccordion' }}" class="{{column3Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                            <h4 class="panel-title">
+                                {{'VehicleInformation' | sp3Translate}}
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="{{column3Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-textbox #plateNumber controlId="manualCasePlateNumberId" [(isDisabled)]="isDisabled" placeholderText="" labelText="{{'PlateNumber' | sp3Translate}}" showTooltip="false" [(value)]="caseCreateDetails.vehicle.licensePlateNumber"></sp3-comp-textbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-textbox #vehicleMake controlId="manualCaseVehicleMakeId" [(isDisabled)]="isDisabled" placeholderText="" labelText="{{'VehicleMake' | sp3Translate}}" showTooltip="false" [(value)]="caseCreateDetails.vehicle.make"></sp3-comp-textbox>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-textbox #driverName controlId="manualCaseDriverNameId" [(isDisabled)]="isDisabled" placeholderText="" labelText="{{'DriverName' | sp3Translate}}" [(value)]="caseCreateDetails.vehicle.driverName"></sp3-comp-textbox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-textbox #vehicleCompany controlId="manualCaseVehicleCompanyId" [(isDisabled)]="isDisabled" placeholderText="" labelText="{{'VehicleCompany' | sp3Translate}}" [(value)]="caseCreateDetails.vehicle.company"></sp3-comp-textbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-textbox #vehicleModal controlId="manualCaseVehicleModalId" [(isDisabled)]="isDisabled" placeholderText="" labelText="{{'VehicleModal' | sp3Translate}}" [(value)]="caseCreateDetails.vehicle.model"></sp3-comp-textbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <sp3-comp-textbox #driverLicense controlId="manualCaseDriverLicenseId" [(isDisabled)]="isDisabled" placeholderText="" labelText="{{'DriverLicense' | sp3Translate}}" showTooltip="false" [(value)]="caseCreateDetails.vehicle.driverLicenseNumber"></sp3-comp-textbox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="{{column5Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="columnExpandCollapse(5)">
+                            <span id="{{column5Expanded? 'containerInformationExpandAccordion' : 'containerInformationCollapseAccordion' }}" class="{{column5Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                            <h4 class="panel-title">
+                                {{'ContainerInformation' | sp3Translate}}
+                            </h4>
+                        </div>
+                        <div id="collapse5" class="{{column5Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="controlId" class="col-sm-4">{{'ContainerId'| sp3Translate}}</label>
+                                            <div class="col-sm-8">
+                                                {{containerIdValue}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                                <label for="manualCaseHSCode" class="col-sm-4">{{'HSCodesText' | sp3Translate}}</label>
+                                                <div class="col-sm-8">
+                                                        {{hsCodeValue}}
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Panel 6-->
+                    <div class="panel panel-default">
+                        <div class="{{column6Expanded?'panel-open active':'panel-close'}} panel-heading" (click)="columnExpandCollapse(6)">
+                            <span id="{{column6Expanded? 'attachmentsExpandAccordion' : 'attachmentsCollapseAccordion' }}" class="{{column6Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                            <h4 class="panel-title">
+                                {{'Attachments' | sp3Translate}} <span *ngIf="attachments.length > 0">({{attachments.length}})</span>
+                            </h4>
+                        </div>
+                        <div id="collapse6" class="{{column6Expanded? 'panel-collapse collapse in upload-attachment' : 'panel-collapse collapse upload-attachment' }}">
+                            <div class="panel-body">
+                                <div class="table-responsive col-sm-12">
+                                    <table class="table table-striped table-hover resTableBorder">
+                                        <thead>
+                                            <tr>
+                                                <th class="pointer">
+                                                    {{'Title'| sp3Translate}}
+                                                </th>
+                                                <th class="pointer">
+                                                    {{'Description'| sp3Translate}}
+                                                </th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let caseattachments of attachments">
+                                            <td><a (click)="downloadAttachment(caseattachments)">{{caseattachments.title}}</a></td>
+                                            <td>{{caseattachments.description}}</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot *ngIf="attachments.length === 0">
+                                            <tr>
+                                                <td colspan="2" class="ui-datatable-emptymessage">
+                                                    {{'NoAttachmentsFound' | sp3Translate}}
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Panel 7-->
+                    <div class="panel panel-default" *ngIf="isAssessmentImagesPanelVisible">
+                        <div class="{{column7Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="columnExpandCollapse(7)">
+                            <span id="{{column7Expanded? 'AssessmentImagesExpandAccordion' : 'AssessmentImagesCollapseAccordion' }}" class="{{column7Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                            <h4 class="panel-title">
+                                {{'AssessmentDetails' | sp3Translate}}
+                            </h4>
+                        </div>
+                        <div id="collapse7" class="{{column7Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse upload-attachment' }}">
+                        <div class="panel-body">
+                            <!-- Assessment Images-->
+                            <div id="AssessmentImagesCollapseAccordionId1" class="{{column7Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                    <table class="table table-striped table-hover resTableBorder">
+                                        <thead>
+                                            <tr>
+                                                <th class="pointer">
+                                                    {{'FileName' | sp3Translate}}
+                                                </th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let data of inspectedCaseDetails.assessmentImages">
+                                            <td><a (click)="redirectToImageAnalyzer(data)">{{data.fileName}}</a></td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot *ngIf="inspectedCaseDetails.assessmentImages.length === 0">
+                                            <tr>
+                                                <td colspan="1" class="ui-datatable-emptymessage">
+                                                    {{'NoRecordsFound' | sp3Translate}}
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- Finding Shapes-->
+                        <div id="AssessmentImagesCollapseAccordionId2" class="{{column7Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                            <div class="table-responsive col-sm-12">
+                                <table class="table table-striped table-hover resTableBorder">
+                                    <thead>
+                                        <tr>
+                                            <th class="pointer">
+                                                {{'FindingNumber' | sp3Translate}}
+                                            </th>
+                                            <th class="pointer">
+                                                {{'Category' | sp3Translate}}
+                                            </th>
+                                            <th class="pointer">
+                                                {{'Shapes' | sp3Translate}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let data of inspectedCaseDetails.findings" style="border-bottom:  1px solid #ccc; ">
+                                        <td *ngIf="data.source && data.source===1"> {{data.findingNumber}} </td>
+                                        <td *ngIf="data.source && data.source===1"> <a (click)="redirectToImageAnalyzer(data)">{{data.category | sp3TypeFormatPipe: categoryType | uppercase}}</a></td>
+                                        <td *ngIf="data.source && data.source===1">
+                                            <img (click)="redirectToImageAnalyzer(data)" class="icn_apps" src="../../../assets/images/view-default.jpg" style="width: 40px; height: 40px; float: left; cursor: pointer"/>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot *ngIf="!assessmentType.datasourceprofiler">
+                                        <tr>
+                                            <td colspan="3" class="ui-datatable-emptymessage">
+                                                {{'NoRecordsFound' | sp3Translate}}
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Image Rulers-->
+                        <div id="AssessmentImagesCollapseAccordionId3" class="{{column7Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                <div class="table-responsive col-sm-12">
+                                    <table class="table table-striped table-hover resTableBorder">
+                                    <thead>
+                                        <tr>
+                                            <th class="pointer">
+                                                {{'RulerId' | sp3Translate}}
+                                            </th>
+                                            <th class="pointer">
+                                                {{'Length' | sp3Translate}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of inspectedCaseDetails.imageRulers">
+                                            <td> <a (click)="redirectToImageAnalyzer(data)">{{data.rulerId}}</a></td>
+                                            <td> {{data.length}} </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot *ngIf="inspectedCaseDetails.imageRulers.length === 0">
+                                            <tr>
+                                                <td colspan="2" class="ui-datatable-emptymessage">
+                                                    {{'NoRecordsFound' | sp3Translate}}
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                        </div>
+                            <!-- Findings Grid -->
+                            <div id="AssessmentImagesCollapseAccordionId4" class="{{column7Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                                        <div class="table-responsive col-sm-12">
+                                            <table class="table table-striped table-hover resTableBorder">
+                                                <thead>
+                                                <tr>
+                                                    <th class="pointer">
+                                                        {{'Id' | sp3Translate}}
+                                                    </th>
+                                                    <th class="pointer">
+                                                        {{'Category' | sp3Translate}}
+                                                    </th>
+                                                    <th class="pointer">
+                                                        {{'Comment' | sp3Translate}}
+                                                    </th>
+                                                    <th class="pointer">
+                                                        {{'HsCodeOrGoodsType' | sp3Translate}}
+                                                    </th>
+                                                    <th class="pointer">
+                                                        {{'Finding_Declared' | sp3Translate}}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of inspectedCaseDetails.findings" style="border-bottom:  1px solid #ccc;">
+                                                    <td *ngIf="data.source && data.source===1"> <a (click)="redirectToImageAnalyzer(data)">{{data.id}}</a> </td>
+                                                    <td *ngIf="data.source && data.source===1"> {{data.category | sp3TypeFormatPipe: categoryType | uppercase}} </td>
+                                                    <td *ngIf="data.source && data.source===1"> {{data.comment}} </td>
+                                                    <td *ngIf="data.source && data.source===1">{{data | sp3CaseDetailCustomPipe}}</td>
+                                                    <td *ngIf="data.source && data.source===1"> {{data.status | sp3TypeFormatPipe: findingStatus | uppercase}} </td>
+                                                </tr>
+                                            </tbody>
+                                                    <tfoot *ngIf="!assessmentType.datasourceprofiler">
+                                                        <tr>
+                                                            <td colspan="5" class="ui-datatable-emptymessage">
+                                                                {{'NoRecordsFound' | sp3Translate}}
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                            </table>
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!--Panel 8-->
+                    <div class="panel panel-default" *ngIf="isImageAssessmentVerdictPanelVisible">
+                        <div class="{{column8Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="columnExpandCollapse(8)">
+                            <span id="{{column8Expanded? 'ImageAssessmentVerdictExpandAccordion' : 'ImageAssessmentVerdictCollapseAccordion' }}" class="{{column8Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                            <h4 class="panel-title">
+                                {{'ImageAssessmentVerdict' | sp3Translate}}
+                            </h4>
+                        </div>
+                        <!-- Image Assesment Verdict-->
+                        <div id="ImageAssessmentVerdictExpandAccordionId1" class="{{column8Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                            <div class="panel-body">
+                                <div class="table-responsive col-sm-12">
+                                    <table class="table table-striped table-hover resTableBorder">
+                                       <thead> <tr>
+                                            <th class="pointer">
+                                                {{'Assessment' | sp3Translate}}
+                                            </th>
+                                            <th class="pointer">
+                                                {{'Verdict' | sp3Translate}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of inspectedCaseDetails.inspectionVerdict"  style="border-bottom:  1px solid #ccc;">
+                                            <td *ngIf="data.assessment === 1"> {{data.comment}} </td>
+                                            <td *ngIf="data.assessment === 1"> {{data.result | sp3TypeFormatPipe: VerdictTypes | uppercase}} </td>
+                                        </tr>
+                                    </tbody>
+                                        <tfoot *ngIf="!assessmentType.image">
+                                                <tr>
+                                                    <td colspan="2" class="ui-datatable-emptymessage">
+                                                        {{'NoRecordsFound' | sp3Translate}}
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Panel 9 -->
+                    <div class="panel panel-default" *ngIf="isInspectionEvidencePanelVisible">
+                        <div class="{{column9Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="columnExpandCollapse(9)">
+                            <span id="{{column9Expanded? 'InspectionEvidenceExpandAccordion' : 'InspectionEvidenceCollapseAccordion' }}" class="{{column9Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                            <h4 class="panel-title">
+                                {{'InspectionEvidence' | sp3Translate}}
+                            </h4>
+                        </div>
+                        <div id="InspectionEvidenceExpandAccordion1" class="{{column9Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                            <div class="panel-body">
+                                    <div controlId="evidenceFindingsDiv" class="col-sm-12" *ngFor="let finding of findings" >
+                                      <div *ngIf="finding.source && finding.source!==1">
+                                          <h4>
+                                              {{'Finding' | sp3Translate}}
+                                          </h4>
+                                          <div class="table-responsive">
+                                              <table class="table table-striped table-hover resTableBorder">
+                                                  <thead><tr>
+                                                    <th class="pointer">ID </th>
+                                                    <th class="pointer">
+                                                        {{'Finding_Category' | sp3Translate}}
+                                                    </th>
+                                                    <th class="pointer">
+                                                        {{'FindingNumber' | sp3Translate}}
+                                                    </th>
+                                                    <th class="pointer">
+                                                        {{'Finding_Description' | sp3Translate}}
+                                                    </th>
+                                                  </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                  <tr>
+                                                      <td>
+                                                        <span *ngIf="finding.source !== 3"><a (click)="viewTimeLineViews()">{{finding.id}} </a>  </span>
+                                                        <span *ngIf="finding.source === 3"> {{finding.id}}  </span>
+                                                       </td>
+                                                      <td>{{finding.category | sp3TypeFormatPipe: categoryType}} </td>
+                                                      <td>{{finding.findingNumber}} </td>
+                                                      <td>{{finding.comment}} </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                          </div>
+                                          <div *ngIf="finding.attachments.length > 0">
+                                            <h4>
+                                                {{'FindingAttachments' | sp3Translate}}
+                                            </h4>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover resTableBorder">
+                                                    <tr>
+                                                        <th class="pointer">Id </th>
+                                                        <th class="pointer">
+                                                            {{'FileName' | sp3Translate }}
+                                                        </th>
+                                                        <th class="pointer">
+                                                            {{'FileDescription' | sp3Translate }}
+                                                        </th>
+                                                    </tr>
+                                                    <tr *ngFor="let findingAttachmentData of finding.attachments">
+                                                        <td> <a (click)="downloadInspectionEvidence(findingAttachmentData)">{{findingAttachmentData.id}}</a></td>
+                                                        <td>{{findingAttachmentData.title}} </td>
+                                                        <td>{{findingAttachmentData.description}} </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Panel 10 -->
+                    <div class="panel panel-default" *ngIf="isInspectionVerdictPanelVisible">
+                        <div class="{{column10Expanded?'panel-open active':'panel-close'}} panel-heading panel-clr" (click)="columnExpandCollapse(10)">
+                            <span id="{{column10Expanded? 'InspectionVerdictExpandAccordion' : 'InspectionVerdictCollapseAccordion' }}" class="{{column10Expanded? 'icn-collapse collapse-icon' : 'icn-expand collapse-icon' }}"></span>
+                            <h4 class="panel-title">
+                                {{'InspectionVerdict' | sp3Translate}}
+                            </h4>
+                        </div>
+                        <div id="InspectionVerdictExpandAccordion1" class="{{column10Expanded? 'panel-collapse collapse in' : 'panel-collapse collapse' }}">
+                            <div class="panel-body">
+                                <div class="table-responsive col-sm-12">
+                                    <table class="table table-striped table-hover resTableBorder">
+                                       <thead>
+                                        <tr>
+                                            <th class="pointer">
+                                                {{'Assessment' | sp3Translate}}
+                                            </th>
+                                            <th class="pointer">
+                                                {{'Verdict' | sp3Translate}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of inspectedCaseDetails.inspectionVerdict">
+                                            <td *ngIf="data.assessment === 2"> {{data.comment}} </td>
+                                            <td *ngIf="data.assessment === 2"> {{data.result | sp3TypeFormatPipe: VerdictTypes | uppercase}} </td>
+                                        </tr>
+                                    </tbody>
+                                        <tfoot *ngIf="!assessmentType.physical">
+                                                <tr>
+                                                    <td colspan="2" class="ui-datatable-emptymessage">
+                                                        {{'NoRecordsFound' | sp3Translate}}
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </div>
+            <!-- End : : Collapsable Panal  -->
+        </div>
+
+        <div *ngIf="!isDetailsVisible">
+            <div class="row">
+                <sp3-comp-modal-case-timeline [caseId]="caseId"></sp3-comp-modal-case-timeline>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isFooterVisible && source === checkVerdictSources.DecisionCentre" class="modal-footer">
+        <div class="col-sm-12">
+           <div class="row">
+               <div class="left-btns">
+                   <span *ngIf="isScanEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'Scan'"
+                                            [buttonClass]="'btn btn-reverse'"
+                                            [caseButtonType]="caseButtonTypes.ScanCaseInDC" [caseIds]="generatedCaseId"
+                                            [pageTitle]="'Scan'" (callBackParent)="onScanCasePopUpClick($event)" buttonid="ScanLower" (duplicateAction)="duplicateActivity($event)">
+                       </sp3-comp-casebutton>
+                   </span>
+                   <span *ngIf="isCancelEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'cancelCase'"
+                                            [buttonClass]="'btn btn-reverse'"
+                                            [caseButtonType]="caseButtonTypes.CancelCase" [(reasonsTypes)]="reasonType" [caseIds]="generatedCaseId" (callBackParent)="toggleClick($event)" (duplicateAction)="duplicateActivity($event)" buttonid="CancelCaseLower">
+                       </sp3-comp-casebutton>
+                   </span>
+                   <span *ngIf="isInspectEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'Inspect'"
+                           [buttonClass]="'btn btn-reverse'"
+                           [caseButtonType]="caseButtonTypes.AwaitingInspectionCaseInDC" [caseIds]="generatedCaseId"
+                           [pageTitle]="'PhysicalInspection'" (callBackParent)="onInspectCasePopUpClick($event)" (duplicateAction)="duplicateActivity($event)"
+                           buttonid="Inspect" [inspectionTypes] = "inspectionTypes">
+                       </sp3-comp-casebutton>
+                   </span>
+                   <span *ngIf="isSuspectEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'Suspect'"
+                                            [buttonClass]="'btn btn-reverse'"
+                                            [caseButtonType]="caseButtonTypes.SuspectInDC" [caseIds]="generatedCaseId"
+                                            [pageTitle]="'Suspect'" (callBackParent)="onSuspectCasePopUpClick($event)" (duplicateAction)="duplicateActivity($event)" buttonid="Suspect">
+                       </sp3-comp-casebutton>
+                   </span>
+                   <span *ngIf="isReScanEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'ReScan'"
+                                            [buttonClass]="'btn btn-reverse'"
+                                            [caseButtonType]="caseButtonTypes.ReScanInDc" [caseIds]="generatedCaseId"
+                                            [pageTitle]="'ReScan'" (callBackParent)="onScanCasePopUpClick($event)" (duplicateAction)="duplicateActivity($event)" buttonid="RescanRequest">
+                       </sp3-comp-casebutton>
+                   </span>
+
+               </div>
+
+               <div class="right-btns">
+                   <span *ngIf="isClearEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'Clear'"
+                           [buttonClass]="'btn btn-reverse'"
+                           [caseButtonType]="caseButtonTypes.ClearCaseInDC" [caseIds]="generatedCaseId"
+                           [pageTitle]="'ClearCases'" (callBackParent)="onClearCasePopUpClick($event)" (duplicateAction)="duplicateActivity($event)" buttonid="ClearCase">
+                       </sp3-comp-casebutton>
+                   </span>
+               </div>
+           </div>
+       </div>
+</div>
+
+<div *ngIf="isFooterVisible && source != checkVerdictSources.DecisionCentre" class="modal-footer">
+       <div class="col-sm-12">
+           <div class="row">
+               <div class="left-btns">
+                   <span *ngIf="isScanEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'scan'"
+                                            [buttonClass]="'btn btn-reverse'"
+                                            [caseButtonType]="caseButtonTypes.Scan" [caseIds]="generatedCaseId" (callBackParent)="toggleClick($event)" (duplicateAction)="duplicateActivity($event)" buttonid="ScanLower">
+                       </sp3-comp-casebutton>
+                   </span>
+                   <span *ngIf="isCancelEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'cancelCase'"
+                                            [buttonClass]="'btn btn-reverse'"
+                                            [caseButtonType]="caseButtonTypes.CancelCase" [(reasonsTypes)]="reasonType" [caseIds]="generatedCaseId" (callBackParent)="toggleClick($event)" (duplicateAction)="duplicateActivity($event)" buttonid="CancelCaseLower">
+                       </sp3-comp-casebutton>
+                   </span>
+                   <span *ngIf="isInspectEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'Inspect'"
+                                            [buttonClass]="'btn btn-reverse'"
+                                            [caseButtonType]="caseButtonTypes.Inspect" [caseIds]="generatedCaseId" (callBackParent)="toggleClick($event)" (duplicateAction)="duplicateActivity($event)" buttonid="Inspect">
+                       </sp3-comp-casebutton>
+                   </span>
+                   <span *ngIf="isSuspectEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'Suspect'"
+                                            [buttonClass]="'btn btn-reverse'"
+                                            [caseButtonType]="caseButtonTypes.Suspect" [caseIds]="generatedCaseId" (callBackParent)="toggleClick($event)" (duplicateAction)="duplicateActivity($event)" buttonid="Suspect">
+                       </sp3-comp-casebutton>
+                   </span>
+                   <span *ngIf="isReScanEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'Re-Scan Request'"
+                                            [buttonClass]="'btn btn-reverse'"
+                                            [caseButtonType]="caseButtonTypes.ReScanCase" [caseIds]="generatedCaseId" (callBackParent)="toggleClick($event)" (duplicateAction)="duplicateActivity($event)" buttonid="RescanRequest">
+                       </sp3-comp-casebutton>
+                   </span>
+
+               </div>
+
+               <div class="right-btns">
+                   <span *ngIf="isClearEnabled">
+                       <sp3-comp-casebutton [buttontitle]="'Clear'"
+                                            [buttonClass]="'btn btn-reverse'"
+                                            [caseButtonType]="caseButtonTypes.ClearCase" [caseIds]="generatedCaseId" (callBackParent)="toggleClick($event)" (duplicateAction)="duplicateActivity($event)" buttonid="ClearCase">
+                       </sp3-comp-casebutton>
+                   </span>
+               </div>
+           </div>
+       </div>
+   </div>
+    </div>
+</div>

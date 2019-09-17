@@ -1,0 +1,20 @@
+﻿<div *ngIf="visible" class="modal fade loader-popup" id="sp3Loaderpopup" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div *ngIf="loaderMessage.type===0" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                    <h4 class="modal-title">{{loaderMessage.headerMessage}}</h4> 
+            </div>
+            <div class="modal-body">
+                <div class="sp sp-circle">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">{{loaderMessage.footerMessage}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="visible" id="sp3Loaderpopup">
+    <div *ngIf="loaderMessage.type===1" class="loading"><div class="sp sp-circle"></div></div>
+</div>

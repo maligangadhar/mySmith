@@ -1,0 +1,26 @@
+﻿<div [ngClass]="{ 'menu-close': isMenuClose, 'menu-open': !isMenuClose  }">
+    <div class="logo">
+        <a>
+            <p>{{header}}</p>
+        </a>
+    </div>
+    
+    <ul class="menu">
+        <li *ngFor="let menuItem of menuItems" [class.active]="menuItem.active">
+            <a title="{{menuItem.heading}}" [id]="menuItem.controlId" (click)="onMenuItemClick(menuItem)">
+                <p><i [ngClass]="menuItem.imageCss" ></i><span>{{menuItem.heading}}</span></p>
+            </a>
+        </li>
+    </ul>
+
+    <a (click)="openCloseMenu($event)">
+        <span class="logo sidebar-openclose">
+            <i class="side-toggle expand-sidebar icn_arrow_right-grey" ></i>
+        </span>
+    </a>
+    <a (click)="openCloseMenu($event)">
+        <span class="sidebar-openclose">
+            <i class="side-toggle collapse-sidebar icn_arrow_left-grey"></i>
+        </span>
+    </a>
+</div>

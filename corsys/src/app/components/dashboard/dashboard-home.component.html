@@ -1,0 +1,22 @@
+<div class="viewer-container" [ngClass]="{ 'sclose': togglePanel, 'sopen': !togglePanel  }">
+  <sp3-comp-side-menu header="{{'Dashboard' | sp3Translate}}" (sideMenuToggleState)="getMenuState($event)">
+    <sp3-menu-item [active]="true" heading="{{'OperationalDashboard' | sp3Translate}}" imageSrc="{{'../assets/images/svg/icn-actions.svg'}}"
+      imageCss="{{'icn_actions'}}" [currentTab]="1" controlId="operationalDashboard" (select)="onTabChange(actionTab.operationalDashboard)">
+    </sp3-menu-item>
+    <sp3-menu-item [active]="false" heading="{{'ProfilerDashboard' | sp3Translate}}" imageSrc="{{'../assets/images/svg/icn-cases.svg'}}" imageCss="{{'icn_cases'}}"
+      [currentTab]="2" controlId="profilerDashboard" (select)="onTabChange(actionTab.profilerDashboard)">
+    </sp3-menu-item>
+    <sp3-menu-item [active]="false" heading="{{'ProfilerResultHeader' | sp3Translate}}" imageSrc="{{'../assets/images/svg/icn-cases.svg'}}" imageCss="{{'icn_cases'}}"
+       [currentTab]="3" controlId="profilerResultDashboard" (select)="onTabChange(actionTab.profilerResultDashboard)">
+    </sp3-menu-item>
+  </sp3-comp-side-menu>
+  <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.operationalDashboard">
+    <sp3-comp-operational-dashboard></sp3-comp-operational-dashboard>
+  </div>
+  <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.profilerDashboard">
+    <sp3-comp-profilerdashboard-layout></sp3-comp-profilerdashboard-layout>
+  </div>
+  <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.profilerResultDashboard">
+    <sp3-comp-profiler-result></sp3-comp-profiler-result>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="switchclass">
+  <label class="switch" [ngClass]="{switchOverlay: disableSwitch}">
+    <input type="checkbox" [checked]="buttonState" (change)="onChangeState()" [disabled]="disableSwitch">
+    <span class="slider round"></span>
+  </label>
+</div>

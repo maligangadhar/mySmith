@@ -1,0 +1,34 @@
+.ruler{
+    background: #fff;
+    height: 34px;
+    .ruler-container {
+        background-color: rgba(41, 158, 217, 0.5);
+        height: 19px;
+        box-shadow: 0 2px 0 0 #ffffff;
+        background-image: linear-gradient(90deg, #299ed9 16%, #fff 0%, transparent 33%), linear-gradient(90deg, #299ed9 26%, #fff 10%, transparent 5%), linear-gradient(90deg, transparent 3%, #299ed9 6%, #fff 39%, transparent 6%), linear-gradient(180deg, #ffffff 37%, transparent 18%), linear-gradient(90deg, transparent 25%, #299ed9 49%, #fff 70%, transparent 2%, transparent 2%, #299ed9 2%, #fff 2%, transparent 2%, transparent 2%, #299ed9 3%, #fff 2%, transparent 2%, transparent 5%, #299ed9 55%, #fff 42%, transparent 2%, transparent 21%, #299ed9 63%, #fff 100%, transparent 0%, transparent 0%, #299ed9 38%, #fff 100%, transparent 92%, transparent 2%, #299ed9 100%, #fff 10%, transparent 2%, transparent 90%, #299ed9 100%, #fff 10%, transparent 2%);
+        background-size: 12px 10px;
+        background-repeat: repeat-x;
+        min-height: 20px;
+        /* only needed for labels */
+        white-space: nowrap;
+        font-size: 0;
+        margin: 0;
+        padding: 0;
+  
+        label {
+            font-size: 9px;
+            padding-top: 2px;
+            display: inline-block;
+            width: 20px;
+            text-indent: 3px; 
+        }
+    }
+    .ruler-bottom {
+            height: 15px;
+            background-color: #299ed9;
+            text-align: center;
+            font-family: ProximaNova-Bold;
+            color: #fff;
+            font-size: 12px;
+    }
+}

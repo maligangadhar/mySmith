@@ -1,0 +1,17 @@
+<div *ngIf="visible" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+[ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+<div class="modal-dialog">
+   <div class="modal-content confirm" >
+       <div class="modal-header">
+           <!-- <ng-content select=".app-modal-header"></ng-content> -->
+           {{'DuplicateAction' | sp3Translate}}
+       </div>
+       <div class="modal-body">
+           {{duplicateActionMessage}}
+       </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-primary " id="duplicateActionPopupClose" (click)="close()">{{'Ok'| sp3Translate}}</button>
+       </div>
+   </div>
+</div>
+</div>

@@ -1,0 +1,18 @@
+<svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+ <title/>
+
+ <g>
+  <title>background</title>
+  <rect x="-1" y="-1" width="28" height="28" id="canvas_background" fill="none"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path class="cls-1" d="m12.975088,3.453686c-6.38001,0 -11.54999,5.55997 -11.54999,11.94004a13.09,13.09 0 0 0 2.07,7.00002l19.00006,0a13.09,13.09 0 0 0 2.07,-7.00002c-0.04,-6.38007 -5.21001,-11.94004 -11.59007,-11.94004z" id="svg_2" fill="none" stroke="#443B3B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px"/>
+  <line class="cls-1" x1="12.9751" x2="12.9751" y1="4.373685" y2="5.373685" id="svg_3" fill="none" stroke="#443B3B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px"/>
+  <line class="cls-1" x1="4.9151" x2="6.0351" y1="7.813685" y2="8.933685" id="svg_4" fill="none" stroke="#443B3B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px"/>
+  <line class="cls-1" x1="21.0351" x2="19.9151" y1="7.813685" y2="8.933685" id="svg_5" fill="none" stroke="#443B3B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px"/>
+  <line class="cls-1" x1="1.9751" x2="2.9751" y1="15.373685" y2="15.373685" id="svg_6" fill="none" stroke="#443B3B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px"/>
+  <line class="cls-1" x1="22.9751" x2="23.9751" y1="15.373685" y2="15.373685" id="svg_7" fill="none" stroke="#443B3B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px"/>
+  <line class="cls-1" x1="12.9751" x2="16.6451" y1="22.373685" y2="13.543685" id="svg_8" fill="none" stroke="#443B3B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px"/>
+ </g>
+</svg>

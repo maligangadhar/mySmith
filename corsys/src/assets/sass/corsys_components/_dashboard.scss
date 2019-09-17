@@ -1,0 +1,443 @@
+.dashboard-main-panel{
+    padding: 16px;
+    float: left;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    height: 100%;
+    .col-title{
+        font-size: 24px;
+        font-weight: 300;
+        text-align: left;
+        color: #315064;
+        margin: 16px 0px;
+        font-family: ProximaSoft-Semibold, ProximaNova-Bold, ProximaNova-Regular;
+        small{
+            font-size: 16px;
+            font-weight: 500;
+            color: #443b3b;
+        }   
+    }
+    .kpi-section{
+        border-bottom: 1px solid #248cc0;
+        margin: 20px 0px;
+    }
+    .col-5{
+        width: 20%;
+        padding: 0 16px;
+        float: left;
+        margin-bottom: 16px;
+        position: relative;
+        
+        .col-thumb{
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border: solid 1px rgba(184, 189, 194, 0.4);
+            background: #fff;
+            float: left;
+            width: 100%;
+            padding: 16px 8px;
+            text-align: center;
+            text-transform: uppercase;
+            h4{
+                color: #299ed9;
+                font-size: 14px;
+                font-family:inherit;
+                font-weight: 300;
+                margin-bottom: 0px;
+                font-weight: 800;
+            }
+            h2{
+                font-size: 38px;
+                color: #1e6e96;
+                font-family: inherit;
+                font-weight: 300;
+                margin-top: 0px;
+               
+            }
+            
+        }
+    }
+    .col-foot{
+        padding: 4px 16px;
+        width: 100%;
+        float: left;
+        font-size: 16px;
+        font-family: ProximaSoft-Semibold, ProximaNova-Bold, ProximaNova-Regular;
+        .stats{
+            position: relative;
+        }
+        .fa{
+            font-size: 18px;
+            position: absolute;
+            right: 0px;
+            top: 4px;
+        }
+    }
+    .col-foot.positive{
+        background-color: rgba(61, 174, 94, 0.2);
+        color: #3dae5e;
+    }
+    .col-foot.negative{
+        background-color: rgba(202, 58, 58, 0.2);
+        color: #ca3a3a;
+        .fa{
+            -ms-transform: rotate(180deg); /* IE 9 */
+            -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+            transform: rotate(180deg);
+            top: -4px;
+        }
+    }
+    .leftsidebar{
+        width: 442px;
+        height:480px;
+    }
+    .rightsidebar{
+        width: calc(100% - 442px);
+        .sp3-charts{
+             height:480px;
+        }
+    }
+    .sp3-charts{
+        border: 0px;
+        .panel-heading{
+            background: transparent;
+            border-bottom: 0px;
+            font-size: 24px;
+            color:  #315064;
+            font-family: ProximaSoft-Semibold, ProximaNova-Bold, ProximaNova-Regular;
+            float: left;
+            width: 100%;
+            small{
+                font-size: 16px;
+                font-weight: 500;
+                color: #443b3b;
+            }
+        }
+        .panel-body{
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+            .c3-legend-item{
+                text-transform: capitalize;
+            }
+        }
+        
+    }
+    .hourlyscan{
+        position: relative;
+        .panel-heading{
+            position: absolute;
+            padding: 20px 10px;
+        }
+        .panel-body{
+            position: relative;
+            width: 100%;
+            height: 230px;
+            padding: 100px 32px;
+            .guage-component{
+                position: absolute;
+                top: 24px;
+                right: 1px;
+                display: inline-block;
+                width: auto;
+            }
+            .guage-footer{
+                position: absolute;
+                bottom: 0px;
+                right: 0px;
+                width: 100%;
+            }
+        }
+        
+    }
+}
+
+.leftsidebar{
+    .gradespan{ 
+        width: 14px;
+        height: 4px;
+        display: inline-block;
+        border-radius: 4px;
+        padding: 0px;
+        text-align: center;
+    }
+}
+.switchclass{
+    input[type="checkbox"]{
+        opacity: 0;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 37px;
+        height: 17px;
+        margin-bottom: 0px !important;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ca3a3a;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 19px;
+        width: 19px;
+        left: -4px;
+        bottom: -2px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        
+      }
+      
+      input:checked + .slider {
+        background-color: #3dae5e;
+      }
+      
+      
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+      
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 17px;
+      }
+      
+      .slider.round:before {
+        border-radius: 50%;
+      }
+}
+
+.chartBanner{
+    float:right;
+    color: #443b3b;
+    opacity: 0.9;
+    font-size: small;
+    .actual{
+      width: 35px;
+      height: 16px;
+      border-bottom: 2px solid #443b3b;
+      position: absolute;
+      margin-top: 4px;
+    }
+    .legend{
+      margin-left:40px;margin-right:10px;
+    }
+  }
+  
+  .chartloading {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            z-index: 9999999;
+            text-align: center;
+            padding : 50px;
+            background: #fff;
+            
+        .appspinner {
+            border: 4px solid #f3f3f3;
+            -webkit-animation: spin 0.8s linear infinite;
+            animation: spin 0.8s linear infinite;
+            border-top: 4px solid #299ed9;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+          }
+         span {
+            margin-top: 10px;
+            display: block;
+        }
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+          }
+          
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+    }
+         
+  
+  .sp3-guage{
+    .guageRange{
+       border:2px solid #ccc;
+       border-radius:4px;
+       padding:5px;
+    }
+    h3{
+      margin-top:35px;
+      margin-left: 20px
+    }
+    p{
+      color:#299ed9;
+      font-weight:700;
+      text-transform: uppercase;
+      padding-right: 65px;
+    }
+    .actual{
+      float:right;
+    }
+  }
+  
+  .stats > img{
+    margin-top:-6px;
+  }
+  .targetLegend
+  {
+    font-size: 20px;
+  }
+  .rap-line-chart {
+    .c3-line {
+    stroke-width: 3px;
+    }
+    
+    .c3-axis {
+    .tick line {
+    display: none;
+    }
+    }
+    }
+    .c3-chart-arcs .c3-chart-arcs-background{
+    fill:#d8efdf;
+    stroke:none
+    } 
+    
+    .c3-xgrid-line line {
+    stroke: green;
+    }
+    // .c3-chart-arc.c3-target.c3-target-Target{
+    // opacity: 0.2!important;
+    // }
+    .c3-chart-arc.c3-target,.c3-target-Actual:hover, .c3-chart-arc.c3-target.c3-target-Actual{
+    opacity: 1 !important;
+    }
+    .guageBanner{
+    margin-top:10px;
+    }
+    .c3-shapes.c3-shapes-Actual.c3-arcs.c3-arcs-Actual{
+    opacity: 0.2 !important;
+    }
+    .c3-gauge-value{
+        font-size:21px !important;
+        fill: #1e6e96 !important;
+        font-family: ProximaSoft-Semibold, ProximaNova-Bold, ProximaNova-Regular;
+        color: #1e6e96;
+    } 
+
+.sp3-charts{
+    .rank-rating {
+        background: #e8eef5;
+        text-align: center;
+        color: #fff;
+        padding: 5px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: inline-block;
+        border-radius: 4px;
+    }
+    .rank-rating.queryData {
+        width: 83px;
+        height: auto;
+        margin: 0px;
+    }
+    .rank-rating.highrisk {
+        background-color: rgba(202,58,58,.2);
+        color: #ca3a3a;
+    }
+    .rank-rating.norisk {
+        background-color: rgba(52,148,81,.2);
+        color: #339450;
+    }
+    .rank-rating.inactive {
+        background-color: gray;
+        color: #ccc;
+    }
+    .rank-rating.moderate{
+        color: #e68f28;
+        background-color: rgba(230, 143, 40, 0.2);
+      }
+    .table-responsive table td{
+        padding: 8px 16px !important;
+    }
+    .table-responsive table th{
+        padding: 8px 16px !important;
+        background-color: #e7d0ec!important;
+        font-family: ProximaNova-Bold;
+        font-size: 14px;
+        text-transform: uppercase;
+        border: 0;
+        text-align: left;
+        height: 32px!important;
+        overflow: hidden;
+        font-weight: 300;
+        color: #443b3b;
+        opacity: .9;
+    }
+    .c3 text{
+        color: #1e6e96;
+        fill: #1e6e96;
+        font-size: 12px;
+        font-family: ProximaNova-Bold;
+    }
+}
+.c3-chart-arc.c3-target,.c3-target-Actual:hover, .c3-chart-arc.c3-target.c3-target-Actual{
+    opacity: 1 !important;
+}
+.guageBanner{
+    margin-top:10px;
+}
+.c3-shapes.c3-shapes-Actual.c3-arcs.c3-arcs-Actual{
+    opacity: 0.2 !important;
+}
+.c3-gauge-value{
+    font-family: ProximaSoft-Semibold, ProximaNova-Bold, ProximaNova-Regular;
+    font-weight:normal;
+    font-size:24px !important;
+}
+
+.c3-chart-arcs .c3-chart-arcs-background{
+  fill:#d8efdf;
+  stroke:none
+ } 
+
+.c3-xgrid-line line {
+    stroke: green;
+}
+.c3 .c3-chart-lines .c3-chart-line .c3-areas .c3-area {opacity: 0.8 !important;} 
+
+.gradespan{ 
+    width: 14px;
+    height: 4px;
+    display: inline-block;
+    border-radius: 4px;
+    padding: 0px;
+}
+
+.paginationLoader {
+  border: 1px solid #f3f3f3;
+  -webkit-animation: spin 0.8s linear infinite;
+  animation: spin 0.8s linear infinite;
+  border-top: 4px solid #299ed9;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-right:25px;
+  display: inline-block;
+}

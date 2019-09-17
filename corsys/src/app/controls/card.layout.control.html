@@ -1,0 +1,132 @@
+﻿<div class="settings-wrapper">
+        <div class="row" *ngIf="showError">
+            <div class="col-md-12">
+                <sp3-comp-message-display id="roleMessage"></sp3-comp-message-display>
+            </div>
+        </div>
+
+        <div *ngIf="cardType === 6; then profilerSettingBlock"></div>
+        <ng-template #profilerSettingBlock>
+            <ng-container *ngTemplateOutlet="profilerSettingTemplate"></ng-container>
+        </ng-template>
+        <div *ngIf="cardType === 7; then rapPathwayBlock"></div>
+        <ng-template #rapPathwayBlock>
+            <ng-container *ngTemplateOutlet="rapPathwayTemplate"> </ng-container>
+        </ng-template>
+        <div *ngIf="cardType === 8; then dcSettingBlock"></div>
+        <ng-template #dcSettingBlock>
+            <ng-container *ngTemplateOutlet="dcSettingTemplate"> </ng-container>
+        </ng-template>
+        <div *ngIf="cardType === 5; then thenBlock"></div>
+        <div *ngIf="cardType === 1 || cardType === 2 || cardType === 3 || cardType === 4; then elseBlock"></div>
+        <ng-template #thenBlock>
+            <ng-container *ngTemplateOutlet="generalSettingTemplate"></ng-container>
+        </ng-template>
+        <ng-template #elseBlock>
+            <div *ngIf="column1Visible" class="row col-header">
+                <div [ngSwitch]="cardType">
+                    <div *ngSwitchCase="1"><ng-container *ngTemplateOutlet="roleHeaderTemplate"></ng-container></div>
+                    <div *ngSwitchCase="2"><ng-container *ngTemplateOutlet="userHeaderTemplate"></ng-container></div>
+                    <div *ngSwitchCase="3"><ng-container *ngTemplateOutlet="applicationHeaderTemplate"></ng-container></div>
+                    <div *ngSwitchCase="4"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div *ngIf="column1Visible" class="col-sm-3 col-md-2 col-lg-2 click-to-top" id="column1" [ngStyle]="zIndex0">
+                    <div [ngSwitch]="cardType">
+                        <div *ngSwitchCase="1"><ng-container *ngTemplateOutlet="roleViewTemplate"></ng-container></div>
+                        <div *ngSwitchCase="2"><ng-container *ngTemplateOutlet="userViewTemplate"></ng-container></div>
+                        <div *ngSwitchCase="3"><ng-container *ngTemplateOutlet="applicationViewTemplate"></ng-container></div>
+                        <div *ngSwitchCase="4"></div>
+                    </div>
+                </div>
+                <div class="col-lg-10 view-result">
+                    <div class="{{cardType == 4? 'click-to-top' : 'col-sm-5 col-md-5 col-lg-3 click-to-top'}}" id="column2" (click)="bringOnTop(1)" [ngStyle]="zIndex1" *ngIf="toggleCard">
+                        <div [ngSwitch]="cardType">
+                            <div *ngSwitchCase="1"><ng-container *ngTemplateOutlet="roleDetailTemplate"></ng-container></div>
+                            <div *ngSwitchCase="2"><ng-container *ngTemplateOutlet="userDetailTemplate"></ng-container></div>
+                            <div *ngSwitchCase="3"><ng-container *ngTemplateOutlet="applicationDetailTemplate"></ng-container></div>
+                            <div *ngSwitchCase="4"><ng-container *ngTemplateOutlet="userDetailTemplate"></ng-container></div>
+                        </div>
+                    </div>
+                    <div class="{{cardType == 4?'click-to-top' : cardType == 1? 'col-sm-5 col-md-5 col-lg-5 click-to-top' : 'col-sm-5 col-md-5 col-lg-4 click-to-top'}}" id="column3" (click)="bringOnTop(2)" [ngStyle]="zIndex2" *ngIf="toggleCard">
+                        <div [ngSwitch]="cardType">
+                            <div *ngSwitchCase="1"><ng-container *ngTemplateOutlet="appTemplate"></ng-container></div>
+                            <div *ngSwitchCase="2"><ng-container *ngTemplateOutlet="roleTemplate"></ng-container></div>
+                            <div *ngSwitchCase="3"><ng-container *ngTemplateOutlet="applicationRoleTemplate"></ng-container></div>
+                            <div *ngSwitchCase="4"><ng-container *ngTemplateOutlet="createUserRoleTemplate"></ng-container></div>
+                        </div>
+                    </div>
+                    <div class="{{cardType == 1? 'col-sm-5 col-md-5 col-lg-4 click-to-top' : cardType == 4?'click-to-top' : 'col-sm-5 col-md-5 col-lg-5 click-to-top'}}" id="column4" (click)="bringOnTop(3)" [ngStyle]="zIndex3" *ngIf="toggleCard">
+                        <div [ngSwitch]="cardType">
+                            <div *ngSwitchCase="1"></div>
+                            <div *ngSwitchCase="2"><ng-container *ngTemplateOutlet="appUserTemplate"></ng-container></div>
+                            <div *ngSwitchCase="3"></div>
+                            <div *ngSwitchCase="4"><ng-container *ngTemplateOutlet="appCreateUserTemplate"></ng-container></div>
+                            <div *ngSwitchDefault>No Data Found</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+<ng-template #userTemplate let-contact>
+    <sp3-comp-user-view #userTemplateViewer></sp3-comp-user-view>
+</ng-template>
+<ng-template #userDetailTemplate let-contact>
+    <sp3-comp-user-detail #userDetailTemplateViewer [mode]="mode"></sp3-comp-user-detail>
+</ng-template>
+<ng-template #roleViewTemplate let-fileteredRoleList>
+    <sp3-comp-role-view #roleTemplateViewer (cardDisplayUpdate)="handleCardUpdated($event)"></sp3-comp-role-view>
+</ng-template>
+<ng-template #applicationViewTemplate let-contact>
+    <sp3-comp-application-view #applicationTemplateViewer (cardDisplayUpdate)="handleCardUpdated($event)"></sp3-comp-application-view>
+</ng-template>
+<ng-template #generalSettingTemplate let-contact>
+    <sp3-comp-general-settings #generalSettingTemplateViewer></sp3-comp-general-settings>
+</ng-template>
+<ng-template #applicationDetailTemplate let-contact>
+    <sp3-comp-application-detail #applicationDetailTemplateViewer></sp3-comp-application-detail>
+</ng-template>
+<ng-template #applicationRoleTemplate let-applicationRole>
+    <sp3-comp-application-role #applicationRoleTemplateViewer></sp3-comp-application-role>
+</ng-template>
+<ng-template #userViewTemplate let-fileteredUserList>
+    <sp3-comp-user-view #userTemplateViewer (cardDisplayUpdate)="handleCardUpdated($event)"></sp3-comp-user-view>
+</ng-template>
+<ng-template #roleDetailTemplate let-roleDetail>
+    <sp3-comp-role-detail #roleDetailTemplateViewer></sp3-comp-role-detail>
+</ng-template>
+<ng-template #appTemplate let-applications>
+    <sp3-comp-applications #appTemplateViewer controlId="role" [mode]="3" [allowNavigate]="false" [showAllApps]="true" [showSelect]="true" [allowSelect]="true" [selectedApps]="roleApps" [showNoAppMessage]="false"></sp3-comp-applications>
+</ng-template>
+<ng-template #appUserTemplate let-userRoleApplications>
+    <sp3-comp-applications #appUserTemplateViewer controlId="userEditApps" [mode]="3" [allowNavigate]="false" [showAllApps]="false" [showSelect]="false" [allowSelect]="false" [selectedApps]="userRoleApps" [showNoAppMessage]="false"></sp3-comp-applications>
+</ng-template>
+<ng-template #appCreateUserTemplate let-createUserRoleApplications>
+    <sp3-comp-applications #appCreateUserTemplateViewer controlId="selectedUserRoleAppsId" [mode]="3" [allowNavigate]="false" [showAllApps]="false" [showSelect]="false" [allowSelect]="false" [selectedApps]="createUserRoleApps" [showNoAppMessage]="false"></sp3-comp-applications>
+</ng-template>
+<ng-template #roleTemplate let-roles>
+    <sp3-comp-roles #roleTemplateViewer controlId="editUserSelectedRoleId"></sp3-comp-roles>
+</ng-template>
+<ng-template #createUserRoleTemplate let-createUserRoles>
+    <sp3-comp-roles #createUserRoleTemplateViewer controlId="createUserSelectedRoleId"></sp3-comp-roles>
+</ng-template>
+<ng-template #userHeaderTemplate let-userHeader>
+    <sp3-comp-user-header #userHeaderTemplateViewer></sp3-comp-user-header>
+</ng-template>
+<ng-template #applicationHeaderTemplate let-userHeader>
+    <sp3-comp-application-header #applicationHeaderTemplateViewer></sp3-comp-application-header>
+</ng-template>
+<ng-template #roleHeaderTemplate let-roleHeader>
+    <sp3-comp-role-header #roleHeaderTemplateViewer></sp3-comp-role-header>
+</ng-template>
+<ng-template #profilerSettingTemplate let-profilerSetting>
+    <sp3-comp-profiler-setting #profilerSettingTemplateViewer></sp3-comp-profiler-setting>
+</ng-template>
+<ng-template #rapPathwayTemplate let-rapPathway>
+  <sp3-comp-rap-pathway #rapPathwayTemplateViewer></sp3-comp-rap-pathway>
+</ng-template>
+<ng-template #dcSettingTemplate let-rapPathway>
+    <sp3-comp-dc-setting #dcSettingTemplateViewer></sp3-comp-dc-setting>
+</ng-template>

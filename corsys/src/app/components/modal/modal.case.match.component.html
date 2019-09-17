@@ -1,0 +1,79 @@
+<div *ngIf="visible" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}"> 
+    <div id="caseMatchModal" role="dialog" class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">                    
+                <a class="close" (click)="closeClick()" data-dismiss="modal"><i class="icn-close"></i></a>
+                <h4 class="modal-title">{{pageTitle | sp3Translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <p style="font-weight:600;">{{questionText | sp3Translate}}</p>
+                <div class="row" style="border: 1px solid #ccc;margin-top: 13px;border-radius: 3px;">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                           <label class="control-label col-xs-4 col-sm-4">{{'ContainerID'| sp3Translate}} :</label>
+                           <label class="control-label col-xs-8 col-sm-8">{{caseDetails.containers[0].id}}</label> 
+                        </div>
+                    </div> 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                           <label class="control-label col-xs-4 col-sm-4">{{'DestinationPort'| sp3Translate}}:</label>
+                           <label class="control-label col-xs-8 col-sm-8">{{to}}</label> 
+                        </div>
+                    </div> 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                           <label class="control-label col-xs-4 col-sm-4">{{'DateOfArrival'| sp3Translate}}:</label>
+                           <label class="control-label col-xs-8 col-sm-8" *ngIf="caseDetails.dateOfArrival">{{caseDetails.dateOfArrival | sp3DateTimeFormat}}</label> 
+                        </div>
+                    </div> 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                           <label class="control-label col-xs-4 col-sm-4">{{'CurrentStatus'| sp3Translate}}:</label>
+                           <label class="control-label col-xs-8 col-sm-8">{{statusName}}</label> 
+                        </div>
+                    </div> 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                           <label class="control-label col-xs-4 col-sm-4">{{'ShipId'| sp3Translate}}:</label>
+                           <label class="control-label col-xs-8 col-sm-8" *ngIf="caseDetails.shipping && caseDetails.shipping.shipId" >{{caseDetails.shipping.shipId}} </label> 
+                        </div>
+                    </div> 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                           <label class="control-label col-xs-4 col-sm-4">{{'ShippingCompany'| sp3Translate}}:</label>
+                           <label class="control-label col-xs-8 col-sm-8" *ngIf="caseDetails.shipping && caseDetails.shipping.shippingCompany" >{{caseDetails.shipping.shippingCompany }}</label> 
+                        </div>
+                    </div> 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                           <label class="control-label col-xs-4 col-sm-4">{{'ShippingContact'| sp3Translate}}:</label>
+                           <label class="control-label col-xs-8 col-sm-8" *ngIf="caseDetails.shipping && caseDetails.shipping.contactDetails" >{{caseDetails.shipping.contactDetails}}</label> 
+                        </div>
+                    </div> 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                           <label class="control-label col-xs-4 col-sm-4">{{'ShippingNationality'| sp3Translate}}:</label>
+                           <label class="control-label col-xs-8 col-sm-8" *ngIf="caseDetails.shipping && caseDetails.shipping.nationality" >{{caseDetails.shipping.nationality}}</label> 
+                        </div>
+                    </div> 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                           <label class="control-label col-xs-4 col-sm-4">{{'DeparturePort'| sp3Translate}}:</label>
+                           <label class="control-label col-xs-8 col-sm-8">{{from}}</label> 
+                        </div>
+                    </div> 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                           <label class="control-label col-xs-4 col-sm-4">{{'DepartureDate'| sp3Translate}}:</label>
+                           <label class="control-label col-xs-8 col-sm-8" *ngIf="caseDetails.departureDate">{{caseDetails.departureDate | sp3DateTimeFormat}}</label> 
+                        </div>
+                    </div> 
+                </div>       
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-reverse" data-dismiss="modal" id="sameCase" title="Cases are the same, no need to create new case, therefore you will be returned to your My Cases"  (click)="sameCaseClick()">Same Case</button>
+                <button type="button" class="btn btn-reverse" id="differentCase" title="Cases are different and new case needs to be created with different information. Therefore you will be returned to New Case page to change case information" (click)="differentCaseClick()">Different Case</button>                   
+            </div>
+    </div>
+</div>

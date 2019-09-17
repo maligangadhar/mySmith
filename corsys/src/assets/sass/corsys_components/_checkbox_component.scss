@@ -1,0 +1,57 @@
+
+/* 
+- Style each label that is directly after the input
+- position: relative; will ensure that any position: absolute children will position themselves in relation to it
+*/
+#actionaPage {
+    input[type=checkbox] + label {
+        position: relative;
+        background: #fff url(../images/svg/icn-checkbox-normal.svg) no-repeat 0 0;
+        height: 20px;
+        width: 20px;
+        display: block;
+        cursor: pointer;
+        background-size: 20px;
+        top: -1.5em;
+        left: 0.5em;
+    }
+    /* Provide a border when hovered and when the checkbox before it is checked */
+    input[type=checkbox]:checked + label {
+        background: #fff url("../images/svg/icn-checkbox-selected.svg") no-repeat 0 0;
+        height: 20px;
+        width: 20px;
+        display: block;
+        cursor: pointer;
+        background-size: 20px;
+        top: -1.5em;
+        left: 0.5em;
+        /* Soften the jagged edge */
+    }
+    /* 
+- Create a pseudo element :after when checked and provide a tick
+- Center the content
+*/
+    input[type=checkbox]:checked + label:after {
+        /*content is required, though it can be empty - content: '';*/
+        height: 1em;
+        position: absolute;
+        font-size: 18px;
+        text-align: center;
+    }
+    /* Provide a border when hovered and when the checkbox before it is checked */
+    th input[type=checkbox]:checked + label {
+        background: #dac4df url(../images/svg/icn-checkbox-normal.svg) no-repeat 0 0 !important;
+    }
+
+    th input[type=checkbox]:checked + label {
+        background: #dac4df url(../images/svg/icn-checkbox-selected-partial.svg) no-repeat 0 0 !important;
+        height: 18px;
+        width: 18px;
+        display: block;
+        cursor: pointer;
+        background-size: 19px;
+        top: -1.5em;
+        left: 0.5em;
+        /* Soften the jagged edge */
+    }
+}

@@ -1,0 +1,81 @@
+<div class="settings-wrapper">
+    <div class="settings-control col-sm-4"><!-- Left Panel starts here-->
+        <div class="row">
+            <div class="col-sm-12 settings-innercontrol" [style.height.px]="innerControlHeight">
+                <div class="users-list row" [style.height.px]="viewListHeight">
+                    <div id="userList">
+                        <div class="radio" *ngFor="let device of deviceList; let idx = index">
+                            <input id="{{device.id}}" name="deviceInfo" type="radio" [checked]="idx === 0" [value]="device" (change)="onSelectionChange(device, idx)">
+                            <label for="{{device.id}}">{{device.serialNumber}}</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="deviceList.length == 0">
+                        <h4 class="col-sm-12 error-info">{{'NoResultFound' | sp3Translate}}</h4>
+                    </div>
+            </div>
+            </div>
+        </div>
+      
+    </div> <!-- Left Panel ends here-->
+    <div class="settings-viewer col-sm-8"> <!-- Right Panel Starts here-->
+        <div class="settings-innerviewer">
+            <div class="settings-title">
+                <h2 id="modelName">{{selectedDevice.serialNumber}}</h2>
+            </div>
+            <div class="row">
+                <form class="form-horizontal">
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="id">{{'DeviceId' | sp3Translate}}</label>
+                            <p class="body-text" id="id">{{selectedDevice.id}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="manufacturer">{{'Manufacturer' | sp3Translate}}</label>
+                            <p class="body-text" id="manufacturer">{{selectedDevice.manufacturer}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="modelName">{{'ModelName' | sp3Translate}}</label>
+                            <p class="body-text" id="modelName">{{selectedDevice.modelName}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="latitude">{{'Latitude' | sp3Translate}}</label>
+                            <p class="body-text" id="latitude">{{selectedDevice.latitude}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="longitude">{{'Longitude' | sp3Translate}}</label>
+                            <p class="body-text" id="longitude">{{selectedDevice.longitude}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="location">{{'Location' | sp3Translate}}</label>
+                            <p class="body-text" id="location">{{selectedDevice.location}}</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="userOrgId">{{'AssignedLicense' | sp3Translate}}</label>
+                                <sp3-comp-inputswitch [buttonState]="selectedDevice.assignedLicense" [disableSwitch]="!selectedDevice.licenseAvailable" (getButtonState)="fetchButtonState($event)"></sp3-comp-inputswitch>
+                                <p *ngIf="!selectedDevice.licenseAvailable">{{'NoLicense' | sp3Translate}}</p>
+                                <p *ngIf="toggleLicenseFailure">{{'NoLicense' | sp3Translate}}</p>                                
+                            </div>
+                        </div>  
+                    </div>
+                    </form>
+            </div>
+        </div>
+    </div> <!-- Right Panel ends here-->
+</div>

@@ -1,0 +1,23 @@
+﻿
+<div class="viewer-container arrivals" [ngClass]="{ 'sclose': togglePanel, 'sopen': !togglePanel  }">
+    
+        <sp3-comp-side-menu  header="{{'Arrivals' | sp3Translate}}" (sideMenuToggleState)="getMenuState($event)">
+            <sp3-menu-item [active]="true"  heading="{{'CreateCase' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-actions.svg'}}" imageCss="{{'icn_addcase'}}"
+                [currentTab]="1" controlId="myCases" (select)="onTabChange(actionTab.myCases)">
+            </sp3-menu-item>
+            <sp3-menu-item [active]="false" heading="{{'MyDrafts' | sp3Translate}}" imageSrc="{{'../../assets/images/svg/icn-cases.svg'}}"
+                imageCss="{{'icn_cases'}}" [currentTab]="2" controlId="myDrafts" (select)="onTabChange(actionTab.myDrafts)">
+            </sp3-menu-item>
+        </sp3-comp-side-menu>
+    
+    
+        <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.myCases">
+           <sp3-comp-case-view controlId="Cases"></sp3-comp-case-view>
+           
+        </div>
+
+        <div class="viewer-main-panel" *ngIf="selectedTab === actionTab.myDrafts"> 
+          <sp3-comp-case-view controlId="Draft"></sp3-comp-case-view>
+        </div>
+        
+    </div>

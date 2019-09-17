@@ -1,0 +1,13 @@
+<div id="autocomplete">
+    <p-autoComplete [minLength]="minLength" (onKeyUp)="onEnterKeyPressed($event)" [placeholder]="placeholder" (onSelect)="onSelection($event)"
+        (onBlur)="onBlur($event.target.value)"
+        [(suggestions)]="suggestions" (completeMethod)="onSearch($event)" [(ngModel)]="selectedSearch" [multiple]="multiple" field="fieldValue">
+           
+            <ng-template let-result pTemplate="item">
+                <div class="ui-helper-clearfix">   
+                    <div class="pull-left">{{result.fieldName==='From' ? result.fullValue:result.fieldValue}}</div>
+                    <div class="pull-right" style="color: #299ed9;" *ngIf="displayFieldName">{{result.fieldName | sp3Translate}}</div>                                              
+                </div>
+            </ng-template> 
+    </p-autoComplete>
+</div> 

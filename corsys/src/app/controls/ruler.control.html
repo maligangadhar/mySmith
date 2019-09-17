@@ -1,0 +1,44 @@
+﻿<sp3-comp-modal-prompt #modalPrompt (confirmButtonStat)="modalPromptClick($event)" questionText="{{'RulerDeleteQuestion'|sp3Translate}}"
+    headerText="{{'RulerMark'|sp3Translate}}"></sp3-comp-modal-prompt>
+<sp3-comp-modal-confirm #modalRulerCreationValidation>
+    <div class="app-modal-header">
+        {{'AddRuler' | sp3Translate}}
+    </div>
+    <div class="app-modal-body">
+        <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{'RulerCreationErrorMessage'| sp3Translate}}</p>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-primary " id="rulerCreationOk" (click)="validationOkClick()">{{'Ok'| sp3Translate}}</button>
+    </div>
+</sp3-comp-modal-confirm>
+<div #rulerOverlayDiv *ngIf="toDrawRuler" style="position: absolute; cursor: crosshair;z-index:100" [style.width.px]="readerWidth"
+    [style.height.px]="readerHeight" [style.cursor]="cursorType">
+</div>
+<div [style.cursor]="cursorType">
+    <div *ngFor="let ruler of rulerArray; let i = index" [attr.id]="ruler.rulerId" style="position: absolute; cursor: move;"
+        [style.display]="ruler.isVisible" [style.width.px]="ruler.rulerWidth" [style.height.px]="ruler.height" [style.left.px]="ruler.displayCoordinates.startPoint.x"
+        [style.zIndex]="ruler.zIndex" [style.transform]="'rotate(' + (ruler.angle ? ruler.angle : 0) + 'deg)'" (mouseup)="rulerMouseUp($event)"
+        (touchend)="onTouchEnd($event)" (mousedown)="ruleredown(ruler)" (touchstart)="onTouchStart($event,ruler)" (mouseout)="leaveRuler($event)"
+        (mouseleave)="leaveRuler($event)" [style.top.px]="ruler.displayCoordinates.startPoint.y" [class]="ruler.rulerClass">
+        <label style="-webkit-touch-callout: none; -webkit-user-select: none;-ms-user-select: none;user-select: none;">{{ruler.length}} mtrs</label>
+        <div class="finding-icons-header">
+            <button type="button" class="btn btn-link pull-right" (disabled)="disablePopUp" (click)="openRulerButtons(ruler)">
+                <i class="fa fa-gear" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="isLoading" style="position:absolute;z-index:999999999999" [style.left.px]="iRuler.displayCoordinates.startPoint.x"
+        [style.top.px]="iRuler.displayCoordinates.startPoint.y">
+        <sp3-comp-loader [size]="'medium'"></sp3-comp-loader>
+    </div>
+    <div class="rulers-modal" *ngIf="isRulersButtonsVisible && (!viewMode || editFinding)" [style.left.px]="annotationBoxX" [style.top.px]="annotationBoxY">
+        <div class="rulers-dialog row">
+            <button type="button" class="btn btn-block btn-reverse btn-lg rulers-popup-btn" (click)="hideRuler()">
+                <i class="fa fa-eye-slash" aria-hidden="true"></i>{{'HideRuler' | sp3Translate}}</button>
+            <button type="button" *ngIf="!viewMode" class="btn btn-block btn-reverse btn-lg rulers-popup-btn" (click)="deleteRuler()">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>{{'DeleteRuler' | sp3Translate}}
+            </button>
+        </div>
+    </div>
+
+</div>

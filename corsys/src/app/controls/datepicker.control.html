@@ -1,0 +1,8 @@
+  <div class="sp3-datepicker-com">  
+     <div class="input-group {{controlClass}}">
+        <dp-date-picker [(ngModel)]="selectedDate" [required]="true" [config]="config" [theme]="'dp-material'" #datePicker (ngModelChange)="onDateChange()" [disabled]="enablecontrols" id="datePicker"></dp-date-picker>
+        <span class="input-group-addon" (click)="openCalendar()" id="openCalendarPopup"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+        <span class="input-group-addon" (click)="clearCalendar()" id="closeCalendarPopup"><i class="fa fa-times" aria-hidden="true"></i></span>
+    </div>
+  </div>
+  <span class="help-block error-msg case-from-msg" *ngIf="isEmpty">{{'Required' | sp3Translate}}</span>

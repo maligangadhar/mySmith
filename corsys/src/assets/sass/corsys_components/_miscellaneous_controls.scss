@@ -1,0 +1,310 @@
+.selectorHeight {
+  min-width: 210px;
+  max-width: 210px;
+}
+
+.selectorPad {
+  padding: 0 16px;
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+.ui-widget-content.ui-autocomplete-panel {
+  border-radius: 0px;
+  border: 0px;
+  box-shadow: 0px 0px 0px;
+  max-height: unset !important;
+
+  .ui-autocomplete-list {
+      height: auto !important;
+      max-height: 200px !important;
+      background-color: $text-color-white;
+      border: solid 1px #c0c0c0 !important;
+      overflow-y: auto;
+      margin-top: 2px;
+
+      .ui-autocomplete-list-item {
+          padding: 10px;
+          border-radius: 0px;
+
+          .ui-helper-clearfix {
+              border-bottom: 0px !important;
+          }
+      }
+
+      .ui-autocomplete-list-item.ui-state-highlight,
+      .ui-autocomplete-list-item.ui-state-highlight,
+      .ui-state-highlight {
+          background-color: rgba(68, 59, 59, 0.1) !important;
+          color: $gray-base !important;
+          border-radius: 0px;
+      }
+  }
+}
+
+.ui-multiselect {
+  width: 100%;
+
+  .ui-multiselect-panel {
+      width: 100%;
+      min-width: unset;
+  }
+}
+
+.ui-autocomplete-multiple-container.ui-inputtext {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid #c7c4c4;
+  border-radius: 4px;
+  min-height: 40px;
+
+  .ui-autocomplete-token {
+      margin-bottom: 4px;
+      width: 100%;
+  }
+
+  .ui-autocomplete-input-token {
+      width: 100%;
+      padding: 0px;
+
+      input {
+          width: 100%;
+          padding: 0px;
+      }
+  }
+}
+
+li.ui-multiselect-item.ui-corner-all.ui-state-highlight label {
+  color: #fff;
+  // vertical-align: middle;
+  // display: inline;
+}
+
+.ui-autocomplete {
+  width: 100%;
+}
+
+.disablemenu {
+  pointer-events: none;
+}
+
+.icn-close {
+  background: url(../images/svg/icn-close.svg) right no-repeat;
+  background-size: 12px;
+  background-color: transparent;
+  width: 20px;
+  height: 14px;
+  display: block;
+  color: #fff;
+}
+
+.helper-text {
+  font-family: 'ProximaNova-Regular', Helvetica, Arial, sans-serif;
+  line-height: 1.67;
+  color: $gray-base;
+  margin-top: 5px;
+  float: left;
+  width: 100%;
+}
+.box-border-grey {
+  /*border: 1px solid #aeaaaa;
+  text-align: center; */
+  text-align: left;
+  padding: 12px 16px;
+  height: 70px;
+  float: left;
+  width: auto;
+}
+.selected{
+  opacity: 0.5;
+}
+.panel-primary > .panel-heading {
+  color: #fff;
+  background-color: #299ed9;
+  border-color: #299ed9;
+}
+.form-control[disabled], fieldset[disabled] .form-control {
+  cursor: default;
+}
+::-webkit-scrollbar
+{
+	width: 16px;
+	opacity: 0.5;
+  background-color: #ebebeb;
+}
+::-webkit-scrollbar-thumb
+{
+  width: 12px;
+	border-radius: 4px;
+  background-color: #dde2e8;
+  border: solid 1px #b8bdc2;
+}
+input:-webkit-autofill,input:hover:-webkit-autofill,input:focus:-webkit-autofill {
+  background-color: #fff !important;
+}
+input:-webkit-autofill,input:hover:-webkit-autofill,input:focus:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px white inset;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.ui-autocomplete-loader{
+  display: none;
+}
+
+.form-control[disabled]::-webkit-input-placeholder { /* WebKit browsers */
+  color:#443b3b !important;
+}
+.form-control[disabled]:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #443b3b !important;
+}
+.form-control[disabled]::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #443b3b !important;
+}
+.form-control[disabled]:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #443b3b !important;
+}
+
+
+
+
+/*PRE UAT Bug fixes */
+/*Query Builder Dropdown styles*/
+.arrivals-case-creation .table-responsive table .ui-widget-content .ui-datatable-emptymessage{font-size: 16px; color:#443b3b;    border: 1px solid #ccc; }
+.ui-multiselect .ui-multiselect-label {background: transparent;}
+.ui-multiselect .ui-multiselect-label-container .ui-multiselect-label{padding: 10px 16px;}
+.header-search .ui-multiselect .ui-multiselect-label-container .ui-multiselect-label{padding: 10px 16px;}
+.ui-multiselect .ui-multiselect-label-container {height: 40px;}
+.ui-multiselect .ui-multiselect-trigger {
+  padding: 8px; border-left: 1px solid #d6d6d6;
+  width: auto; background: transparent;}
+.ui-state-highlight a,.ui-widget-content a{color: #299ed9; }
+.ui-multiselect .ui-multiselect-panel .ui-multiselect-item{height: auto; vertical-align: top; padding-top: 2px;padding-bottom: 4px;}
+.ui-multiselect .ui-multiselect-panel .ui-multiselect-item label{margin: 0px;}
+.ui-multiselect .ui-multiselect-panel{z-index: 9999 !important;}
+.ui-datatable .ui-datatable-data tr.ui-state-highlight{cursor: default;}
+.ui-chkbox .ui-chkbox-icon{height: 18px; padding: 0px;}
+
+.locationdiv {
+  position: relative;
+  /*Don't really need this just for demo styling*/
+  float: left;
+  img{
+    position: absolute;
+    z-index: 99;
+    left: 26px;
+    top: 16px;
+  }
+  select::-ms-expand {
+    display: none;
+}
+}
+.viewselection{
+  select::-ms-expand {
+    display: none;
+}
+}
+
+
+.site-header .navbar-inverse .navbar-collapse .navbar-right .locationdiv select.form-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add some styling */
+  display: block;
+  padding: 0 10px 0 32px;
+}
+.dp-material[_nghost-c1] .dp-calendar-day[_ngcontent-c1]{
+  border-radius: 16px !important;
+  text-align: center;
+  padding: 0px;
+}
+
+@media only screen and (max-width: 1024px){
+  body{
+    min-height: 100vh;
+  }  
+  .col-5{
+  width: 50% !important;
+}
+.leftsidebar,.rightsidebar{
+  width: 100% !important;
+  height:490px;
+}
+.ui-datatable{
+        table {
+            th,td {
+              width: 200px !important;
+           }
+           .uicheckboxgrid{
+            width: 50px !important; 
+            }
+            .uiflaggrid{
+                width: 75px !important; 
+            }
+            .uicontainergrid, .uidategrid{
+                width: 150px !important;
+            }
+       }
+    }
+  .categoryscorediv{
+    .ui-datatable{
+      table {
+          th,td {
+            width: auto !important;
+         }
+     }
+  }
+  }
+   
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+  /* IE10+ specific styles go here */  
+.btn{line-height: 26px}
+.btn.btn-lg{line-height: 22px}
+.btn.btn-sm{line-height: 24px;}
+.top-bar .ui-splitbutton .ui-button .ui-button-text{line-height: 22px;}
+.top-bar .verdict-buttons .ui-splitbutton .ui-menu.ui-menu-dynamic{min-width: 210px;}
+.top-bar .ui-splitbutton .ui-menu.ui-menu-dynamic .ui-menu-list .ui-menuitem .ui-menuitem-link{height: auto;}
+.inspection-header .header-search .ui-multiselect-panel .ui-multiselect-item label,.ui-multiselect .ui-multiselect-panel .ui-multiselect-item label{margin-bottom: -6px;}
+.ui-multiselect .ui-multiselect-panel .ui-multiselect-item.ui-state-highlight label{margin-bottom: -3px;}
+.ui-multiselect .ui-multiselect-label-container .ui-multiselect-label{line-height: 26px;}
+.ui-multiselect .ui-multiselect-label-container .ui-multiselect-label{padding: 12px 16px;}
+// select::-ms-expand { display: none; }
+.site-header .navbar-inverse .navbar-collapse .navbar-right .locationdiv select.form-control {padding: 5px 10px 0px 32px;}
+.site-header .navbar-inverse .navbar-collapse .navbar-right .locationdiv select:readonly option{color: #fff !important;}
+.full-height-inspect-modals .modal-dialog .modal-content .modal-body{ max-height: calc(100vh - 290px);}
+.case-analyzer::selection { background-color: transparent; }
+.case-analyzer::-webkit-selection {background-color: transparent; }
+.fade, .fade.in{transition: opacity 0s linear;}
+.image-tools,.top-bar,.bottom-bar,.rulerNormal,.rulerFlipHorizontal,sp3-comp-mark-area {
+        -ms-user-select: none; /* Internet Explorer/Edge */
+}
+}
+@media only screen and (max-width: 767px){
+  .screening-actions,.override-actions{
+    position: relative;
+    margin-left: 0px !important;
+    margin-bottom: 20px;
+  }
+  .site-header .navbar-inverse .navbar-collapse .navbar-nav > li > a{
+    padding: 4px 8px;
+  }
+  .site-header .navbar-inverse .navbar-collapse .navbar-left{
+    text-align: left;
+  }
+  .site-header .navbar-inverse .navbar-collapse .navbar-right {
+    text-align: right;
+    margin: 0px;
+      li{
+        display: inline-block;
+        list-style: none;
+      }
+    }
+  .site-header .navbar-inverse .navbar-collapse .navbar-right .selectlocation{padding: 4px 8px; margin: 4px;}
+}

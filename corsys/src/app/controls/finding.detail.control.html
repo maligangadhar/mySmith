@@ -1,0 +1,66 @@
+<div class="col-sm=-12">
+    <div *ngIf="isLoading">
+        <sp3-comp-loader [size]="'medium'"></sp3-comp-loader>
+    </div>
+    <!---Start:: Grid Table-->
+    <div *ngIf="!isLoading">
+        <div class="verdict-list col-sm-12" *ngIf="findings.length > 0;else noFindingData">
+            <div class="row">
+                <ul>
+                    <li class="list-header hidden-sm hidden-md">
+                        <div class="col-sm-3 zeropadding">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-2">{{'Finding_Category' | sp3Translate}}</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 zeropadding">{{'Finding_GoodsType' | sp3Translate}}</div>
+                        <div class="col-sm-6 zeropadding">{{'Finding_Description' | sp3Translate}}</div>
+                    </li>
+                    <div class="findings-result-list">
+                        <li *ngFor="let finding of findings" [ngClass]="{'row-declared': finding.status === 1}">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="row">
+                                    <div class="col-sm-2 co zeropadding">
+                                        <div class="two-layer-container">
+                                            <div class="two-layer-square">
+                                                <div class="two-layer-overlay"></div>
+                                            </div>
+                                        </div>
+                                        <div class="text-on-2-layers">
+                                            {{finding.findingNumber}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="visible-md visible-sm fidingslabels">{{'Finding_Category' | sp3Translate}} <br/></div> {{finding.category}}</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3 paddingtrim">
+                                <div class="visible-md visible-sm fidingslabels">{{'Finding_GoodsType' | sp3Translate}} <br/></div>{{finding.goodsType}}</div>
+                            <div class="col-sm-11 col-lg-6 col-sm-offset-1 col-lg-offset-0 paddingtrim findingscolumns">
+                                <div class="row">
+                                    <div class="col-sm-12 col-lg-7">
+                                        <div class="visible-md visible-sm fidingslabels">{{'Finding_Description' | sp3Translate}} <br/></div>{{finding.comment}}</div>
+                                    <div class="col-sm-12 col-lg-5 text-right" *ngIf="isVerdictVisible">
+                                        <p class="findingsactionsbtns">
+                                            <button [ngClass]="(finding.status === 0) ? 'btn btn-transparent':'btn btn-primary'" [disabled]="isUpdating" type="button"
+                                                (click)="declare(finding)" id="declare">
+                                             <span  *ngIf = "finding.status === 0"> {{ 'Finding_Declare' | sp3Translate }}</span>
+                                             <span  *ngIf = "finding.status === 1"> {{ 'Finding_Declared' | sp3Translate}}</span>
+                                        </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <!---End:: Grid Table-->
+    <ng-template #noFindingData>
+        <div class="panel-warning">{{'NoFindings' | sp3Translate}}</div>
+    </ng-template>
+
+</div>

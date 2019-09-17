@@ -1,0 +1,22 @@
+.profiler-risks{
+    .heading{
+        background: #e8eef5;
+        font-weight: bold;
+        padding: 20px 0px;
+    }
+    .form-group{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .profile-risklist{
+        max-height: 300px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        float: left;
+        width: 100%;
+    }
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    margin: 15px;
+    padding: 15px;
+}

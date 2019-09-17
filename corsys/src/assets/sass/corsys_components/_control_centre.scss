@@ -1,0 +1,73 @@
+/* 
+- Control Centre - Page layout Styles
+*/
+.control-center-grid {
+    width: 100%;
+    margin: 0;
+    padding: 0px;
+    //background: #e8eef5;
+    height: 100vh;
+    float: left;
+    /**Start -  Control centre Search Cases **/
+    .search-panel {
+        padding: 16px;
+        float: left;
+        width: 100%;
+        position: relative;
+
+        p-autocomplete {
+            width: 100%;
+            float: left;
+
+            .ui-autocomplete, .ui-autocomplete-multiple-container, ui-autocomplete-input-token {
+                width: 100%;
+            }
+
+            .ui-widget input {
+                padding: 10px 100px 10px 40px;
+                height: 40px;
+                width: 100%;
+            }
+        }
+
+        .fa {
+            position: absolute;
+            left: 32px;
+            top: 28px;
+        }
+
+        .query-btn {
+            position: absolute;
+            right: 32px;
+            top: 20px;
+            padding: 0px;
+            font-family: ProximaNova-Bold;
+            text-transform: capitalize;
+            color: #299ed9;
+            font-size: 12px;
+            text-transform: capitalize;
+        }
+
+        .query-btn:hover, .query-btn:active, .query-btn:focus {
+            outline: none;
+        }
+    }
+    /**End -  Control centre Search Cases **/
+    
+}
+.screening-actions{
+    position: absolute;
+    top: 16px;
+    z-index: 999;
+    .btn{
+        margin-right: 5px;
+    }
+}
+.override-actions{
+    position: absolute;
+    top: 16px;
+    z-index: 999;
+    .btn{
+        margin-right: 5px;
+    }
+}

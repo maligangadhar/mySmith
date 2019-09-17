@@ -1,0 +1,71 @@
+.login-screen{
+    background-color: #ebebeb;
+    height: 100vh;
+    padding-top: 100px;
+    .panel{
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3), 0 0 14px 0 rgba(0, 0, 0, 0.3);
+        .panel-heading{
+            padding: 12px 32px;
+        }
+        .panel-body{
+            padding: 32px;
+            .btn{
+                padding: 4px 32px;
+            }
+        }
+    }
+}
+.landing-container {
+    padding: 70px 15px 35px;
+    //height: calc(100vh - 50px);
+    .app-block{
+        text-align: center;
+    }
+    .landing-block-container {
+        background: #ebebeb;
+        border-radius: 12px;
+        width: 230px;
+        padding: 5px;
+        text-align: center;
+        height: 270px;
+        margin: 0px auto 32px;
+        cursor: pointer;
+
+        .landing-block {
+            h2 {
+                text-align: center;
+            }
+            h3{
+                font-size: 20px;
+            }
+            .img-container {
+                display: inline-block; 
+            }
+        }
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1200px){
+    .landing-container {
+        padding: 16px;
+        .landing-block-container {
+            padding: 16px;
+            .landing-block{
+                height: 240px;
+                h3{
+                    font-size: 18px;
+                }
+                .img-container{
+                    width: 120px;
+                }
+            }
+        }
+    }
+  
+}
+.unauthorised{
+    padding: 250px 0px;
+    color: #fff;
+    h3,p{
+        color: #fff;
+    }
+}

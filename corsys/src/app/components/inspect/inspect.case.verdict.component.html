@@ -1,0 +1,128 @@
+<div *ngIf="visible" class="modal fade in full-height-inspect-modals" tabindex="-1" [ngStyle]="{'display': visible ? 'block' : 'none'}">
+
+    <div id="addNewAttachment" role="dialog">
+        <div class="modal-dialog modal-generic modal-larger">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" (click)="closeClick()" data-dismiss="modal"><i class="icn-close"></i></a>
+                    <h4 class="modal-title">{{'VerdictCase' | sp3Translate}} {{caseId}}</h4>
+                </div>
+
+                <div class="modal-body" #scrollMe>
+
+                    <div *ngIf="isLoading">
+                        <sp3-comp-loader [size]="'medium'"></sp3-comp-loader>
+                    </div>
+                    <!---Start:: Grid Table-->
+                    <div *ngIf="!isLoading">
+                        <div *ngFor="let finding of findings">
+                            <div [ngClass]="(toggle===false)?'inspect-field-section':'inspect-field-section disabled'">
+                                <div class="col-sm-2 inspect-fields left">
+                                    <span class="count">{{finding.findingNumber}}</span>
+                                </div>
+                                <div class="col-sm-4 inspect-fields left">
+                                    <label>{{ 'Category' | sp3Translate }}</label>
+                                    <p>{{finding.category}}</p>
+                                </div>
+                                <div class="col-sm-6 inspect-fields">
+                                    <label>{{ 'Description' | sp3Translate }}</label>
+                                    <p>{{finding.comment}}</p>
+                                </div>
+                                <div class="col-sm-12 inspect-fields">
+
+
+                                    <div *ngIf="finding.attachments.length>0">
+                                        <label class="evidence-Attached">{{'EvidenceAttached' | sp3Translate}}</label>
+                                        <div *ngFor="let attachment of finding.attachments" class="verdicttab-bg">
+                                            {{attachment.title}}<span class="remove-tag"><i class="icn-close-blue"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+
+                                    <label>{{'Comment' | sp3Translate}}</label>
+                                    <sp3-comp-multitext [isDisabled]="isReadOnly || finding.status != 0" #findingVerdictComment controlId='verdictComment' placeholderText="{{''}}" rows="{{4}}" maxLengthValue="1000" [(textValue)]="finding.verdictComment"></sp3-comp-multitext>
+
+                                    <div class="text-right">
+                                        <sp3-comp-attachment-upload [isDisabled]="isReadOnly || finding.status != 0 || isUpdating" attachmentButtonTitle="UploadEvidence" (confirmButtonStat)="onUploadAttachment($event, finding)" #addAttachment class="pull-left"></sp3-comp-attachment-upload>
+
+                                        <button class="{{finding.status==1? 'btn btn-medium btn-primary' : 'btn btn-medium btn-default' }}" type="button" (click)="declare(finding, 'Declare')" [disabled]="isReadOnly || isUpdating || !(finding.status==1 || finding.status==0)">{{finding.status==1? ('Finding_Declared' | sp3Translate) : ('Finding_Declare' | sp3Translate) }}</button>
+                                        <button class="{{finding.status==4? 'btn btn-medium btn-red' : 'btn btn-medium btn-default' }}" type="button" (click)="declare(finding, 'Confirm')" [disabled]="isReadOnly || isUpdating || !(finding.status==4 || finding.status==0)">{{finding.status==4? ('Finding_Confirmed' | sp3Translate) : ('Finding_Confirm' | sp3Translate) }}</button>
+                                        <button class="{{finding.status==3? 'btn btn-medium btn-green' : 'btn btn-medium btn-default' }}" type="button" (click)="declare(finding, 'Clear')" [disabled]="isReadOnly || isUpdating  || !(finding.status==3 || finding.status==0)">{{finding.status==3? ('Cleared' | sp3Translate) : ('Clear' | sp3Translate) }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="findings.length ===0">
+                             <div class="panel-warning">{{'NoFindings' | sp3Translate}}</div>
+                        </div>
+                        <hr>
+                        <div class="addnewfinding" *ngIf="toggle">
+                            <div class="col-sm-12">
+                                <h3>{{'AddNewFinding'|sp3Translate}}</h3>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{'Category'|sp3Translate}}</label>
+                                    <sp3-comp-select #findingCategory controlId='findingsCategory' [size]="6" [(values)]="categoryList" [(selectedValue)]="newFinding.category" (selectedValueChange)="onCategoryChange($event)" required="true"></sp3-comp-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group" *ngIf="newFinding.category.id!==2">
+                                    <label>{{'HSCodeGoodsType'|sp3Translate}}</label>
+                                    <sp3-comp-select #findingSubCategory controlId='findingsSubCategory' [size]="6" [(values)]="subCategoryList" [(selectedValue)]="newFinding.goodsType"></sp3-comp-select>
+                                </div>
+                                <div class="form-group" *ngIf="newFinding.category.id===2">
+                                    <label>{{'HSCodeGoodsType'|sp3Translate}}</label>
+                                    <input type="text" id="marksHsCodeGoodsType" maxlength="50" placeholder="" [(ngModel)]="newFinding.hsCode" class="form-control">
+                                    <span class="help-block error-msg case-overall-weight-msg" *ngIf="isMessageShown">{{'Required' | sp3Translate}}</span>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="annotationstext">{{'Comment'|sp3Translate}}</label>
+                                    <sp3-comp-multitext #notesFindings [isDisabled]="isReadOnly" controlId='annotationstext' placeholderText="{{'Comment' | sp3Translate}}" rows="4" maxLengthValue="1000" [(textValue)]="newFinding.comment"></sp3-comp-multitext>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 inspect-fields">
+                                <div *ngIf="newFinding.attachments.length>0">
+                                    <label class="evidence-Attached">Evidence Attached</label>
+                                    <div *ngFor="let attachment of newFinding.attachments;let i =index" class="verdicttab-bg">
+                                        {{attachment.title}}<span *ngIf="isReadOnly == false" class="remove-tag" (click)="removeAttachment(i)"><i class="icn-close-blue"></i></span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <sp3-comp-attachment-upload [attachmentButtonTitle]="'UploadEvidence'" (confirmButtonStat)="onUploadFinding($event, newFinding)" #addAttachment class="pull-left"></sp3-comp-attachment-upload>
+                                    <button class="btn btn-medium btn-reverse" type="button" [disabled]="isReadOnly" (click)="cancelFinding()">{{'Cancel' | sp3Translate}}</button>
+                                    <button type="button" class="btn btn-medium btn-primary" id="addAnnotation" (click)="saveFinding()" [disabled]="isReadOnly || isSaveDisabled">{{'SaveFinding' | sp3Translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12 text-left">
+                            <label>{{'AssessmentSummary' | sp3Translate}}<sup>*</sup></label>
+                            <sp3-comp-multitext #textAreaSelector controlId='uploadDescription' [isDisabled]="isReadOnly" placeholderText="{{'Description' | sp3Translate}}" rows="{{4}}" maxLengthValue="1200" [(textValue)]="description" (textAdded)="verdictSummaryUpdate($event)"
+                                (textValueChange)="valueAddedTosummary($event)" required="true"></sp3-comp-multitext>
+                        </div>
+                    </div>
+                    <div class="left-btns">
+                        <button class="btn btn-medium btn-primary" [disabled]="isReadOnly || toggle" (click)="addFinding()" type="button">{{'AddNewFinding' | sp3Translate}}</button>
+                    </div>
+                    <div class="right-btns">
+                        <button class="btn btn-medium btn-reverse" type="button" [disabled]="isReadOnly" (click)="closeClick()">{{ 'Cancel' | sp3Translate }}</button>
+                        <button class="btn btn-medium btn-red" [disabled]="isReadOnly || isUpdating||!enableSuspectAndInspect" type="button" (click)="verdictClick('suspect')">{{ 'Suspect' | sp3Translate}}</button>
+                        <button class="btn btn-medium btn-orng" [disabled]="isReadOnly || isUpdating||!enableSuspectAndInspect" type="button" (click)="verdictClick('inspect')">{{ 'Inspect' | sp3Translate}}</button>
+                        <button class="btn btn-medium btn-green" [disabled]="isReadOnly || isUpdating||!enableClearButton" type="button" (click)="verdictClick('clear')">{{ 'Clear' | sp3Translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <sp3-comp-modal-verdict-prompt #modalPrompt (confirmButtonStat)="modalPromptClick($event)" questionText="{{clearCaseMessage}}" headerText="{{headerText}}" yesButtonTitle="{{yesButtonTitle}}" [caseList]="caseList"></sp3-comp-modal-verdict-prompt>
+    <sp3-comp-modal-verdict-prompt #findingPrompt (confirmButtonStat)="findingPromptClick($event)" questionText="{{clearCaseMessage}}" headerText="{{headerText}}" yesButtonTitle="{{yesButtonTitle}}"></sp3-comp-modal-verdict-prompt>
+</div>

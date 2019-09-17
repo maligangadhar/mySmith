@@ -1,0 +1,83 @@
+﻿<div id="general" class="settings-local-wrapper">
+    <div class="settings-inner-wrapper">
+        <div class="settings-title">
+            <h2>{{'LocalSettings' | sp3Translate}}
+                <span class="pull-right">  
+                    <form>
+                        <span *ngIf="IsSuccess" class="alert alert-success-message">{{'ChangesSave' | sp3Translate}}</span>
+                        <button type="button" class="btn btn-primary" [disabled]="IsSaveDisabled" id="generalEditSave" (click)="updateGeneralSettings()">{{'SaveChanges' | sp3Translate}}</button>
+                        <button type="button" class="btn btn-primary" id="generalEditCancel" [disabled]="IsCancelDisabled" (click)="cancelUpdateSettings()">{{'Cancel' | sp3Translate}}</button>
+                    </form>
+                </span>
+            </h2>
+        </div>
+        <div class="row regional-settings">
+            <div class="col-sm-12">
+                    <h3 class="settings-subtitle">{{'RegionalSettings' | sp3Translate}}</h3>
+            </div>
+           <div class="row">              
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" for="generalLanguage">{{'Language' | sp3Translate}} <sup>*</sup></label>
+                        <div class="col-sm-12">
+                            <sp3-comp-select [size]="6" controlId="generalLanguage" [(values)]="languageList" [(selectedValue)]="selectedLanguage" (selectedChange)="onSelectChanged($event, 'Language')"></sp3-comp-select>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="row measure-settings">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" for="generalDateFormat">{{'DateFormat' | sp3Translate}} <sup>*</sup></label>
+                        <div class="col-sm-12">
+                            <sp3-comp-select [size]="6" controlId="generalDateFormat" [(values)]="dateFormatList" [(selectedValue)]="selectedDateFormat" (selectedChange)="onSelectChanged($event,'DateFormat')"></sp3-comp-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" for="generalTimeFormat">{{'TimeFormat' | sp3Translate}} <sup>*</sup></label>
+                        <div class="col-sm-12">
+                            <sp3-comp-select [size]="6" controlId="generalTimeFormat" [(values)]="timeFormatList" [(selectedValue)]="selectedTimeFormat" (selectedChange)="onSelectChanged($event, 'TimeFormat')"></sp3-comp-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" for="generalCurrency">{{'Currency' | sp3Translate}} <sup>*</sup></label>
+                        <div class="col-sm-12">
+                            <sp3-comp-select [size]="6" controlId="generalCurrency" [(values)]="currencyList" [(selectedValue)]="selectedCurrency" (selectedChange)="onSelectChanged($event,'Currency')"></sp3-comp-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-sm-12">
+                <h3>{{'MeasureUnit' | sp3Translate}}</h3>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" for="generalWeight">{{'Weight' | sp3Translate}} <sup>*</sup>:</label>
+                        <div class="col-sm-12">
+                            <sp3-comp-select [size]="6" controlId="generalWeight" [(values)]="weightList" [(selectedValue)]="selectedWeight" (selectedChange)="onSelectChanged($event, 'Weight')"></sp3-comp-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" for="generalLength">{{'Length' | sp3Translate}} <sup>*</sup>:</label>
+                        <div class="col-sm-12">
+                            <sp3-comp-select [size]="6" controlId="generalLength" [(values)]="lengthList" [(selectedValue)]="selectedLength" (selectedChange)="onSelectChanged($event, 'Length')"></sp3-comp-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+</div>

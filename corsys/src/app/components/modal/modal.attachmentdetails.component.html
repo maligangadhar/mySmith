@@ -1,0 +1,40 @@
+<div *ngIf="visible" class="modal fade " tabindex="-1" [ngClass]="{'in': visibleAnimate}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div id="addNewAttachment" role="dialog" >
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="close" (click)="closeClick()" data-dismiss="modal"><i class="icn-close"></i></a>
+                <h4>{{'UploadAttachment' | sp3Translate }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p><b>{{filename}}</b> {{'AttachmentDescription' | sp3Translate}}</p>
+                        <p>{{'AttachmentInfo' | sp3Translate }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <sp3-comp-textbox controlId="uploadTitle" placeholderText="{{'Title'| sp3Translate}}" labelText="{{'Title'| sp3Translate}}" [(value)]="title" required="true" [maxLengthValue]="titleLengthLimit"></sp3-comp-textbox>
+                        </div>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <sp3-comp-multi-textbox controlId="uploadDescription" placeholderText="{{'Description' | sp3Translate}}" labelText="{{'Description' | sp3Translate}}" rows="{{4}}" maxLengthValue="1200" [(textValue)]="description"></sp3-comp-multi-textbox>
+                            <i id="upLoadDescriptionCount">{{descriptionLengthLimit - description.length}} {{'CharactersLeft' | sp3Translate}}</i>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-reverse" id="uploadSubmit" (click)="yesClick()" [disabled]="!title">{{'Upload' | sp3Translate}}</button>
+                <button type="button" class="btn btn-reverse" data-dismiss="modal" id="uploadClose" (click)="noClick()">{{'Close' | sp3Translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,93 @@
+
+/* 
+- Control Centre - Seach Query Builder Popup
+*/
+.search-builder-queries {
+    width: 100%;
+    float: left;
+    margin-bottom: 0px;
+    padding: 0px 16px;
+
+
+    .query-tags {
+        display: inline-block;
+        margin-right: 10px;
+        max-height: 110px;
+        overflow-y: auto;
+
+        .tag {
+            border-radius: 4px;
+            background-color: steelblue;
+            color: #fff;
+            padding-left: 8px;
+            margin: 4px;
+            cursor: pointer;
+            float: left;
+
+            .btn {
+                color: #fff;
+                height: 28px;
+                overflow: hidden;
+                opacity: 1;
+
+                .icn-close {
+                    background: url(../images/svg/icn-close.svg) center no-repeat;
+                    background-size: 11.7px;
+                    color: #fff;
+                }
+            }
+
+            .btn:hover {
+                background-color: #ca3a3a;
+            }
+
+            p {
+                color: #fff;
+                padding: 0 5px;
+                display: inline-block;
+                margin-bottom: 0px;
+            }
+        }
+
+        label {
+            text-transform: uppercase;
+            color: $gray-base;
+            opacity: 0.6;
+            font-size: 12px;
+            margin-right: 10px;
+            float: left;
+            margin-top: 12px;
+        }
+    }
+}
+
+/**Panel styles**/
+.query-build-form {
+    .modal-dialog {
+        .modal-content {
+            .modal-body {
+                .panel-group {
+                    .panel-default {
+                        .panel-heading {
+                            padding: 18px 32px !important;
+                            background-color: #fff !important;
+
+                            .panel-title {
+                                color: #1e6e96;
+                            }
+                        }
+
+                        .panel-heading:hover {
+                            background-color: #fff !important;
+                        }
+
+                        .panel-body {
+                            padding: 0px 32px 18px 32px !important;
+                            border-top: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

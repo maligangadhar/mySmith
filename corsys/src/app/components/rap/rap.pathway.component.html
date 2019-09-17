@@ -1,0 +1,51 @@
+<div class="settings-local-wrapper">
+    <div class="settings-inner-wrapper">
+        <form #form="ngForm" class="form-horizontal" novalidate>
+                <div class="settings-title">
+                    <h2>{{'RAPPathway' | sp3Translate}}
+                        <span class="pull-right">  
+                                <button id="saveChangesProfiler" class="btn btn-default" (click)="saveChanges()" id="rapSaveChanges" [disabled] = "invalidFlag">{{'SaveChanges' | sp3Translate}}</button>
+                                <button id = "cancelChangesProfiler" class="btn btn-default" (click)="revertDetails()" id="cancelRapChanges" [disabled]="invalidCancelFlag">{{'Cancel' | sp3Translate}}</button>
+                        </span>
+                    </h2>
+                </div> 
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover"> 
+                                <thead>
+                                        <tr>
+                                            <th>{{'RapColour'| sp3Translate}}</th>
+                                            <th>{{'RapColourStatus'| sp3Translate}} </th>
+                                            <th>{{'MinRapScore'| sp3Translate}}</th>
+                                            <th>{{'MaxRapScore'| sp3Translate}}</th>
+                                        </tr>
+
+                                </thead>
+                                
+                                <tbody> 
+                                        <tr *ngFor="let rap of rapCategories; let in = index">
+                                            <td>{{rap.rapColorName}}</td>
+                                            <td>{{rap.initialCaseStatusName}}</td>
+                                            <td>
+                                                <div class="form-group"><input [(ngModel)]="rap.minRapScore" name="rapScoreField - {{in}}" class="form-control" myNumberOnly  regexKey="{{regexKey}}" (input)="onDataChange()" minValue="0" maxValue="100000" ></div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group"><input [(ngModel)]="rap.maxRapScore" name="rapScoreField - {{in}}-" class="form-control" myNumberOnly  regexKey="{{regexKey}}"  (input)="onDataChange()" minValue="0" maxValue="100000"></div>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                                
+                                <tfoot>
+                                    <tr> 
+                                        <td colspan="4" class="text-danger" *ngIf="invalidFlag">{{'rapValidMessage' | sp3Translate}}</td>
+                                        </tr>
+                                </tfoot>
+                            </table>
+                    </div>
+                </div>
+            </div>
+         </form>
+    </div>
+</div>
