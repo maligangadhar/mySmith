@@ -57,7 +57,7 @@
     "karma-junit-reporter": "^1.2.0",
     "karma-phantomjs-launcher": "^1.0.4",
     "lodash": "^4.17.4",
-    "moment": "2.20.1",
+    "moment": "2.29.2",
     "ng2-date-picker": "^2.3.1",
     "phantomjs-prebuilt": "^2.1.16",
     "primeng": "^4.1.3",
